@@ -13,7 +13,7 @@ in
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "nixos";
+  networking.hostName = "desktop";
 
   # Host state version; keep per-machine
   system.stateVersion = "25.05";

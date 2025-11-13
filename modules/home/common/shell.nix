@@ -12,10 +12,6 @@ in
       '';
     };
 
-    bash = {
-      enable = false;
-    };
-
     zoxide.enable = true;
 
     ssh = {
