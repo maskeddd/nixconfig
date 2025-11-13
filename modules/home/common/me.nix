@@ -1,4 +1,3 @@
-# User configuration module
 { config, lib, ... }:
 {
   options = {

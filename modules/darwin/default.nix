@@ -7,8 +7,6 @@
   ];
 
   programs.fish.enable = true;
-  programs._1password-gui.enable = true;
-  programs._1password.enable = true;
 
   # Use TouchID for `sudo` authentication
   security.pam.services.sudo_local.touchIdAuth = true;

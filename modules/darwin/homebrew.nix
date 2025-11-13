@@ -29,6 +29,7 @@
     casks = [
       "nordvpn"
       "cleanshot"
+      "1password"
     ];
   };
 }

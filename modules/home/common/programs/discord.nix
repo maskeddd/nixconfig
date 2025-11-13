@@ -18,10 +18,8 @@
         memberCount.enable = true;
         messageLogger.enable = true;
         spotifyControls.enable = true;
-        silentTyping = {
-          enable = true;
-          showIcon = true;
-        };
+        silentTyping.enable = true;
+        gameActivityToggle.enable = true;
       };
     };
   };
