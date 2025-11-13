@@ -1,0 +1,221 @@
+$fg_color: #{"@theme_fg_color"};
+$text_color: #{"@theme_text_color"};
+$bg_color: #{"@theme_bg_color"};
+$base_color: #{"@theme_base_color"};
+$selected_bg_color: #{"@theme_selected_bg_color"};
+$selected_fg_color: #{"@theme_selected_fg_color"};
+$insensitive_bg_color: #{"@insensitive_bg_color"};
+$insensitive_fg_color: #{"@insensitive_fg_color"};
+$insensitive_base_color: #{"@insensitive_base_color"};
+$unfocused_fg_color: #{"@theme_unfocused_fg_color"};
+$unfocused_text_color: #{"@theme_unfocused_text_color"};
+$unfocused_bg_color: #{"@theme_unfocused_bg_color"};
+$unfocused_base_color: #{"@theme_unfocused_base_color"};
+$unfocused_selected_bg_color: #{"@theme_unfocused_selected_bg_color"};
+$unfocused_selected_fg_color: #{"@theme_unfocused_selected_fg_color"};
+$unfocused_insensitive_color: #{"@unfocused_insensitive_color"};
+$borders: #{"@borders"};
+$unfocused_borders: #{"@unfocused_borders"};
+$error: red;
+
+window {
+  color: $fg_color;
+  background: transparent;
+  font-size: 14px;
+}
+
+window.Bar {
+  font-weight: bold;
+  padding: 20px 20px 0 20px;
+
+  > centerbox {
+    background: $bg-color;
+    border-radius: 12px;
+    padding: 8px 14px;
+  }
+
+  .divider {
+    background: $borders;
+    min-width: 2px;
+    min-height: 12px;
+    margin: 0 10px;
+  }
+
+  .subtext {
+    color: $insensitive_fg_color;
+    font-weight: 600;
+  }
+
+  menubutton {
+    all: unset;
+
+    > button {
+      all: unset;
+    }
+  }
+
+  .icon {
+    color: $selected_bg_color;
+  }
+
+  // workspaces and tray
+  .workspace,
+  .tray {
+    background: $borders;
+    padding: 2px 10px;
+    border-right: none;
+    border-radius: 0;
+    font-family: monospace;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:first-child {
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+
+    &:hover {
+      background: color-mix(in srgb, $borders 90%, white);
+    }
+
+    &.active {
+      background: $selected_bg_color;
+      color: $bg_color;
+      font-weight: bold;
+
+      &:hover {
+        background: color-mix(in srgb, $selected_bg_color 90%, white);
+      }
+    }
+  }
+
+  // visualizer bars
+  .bars {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    color: $selected_bg_color;
+    letter-spacing: -0.5px;
+  }
+
+  // system button
+  .system-icon {
+    font-size: 20px;
+    font-weight: 800;
+    color: $selected_bg_color;
+    margin: 0px 6px;
+  }
+
+  // media player popup
+  .media-player {
+    font-size: 18px;
+    font-weight: 700;
+
+    .progress {
+      font-family: monospace;
+      color: $insensitive_fg_color;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .controls > button {
+      background: none;
+      padding: 10px;
+
+      &:hover {
+        background-color: $borders;
+      }
+    }
+  }
+
+  .audio {
+      font-family: monospace;
+  }
+}
+
+/* window.NotificationPopups {
+  all: unset;
+} */
+
+.Notification {
+  border-radius: 12px;
+  background-color: var(--popover-bg-color);
+  margin: 10px 20px 0px 0px;
+  box-shadow: 0 1px 5px 1px RGB(0 0 0 / 9%),
+              0 2px 14px 3px RGB(0 0 0 / 5%);
+  border: 1pt solid gtkalpha($fg-color, 0.03);
+
+  .header {
+    padding: 0.5rem;
+
+    .app-icon {
+      margin: 0 0.4rem;
+    }
+
+    .app-name {
+      margin-right: 0.3rem;
+      font-weight: bold;
+
+      &:first-child {
+        margin-left: 0.4rem;
+      }
+    }
+
+    .time {
+      margin: 0 0.4rem;
+      color: $insensitive_fg_color;
+      font-weight: 600;
+    }
+
+    button {
+      padding: 0.2rem;
+      min-width: 0;
+      min-height: 0;
+    }
+  }
+
+  separator {
+    margin: 0 0.4rem;
+    background-color: gtkalpha($fg-color, 0.1);
+  }
+
+  .content {
+    margin: 1rem;
+    margin-top: 0.5rem;
+
+    .summary {
+        font-weight: 800;
+    }
+
+    .image {
+      border: 1px solid gtkalpha($fg-color, 0.02);
+      border-radius: 12px;
+      min-width: 60px;
+      min-height:60px;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  .actions {
+    margin: 1rem;
+    margin-top: 0;
+
+    button {
+      margin: 0 0.3rem;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

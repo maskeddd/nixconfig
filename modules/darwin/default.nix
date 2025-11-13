@@ -1,0 +1,39 @@
+# This is your nix-darwin configuration.
+# For home configuration, see /modules/home/*
+{
+  imports = [
+    ./common
+    ./homebrew.nix
+  ];
+
+  programs.fish.enable = true;
+  programs._1password-gui.enable = true;
+  programs._1password.enable = true;
+
+  # Use TouchID for `sudo` authentication
+  security.pam.services.sudo_local.touchIdAuth = true;
+
+  # Configure macOS system
+  # More macbooks => https://github.com/ryan4yin/nix-darwin-kickstarter/blob/main/rich-demo/modules/system.nix
+  system = {
+    defaults = {
+      dock = {
+        autohide = true;
+      };
+
+      finder = {
+        _FXShowPosixPathInTitle = true; # show full path in finder title
+        AppleShowAllExtensions = true; # show all file extensions
+        FXEnableExtensionChangeWarning = false; # disable warning when changing file extension
+        QuitMenuItem = true; # enable quit menu item
+        ShowPathbar = true; # show path bar
+        ShowStatusBar = true; # show status bar
+      };
+    };
+
+    keyboard = {
+      # enableKeyMapping = true;
+      # remapCapsLockToControl = true;
+    };
+  };
+}
