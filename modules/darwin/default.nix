@@ -1,7 +1,15 @@
-# This is your nix-darwin configuration.
-# For home configuration, see /modules/home/*
+{ flake, ... }:
+let
+  inherit (flake) inputs;
+  inherit (inputs) self;
+in
 {
   imports = [
+    {
+      home-manager.sharedModules = [
+        self.homeModules.darwin
+      ];
+    }
     ./common
     ./homebrew.nix
   ];
