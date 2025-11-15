@@ -1,5 +1,5 @@
 {
-  description = "A home-manager template providing useful tools & settings for Nix-based development";
+  description = "My personal config for NixOS and nix-darwin";
 
   inputs = {
     # principle inputs
