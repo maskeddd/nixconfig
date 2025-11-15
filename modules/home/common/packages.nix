@@ -7,6 +7,7 @@
     brave
     code-cursor
     telegram-desktop
+    qbittorrent
 
     ripgrep
     fd
@@ -16,6 +17,7 @@
 
     cachix
     nil
+    nixd
     nix-info
     nixpkgs-fmt
   ];
