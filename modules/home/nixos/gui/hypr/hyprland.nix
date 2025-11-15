@@ -128,12 +128,13 @@
         "$mod, R, exec, $menu"
         "$mod, Q, killactive"
         "$mod, F, fullscreen"
+        "$mod SHIFT, F, togglefloating"
         "$mod, E, exec, $files"
         "$mod, L, exec, $lock"
 
         '', Print, exec, grim -g "$(slurp -d)" - | wl-copy''
 
-        ", F23, pass, class:^(discord)$"
+        ", mouse:275, pass, class:^(discord)$"
 
         "$mod, mouse_down, workspace, e+1"
         "$mod, mouse_up, workspace, e-1"
