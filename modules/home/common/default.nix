@@ -1,6 +1,15 @@
-# A module that automatically imports everything else in the parent folder.
 {
-  imports =
-    with builtins;
-    map (fn: ./${fn}) (filter (fn: fn != "default.nix") (attrNames (readDir ./.)));
+  imports = [
+    ./programs
+
+    ./catppuccin.nix
+    ./direnv.nix
+    ./gc.nix
+    ./git.nix
+    ./me.nix
+    ./nix.nix
+    ./nix-index.nix
+    ./packages.nix
+    ./shell.nix
+  ];
 }

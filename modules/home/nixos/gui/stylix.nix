@@ -5,7 +5,7 @@
   stylix = {
     enable = true;
     polarity = "dark";
-    image = ./tree-stump.jpg;
+    image = ../../common/images/tree-stump.jpg;
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     override = {

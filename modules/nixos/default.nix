@@ -11,7 +11,7 @@ in
       ];
     }
     ./core.nix
-    ./polkit.nix
+    ./packages.nix
     ./hardware
     ./gui
     ./common

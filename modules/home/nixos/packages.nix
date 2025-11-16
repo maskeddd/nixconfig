@@ -16,6 +16,8 @@
     davinci-resolve
     plex-desktop
     gpu-screen-recorder-gtk
+    gparted
+    nicotine-plus
 
     # desktop
     sunsetr
