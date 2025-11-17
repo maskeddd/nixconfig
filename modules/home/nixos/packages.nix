@@ -11,7 +11,6 @@
     baobab
 
     easyeffects
-    solaar
     osu-lazer-bin
     davinci-resolve
     plex-desktop

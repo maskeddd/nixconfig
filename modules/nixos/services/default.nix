@@ -1,6 +1,7 @@
 {
   imports = [
     ./polkit.nix
+    ./solaar.nix
   ];
 
   services = {
