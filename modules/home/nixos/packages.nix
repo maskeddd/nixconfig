@@ -11,6 +11,7 @@
     baobab
     fooyin
 
+    brave
     easyeffects
     osu-lazer-bin
     davinci-resolve

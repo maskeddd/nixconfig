@@ -31,6 +31,7 @@
       "cleanshot"
       "1password"
       "microsoft-word"
+      "brave-browser"
     ];
   };
 }

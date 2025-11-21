@@ -4,7 +4,6 @@
   #
   # Search for packages here: https://search.nixos.org/packages
   home.packages = with pkgs; [
-    brave
     code-cursor
     telegram-desktop
     qbittorrent
