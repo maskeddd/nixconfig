@@ -9,6 +9,7 @@
     showtime
     decibels
     baobab
+    fooyin
 
     easyeffects
     osu-lazer-bin
