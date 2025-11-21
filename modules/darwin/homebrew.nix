@@ -30,6 +30,7 @@
       "nordvpn"
       "cleanshot"
       "1password"
+      "microsoft-word"
     ];
   };
 }
