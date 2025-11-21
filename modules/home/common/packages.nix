@@ -27,6 +27,9 @@
     bat.enable = true;
     fzf.enable = true;
     jq.enable = true;
-    btop.enable = true;
+    btop = {
+      enable = true;
+      package = pkgs.btop-cuda;
+    };
   };
 }
