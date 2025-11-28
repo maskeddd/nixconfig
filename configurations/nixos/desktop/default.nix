@@ -7,7 +7,6 @@ in
 {
   imports = [
     self.nixosModules.default
-    self.nixosModules.gui
     ./hardware-configuration.nix
   ];
 

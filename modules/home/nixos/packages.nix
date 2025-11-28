@@ -9,7 +9,6 @@
     showtime
     decibels
     baobab
-    fooyin
 
     brave
     easyeffects
@@ -19,6 +18,7 @@
     gpu-screen-recorder-gtk
     gparted
     nicotine-plus
+    plexamp
 
     # desktop
     sunsetr
