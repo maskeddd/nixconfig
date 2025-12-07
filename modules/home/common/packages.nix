@@ -15,8 +15,6 @@
     gnumake
 
     cachix
-    nil
-    nixd
     nix-info
     nixpkgs-fmt
     devenv

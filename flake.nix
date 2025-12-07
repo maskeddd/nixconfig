@@ -23,15 +23,16 @@
     nixcord.url = "github:kaylorben/nixcord";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     catppuccin.url = "github:catppuccin/nix";
-
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
-    vicinae.url = "github:vicinaehq/vicinae";
-    apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # nixos specific
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
+    vicinae.url = "github:vicinaehq/vicinae";
+    apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     astal = {
       url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,6 +43,7 @@
       inputs.astal.follows = "astal";
     };
     solaar.url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
 
     # homebrew
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";

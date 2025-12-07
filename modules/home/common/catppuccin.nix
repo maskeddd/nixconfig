@@ -9,5 +9,6 @@
     flavor = "mocha";
     accent = "lavender";
     zed.enable = true;
+    helix.enable = true;
   };
 }

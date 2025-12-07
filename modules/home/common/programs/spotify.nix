@@ -1,6 +1,6 @@
 { flake, pkgs, ... }:
 let
-  spicePkgs = flake.inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
+  spicePkgs = flake.inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   imports = [

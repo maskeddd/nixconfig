@@ -8,4 +8,6 @@
     enable = true;
     withUWSM = true;
   };
+
+  qt.enable = true;
 }

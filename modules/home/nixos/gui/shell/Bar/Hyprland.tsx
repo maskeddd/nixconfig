@@ -15,12 +15,10 @@ function focusWorkspace(id: number) {
 }
 
 export function CurrentClient({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
-  const focusedClient = createBinding(
-    hypr,
-    "focusedClient",
-  )((c) => {
-    if (!c || !c.monitor) return null
-    return c.monitor.model === gdkmonitor.model ? c : null
+  const focusedClient = createBinding(hypr, "focusedClient")((c) => {
+    const model = gdkmonitor?.model
+    if (!c?.monitor || !model) return null
+    return c.monitor.model === model ? c : null
   })
 
   return (
@@ -43,30 +41,25 @@ export function CurrentClient({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
 }
 
 export function Workspaces({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
-  const workspaces = createBinding(
-    hypr,
-    "workspaces",
-  )((list) =>
-    list
-      .filter((w) => w.monitor?.model === gdkmonitor.model)
-      .toSorted((a, b) => a.id - b.id),
-  )
+  const workspaces = createBinding(hypr, "workspaces")((list) => {
+    const model = gdkmonitor?.model
+    if (!model) return []
+    return list
+      .filter((w) => w.monitor?.model === model)
+      .toSorted((a, b) => a.id - b.id)
+  })
 
   return (
     <box orientation={Gtk.Orientation.HORIZONTAL}>
       <For each={workspaces}>
         {(ws) => (
           <button
-            class={createBinding(
-              hypr,
-              "focusedWorkspace",
-            )((active) => {
-              const isActiveMonitor =
-                active?.monitor?.model === gdkmonitor.model
-              const isActiveWorkspace = ws.id === active?.id
-              return isActiveMonitor && isActiveWorkspace
-                ? "workspace active"
-                : "workspace"
+            class={createBinding(hypr, "focusedWorkspace")((active) => {
+              const model = gdkmonitor?.model
+              if (!model) return "workspace"
+              const isActive =
+                active?.monitor?.model === model && ws.id === active?.id
+              return isActive ? "workspace active" : "workspace"
             })}
             onClicked={() => focusWorkspace(ws.id)}
           >

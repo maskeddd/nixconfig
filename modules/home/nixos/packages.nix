@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ flake, pkgs, ... }:
 {
   fonts.fontconfig.enable = true;
 
@@ -11,14 +11,13 @@
     baobab
 
     brave
-    easyeffects
     osu-lazer-bin
-    davinci-resolve
     plex-desktop
     gpu-screen-recorder-gtk
     gparted
     nicotine-plus
     plexamp
+    flake.inputs.affinity-nix.packages.x86_64-linux.v3
 
     # desktop
     sunsetr

@@ -6,6 +6,9 @@
       "nix"
       "vue"
       "ron"
+      "qml"
+      "toml"
+      "scss"
     ];
 
     userSettings = {
@@ -23,6 +26,16 @@
 
       terminal = {
         shell.program = "fish";
+      };
+
+      lsp = {
+        nix = {
+          formatter = {
+            external = {
+              command = "nixfmt";
+            };
+          };
+        };
       };
     };
   };

@@ -1,6 +1,8 @@
 {
   imports = [
     ./keyd.nix
+    ./audio.nix
+    ./openrgb.nix
   ];
 
   hardware.opentabletdriver = {
