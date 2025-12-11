@@ -5,6 +5,9 @@
     extraPackages = with pkgs; [
       biome
       vscode-langservers-extracted
+      nixd
+      nil
+      nixfmt
     ];
     settings = {
       editor = {

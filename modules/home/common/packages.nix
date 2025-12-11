@@ -7,6 +7,7 @@
     code-cursor
     telegram-desktop
     qbittorrent
+    jetbrains.rider
 
     ripgrep
     fd
