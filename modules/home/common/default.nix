@@ -1,6 +1,7 @@
 {
   imports = [
     ./programs
+    ./services
 
     ./catppuccin.nix
     ./direnv.nix
