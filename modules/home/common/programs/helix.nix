@@ -8,6 +8,7 @@
       nixd
       nil
       nixfmt
+      tombi
     ];
     settings = {
       editor = {
@@ -109,6 +110,10 @@
             }
             "biome"
           ];
+        }
+        {
+          name = "toml";
+          auto-format = true;
         }
       ];
     };
