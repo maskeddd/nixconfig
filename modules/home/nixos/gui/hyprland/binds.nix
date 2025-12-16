@@ -26,8 +26,6 @@
 
     '', Print, exec, grim -g "$(slurp -d)" - | wl-copy''
 
-    ", mouse:275, pass, class:^(discord)$"
-
     "$mod, mouse_down, workspace, e+1"
     "$mod, mouse_up, workspace, e-1"
 
