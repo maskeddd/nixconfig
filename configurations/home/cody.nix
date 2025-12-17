@@ -15,8 +15,8 @@ in
   # And used all around in /modules/home/*
   me = {
     username = "cody";
-    fullname = "maskeddd";
-    email = "37945842+maskeddd@users.noreply.github.com";
+    fullname = "masked";
+    email = "masked@noreply.codeberg.org";
   };
 
   home.stateVersion = "24.11";
