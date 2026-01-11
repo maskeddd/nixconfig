@@ -1,16 +1,16 @@
 {
+
   windowrule = [
-    "suppressevent maximize, class:.*"
-    "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
-    "workspace 1, class:^(brave-browser)$"
-    "workspace 2, class:^(dev.zed.Zed)$"
-    "workspace 2, title:^(Sober)$"
-    "workspace 3, class:^(discord)$"
-    "workspace 4, class:^(spotify)$"
-    "workspace 5, class:^(steam)$"
+    "match:class .*, suppress_event maximize"
+    "match:class = ^$, match:title = ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false, no_focus true"
+
+    "workspace 1, match:class ^(brave-browser)$"
+    "workspace 3, match:class ^(discord)$"
+    "workspace 4, match:class ^(spotify)$"
+    "workspace 5, match:class ^(steam)$"
   ];
 
-  layerrule = [ "noanim, vicinae" ];
+  layerrule = [ "no_anim on, match:namespace vicinae" ];
 
   workspace = [
     "1, monitor:DP-2"

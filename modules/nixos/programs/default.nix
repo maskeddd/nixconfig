@@ -5,5 +5,4 @@
   ];
 
   programs.fish.enable = true;
-  programs.gpu-screen-recorder.enable = true;
 }

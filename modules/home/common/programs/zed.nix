@@ -1,14 +1,22 @@
+{ pkgs, ... }:
 {
   programs.zed-editor = {
-    enable = true;
+    enable = false;
+    mutableUserSettings = false;
+
+    extraPackages = with pkgs; [
+      nixd
+      nil
+      luau-lsp
+      stylua
+      tombi
+    ];
 
     extensions = [
       "nix"
-      "vue"
-      "ron"
-      "qml"
-      "toml"
+      "tombi"
       "scss"
+      "luau"
     ];
 
     userSettings = {
@@ -28,12 +36,28 @@
         shell.program = "fish";
       };
 
-      lsp = {
-        nix = {
+      languages = {
+        "Nix" = {
           formatter = {
             external = {
-              command = "nixfmt";
+              command = "${pkgs.nixfmt}/bin/nixfmt";
             };
+          };
+        };
+        "Luau" = {
+          formatter = {
+            external = {
+              command = "${pkgs.stylua}/bin/stylua";
+              arguments = [ "-" ];
+            };
+          };
+        };
+      };
+
+      lsp = {
+        luau-lsp = {
+          settings = {
+            plugin.enabled = true;
           };
         };
       };

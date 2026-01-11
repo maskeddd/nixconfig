@@ -14,7 +14,7 @@
       plugins = {
         anonymiseFileNames.enable = true;
         betterGifPicker.enable = true;
-        clearUrLs.enable = true;
+        ClearURLs.enable = true;
         memberCount.enable = true;
         messageLogger.enable = true;
         spotifyControls.enable = true;

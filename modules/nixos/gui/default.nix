@@ -1,13 +1,11 @@
+{ flake, ... }:
 {
   imports = [
+    flake.inputs.mango.nixosModules.mango
+
     ./stylix.nix
-    ./gdm.nix
   ];
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-  };
-
-  qt.enable = true;
+  programs.hyprland.enable = true;
+  programs.mango.enable = true;
 }

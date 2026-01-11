@@ -7,6 +7,10 @@
         hide_cursor = false;
       };
 
+      animations = {
+        animation = [ "fade, 0" ];
+      };
+
       background = {
         blur_passes = 3;
       };
@@ -31,7 +35,7 @@
       label = [
         {
           monitor = "DP-2";
-          text = ''cmd[update:60000] printf '<span weight="600">%s</span>' "$(date +'%a %d %b')"'';
+          text = "cmd[update:60000] echo \"<span weight='600'>$(date +'%a %d %b')</span>\"";
           font_size = 25;
           font_family = "SF Pro";
           position = "0, -150";

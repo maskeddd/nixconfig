@@ -48,6 +48,7 @@ in
           "networkmanager"
           "wheel"
           "input"
+          "seat"
         ];
       }
     );

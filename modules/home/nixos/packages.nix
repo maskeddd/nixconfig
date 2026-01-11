@@ -13,7 +13,6 @@
     brave
     osu-lazer-bin
     plex-desktop
-    gpu-screen-recorder-gtk
     gparted
     nicotine-plus
     plexamp

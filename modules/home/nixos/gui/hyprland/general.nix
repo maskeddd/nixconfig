@@ -1,7 +1,7 @@
 {
   general = {
     gaps_in = 5;
-    gaps_out = "10, 20, 20, 20";
+    gaps_out = "20, 20, 20, 20";
     border_size = 4;
     layout = "dwindle";
   };
@@ -18,6 +18,7 @@
   misc = {
     force_default_wallpaper = 1;
     disable_hyprland_logo = true;
+    disable_splash_rendering = true;
     focus_on_activate = true;
     vrr = 2;
   };

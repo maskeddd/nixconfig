@@ -25,12 +25,10 @@ window {
 }
 
 window.Bar {
-  font-weight: bold;
-  padding: 20px 20px 0 20px;
+  font-weight: 600;
 
-  > centerbox {
+  >centerbox {
     background: $bg-color;
-    border-radius: 12px;
     padding: 8px 14px;
   }
 
@@ -49,7 +47,7 @@ window.Bar {
   menubutton {
     all: unset;
 
-    > button {
+    >button {
       all: unset;
     }
   }
@@ -62,10 +60,11 @@ window.Bar {
   .workspace,
   .tray {
     background: $borders;
-    padding: 2px 10px;
     border-right: none;
     border-radius: 0;
-    font-family: monospace;
+    padding: 2px;
+    min-width: 24px;
+    min-height: 24px;
 
     &:focus {
       outline: none;
@@ -108,7 +107,7 @@ window.Bar {
     font-size: 20px;
     font-weight: 800;
     color: $selected_bg_color;
-    margin: 0px 6px;
+    margin: 0px 2px;
   }
 
   // media player popup
@@ -123,7 +122,7 @@ window.Bar {
       font-weight: 600;
     }
 
-    .controls > button {
+    .controls>button {
       background: none;
       padding: 10px;
 
@@ -134,20 +133,16 @@ window.Bar {
   }
 
   .audio {
-      font-family: monospace;
+    font-family: monospace;
   }
 }
-
-/* window.NotificationPopups {
-  all: unset;
-} */
 
 .Notification {
   border-radius: 12px;
   background-color: var(--popover-bg-color);
   margin: 10px 20px 0px 0px;
   box-shadow: 0 1px 5px 1px RGB(0 0 0 / 9%),
-              0 2px 14px 3px RGB(0 0 0 / 5%);
+    0 2px 14px 3px RGB(0 0 0 / 5%);
   border: 1pt solid gtkalpha($fg-color, 0.03);
 
   .header {
@@ -189,14 +184,14 @@ window.Bar {
     margin-top: 0.5rem;
 
     .summary {
-        font-weight: 800;
+      font-weight: 800;
     }
 
     .image {
       border: 1px solid gtkalpha($fg-color, 0.02);
       border-radius: 12px;
       min-width: 60px;
-      min-height:60px;
+      min-height: 60px;
       background-size: cover;
       background-position: center;
     }

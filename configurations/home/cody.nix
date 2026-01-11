@@ -16,7 +16,7 @@ in
   me = {
     username = "cody";
     fullname = "masked";
-    email = "masked@noreply.codeberg.org";
+    email = "37945842+maskeddd@users.noreply.github.com";
   };
 
   home.stateVersion = "24.11";
