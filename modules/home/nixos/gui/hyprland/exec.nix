@@ -1,11 +1,11 @@
-{ uwsm }:
 {
   exec-once = [
-    (uwsm "sunsetr")
-    (uwsm "ags run --log-file ~/test")
-    "[workspace 1 silent] ${uwsm "brave"}"
-    "[workspace 3 silent] ${uwsm "discord"}"
-    "[workspace 4 silent] ${uwsm "spotify"}"
-    "[workspace 5 silent] ${uwsm "steam"}"
+    "sunsetr"
+    "ags run"
+
+    "[workspace 1 silent] ${"brave"}"
+    "[workspace 3 silent] ${"discord"}"
+    "[workspace 4 silent] ${"spotify"}"
+    "steam -silent"
   ];
 }

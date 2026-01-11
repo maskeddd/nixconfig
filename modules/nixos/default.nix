@@ -12,10 +12,10 @@ in
     }
     ./core.nix
     ./packages.nix
+    ./services.nix
     ./hardware
     ./gui
     ./common
-    ./services
     ./programs
   ];
 }

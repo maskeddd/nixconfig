@@ -1,25 +1,27 @@
-{ pkgs, ... }:
+{ flake, pkgs, ... }:
 {
   # Nix packages to install to $HOME
   #
   # Search for packages here: https://search.nixos.org/packages
-  home.packages = with pkgs; [
-    code-cursor
-    telegram-desktop
-    qbittorrent
-    jetbrains.rider
+  home.packages =
+    with pkgs;
+    [
+      telegram-desktop
+      qbittorrent
+      jetbrains.rider
 
-    ripgrep
-    fd
-    sd
-    tree
-    gnumake
+      ripgrep
+      fd
+      sd
+      tree
+      gnumake
 
-    cachix
-    nix-info
-    nixpkgs-fmt
-    devenv
-  ];
+      cachix
+      nix-info
+      nixpkgs-fmt
+      devenv
+    ]
+    ++ [ flake.inputs.self.packages.${pkgs.system}.luau-lsp-proxy ];
 
   programs = {
     bat.enable = true;

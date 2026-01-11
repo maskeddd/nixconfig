@@ -5,10 +5,9 @@
     extraPackages = with pkgs; [
       biome
       vscode-langservers-extracted
-      nixd
-      nil
-      nixfmt
       tombi
+      luau-lsp
+      stylua
     ];
     settings = {
       editor = {
@@ -114,6 +113,15 @@
         {
           name = "toml";
           auto-format = true;
+        }
+
+        {
+          name = "luau";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.stylua}/bin/stylua";
+            args = [ "-" ];
+          };
         }
       ];
     };

@@ -1,10 +1,11 @@
-{ flake, ... }:
 {
-  imports = [ flake.inputs.vicinae.homeManagerModules.default ];
-
-  services.vicinae = {
+  programs.vicinae = {
     enable = true;
-    autoStart = true;
     useLayerShell = true;
+    systemd = {
+      enable = true;
+      autoStart = true;
+      target = "hyprland-session.target";
+    };
   };
 }

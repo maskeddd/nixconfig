@@ -22,7 +22,7 @@ in
     };
 
     signing = {
-      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBr31av52kwxC8FIIeSKosnY6NeYnrR0zQj8Ziqfqtqj";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICqBWCeRPMDsD8zUF92Nxask7FmR4oIqdNGmylLW0A6Q";
       format = "ssh";
       signer = signerBinary;
       signByDefault = true;

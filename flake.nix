@@ -27,11 +27,13 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-doom-emacs-unstraightened = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # nixos specific
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
-    vicinae.url = "github:vicinaehq/vicinae";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     astal = {
       url = "github:aylur/astal";
@@ -44,6 +46,10 @@
     };
     solaar.url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
     affinity-nix.url = "github:mrshmllow/affinity-nix";
+    mango = {
+      url = "github:DreamMaoMao/mango";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # homebrew
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";

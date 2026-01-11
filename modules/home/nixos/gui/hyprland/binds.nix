@@ -1,4 +1,3 @@
-{ uwsm }:
 {
   input = {
     kb_layout = "us";
@@ -10,10 +9,10 @@
   };
 
   "$mod" = "SUPER";
-  "$terminal" = uwsm "ghostty";
+  "$terminal" = "ghostty";
   "$menu" = "vicinae toggle";
-  "$files" = uwsm "nautilus";
-  "$lock" = uwsm "hyprlock";
+  "$files" = "nautilus";
+  "$lock" = "hyprlock";
 
   bind = [
     "$mod, Return, exec, $terminal"
