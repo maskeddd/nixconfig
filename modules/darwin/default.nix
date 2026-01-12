@@ -1,4 +1,8 @@
-{ flake, ... }:
+{
+  flake,
+  pkgs,
+  ...
+}:
 let
   inherit (flake) inputs;
   inherit (inputs) self;
@@ -25,6 +29,14 @@ in
     defaults = {
       dock = {
         autohide = true;
+        persistent-apps = [
+          { app = "${pkgs.brave}/Applications/Brave Browser.app"; }
+          {
+            app = "${pkgs.spotify}/Applications/Spotify.app";
+          }
+          { app = "${pkgs.ghostty-bin}/Applications/Ghostty.app"; }
+        ];
+        tilesize = 64;
       };
 
       finder = {

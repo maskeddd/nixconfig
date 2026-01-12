@@ -1,4 +1,4 @@
-{ flake, ... }:
+{ flake, pkgs, ... }:
 {
   imports = [
     flake.inputs.nixcord.homeModules.nixcord
