@@ -35,6 +35,12 @@ in
             app = "${pkgs.spotify}/Applications/Spotify.app";
           }
           { app = "${pkgs.ghostty-bin}/Applications/Ghostty.app"; }
+          {
+            app = "${pkgs.zed-editor}/Applications/Zed.app";
+          }
+          {
+            app = "/System/Applications/System Settings.app";
+          }
         ];
         tilesize = 64;
       };
