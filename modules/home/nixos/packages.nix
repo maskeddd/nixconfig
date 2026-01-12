@@ -10,12 +10,10 @@
     decibels
     baobab
 
-    brave
     osu-lazer-bin
     plex-desktop
     gparted
     nicotine-plus
-    plexamp
     flake.inputs.affinity-nix.packages.x86_64-linux.v3
 
     # desktop

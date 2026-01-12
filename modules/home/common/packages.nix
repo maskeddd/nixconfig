@@ -9,6 +9,7 @@
       telegram-desktop
       qbittorrent
       jetbrains.rider
+      brave
 
       ripgrep
       fd

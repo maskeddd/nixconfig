@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   programs.zed-editor = {
-    enable = false;
+    enable = true;
     mutableUserSettings = false;
 
     extraPackages = with pkgs; [
@@ -10,6 +10,7 @@
       luau-lsp
       stylua
       tombi
+      luau-lsp-proxy
     ];
 
     extensions = [

@@ -63,7 +63,7 @@
         };
       };
 
-      extensions = with pkgs.vscode-marketplace; [
+      extensions = with pkgs.nix-vscode-extensions.vscode-marketplace; [
         jnoortheen.nix-ide
         mkhl.direnv
         evaera.vscode-rojo
