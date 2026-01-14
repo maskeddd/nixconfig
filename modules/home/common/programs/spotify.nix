@@ -1,10 +1,11 @@
 { flake, pkgs, ... }:
 let
-  spicePkgs = flake.inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  inherit (flake) inputs;
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   imports = [
-    flake.inputs.spicetify-nix.homeManagerModules.spicetify
+    inputs.spicetify-nix.homeManagerModules.spicetify
   ];
 
   programs.spicetify = {

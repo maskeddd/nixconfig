@@ -47,12 +47,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.astal.follows = "astal";
     };
-    solaar.url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
-    affinity-nix.url = "github:mrshmllow/affinity-nix";
-    mango = {
-      url = "github:DreamMaoMao/mango";
+    solaar = {
+      url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     # homebrew
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";

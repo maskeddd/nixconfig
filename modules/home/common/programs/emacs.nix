@@ -1,7 +1,9 @@
 { flake, ... }:
-
+let
+  inherit (flake) inputs;
+in
 {
-  imports = [ flake.inputs.nix-doom-emacs-unstraightened.homeModule ];
+  imports = [ inputs.nix-doom-emacs-unstraightened.homeModule ];
 
   services.emacs.enable = false;
 

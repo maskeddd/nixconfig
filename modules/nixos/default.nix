@@ -12,7 +12,7 @@ in
     }
     ./core.nix
     ./packages.nix
-    ./services.nix
+    ./services
     ./hardware
     ./gui
     ./common

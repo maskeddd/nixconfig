@@ -1,4 +1,8 @@
 { flake, pkgs, ... }:
+let
+  inherit (flake) inputs;
+  affinity = inputs.affinity-nix.packages.x86_64-linux.v3;
+in
 {
   fonts.fontconfig.enable = true;
 
@@ -14,7 +18,7 @@
     plex-desktop
     gparted
     nicotine-plus
-    flake.inputs.affinity-nix.packages.x86_64-linux.v3
+    affinity
 
     # desktop
     sunsetr
