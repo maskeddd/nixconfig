@@ -1,7 +1,10 @@
-{ flake, pkgs, ... }:
+{ flake, ... }:
+let
+  inherit (flake) inputs;
+in
 {
   imports = [
-    flake.inputs.nixcord.homeModules.nixcord
+    inputs.nixcord.homeModules.nixcord
   ];
 
   programs.nixcord = {

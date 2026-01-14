@@ -6,7 +6,6 @@
     ./hyprlock.nix
     ./ags.nix
     ./stylix.nix
-    ./mango.nix
   ];
 
   home = {

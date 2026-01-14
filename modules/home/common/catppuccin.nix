@@ -1,7 +1,10 @@
 { flake, ... }:
+let
+  inherit (flake) inputs;
+in
 {
   imports = [
-    flake.inputs.catppuccin.homeModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
   ];
 
   catppuccin = {

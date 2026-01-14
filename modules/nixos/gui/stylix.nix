@@ -1,6 +1,9 @@
 { flake, pkgs, ... }:
+let
+  inherit (flake) inputs;
+in
 {
-  imports = [ flake.inputs.stylix.nixosModules.stylix ];
+  imports = [ inputs.stylix.nixosModules.stylix ];
 
   stylix = {
     enable = true;
@@ -15,12 +18,12 @@
 
     fonts = {
       serif = {
-        package = flake.inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
+        package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
         name = "New York";
       };
 
       sansSerif = {
-        package = flake.inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
+        package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
         name = "SF Pro Text";
       };
 

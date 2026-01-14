@@ -7,6 +7,10 @@ let
       "\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
 in
 {
+  home.shellAliases = {
+    zed = "zeditor";
+  };
+
   programs = {
     fish = {
       enable = true;

@@ -8,6 +8,8 @@
     };
   };
 
+  security.polkit.enable = true;
+
   networking.networkmanager.enable = true;
 
   time.timeZone = "Australia/Brisbane";

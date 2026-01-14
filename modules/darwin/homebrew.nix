@@ -1,7 +1,10 @@
 { config, flake, ... }:
+let
+  inherit (flake) inputs;
+in
 {
   imports = [
-    flake.inputs.nix-homebrew.darwinModules.nix-homebrew
+    inputs.nix-homebrew.darwinModules.nix-homebrew
   ];
 
   nix-homebrew = {
@@ -10,9 +13,9 @@
     user = "cody";
 
     taps = {
-      "homebrew/homebrew-core" = flake.inputs.homebrew-core;
-      "homebrew/homebrew-cask" = flake.inputs.homebrew-cask;
-      "acsandmann/homebrew-tap" = flake.inputs.acsandmann-rift;
+      "homebrew/homebrew-core" = inputs.homebrew-core;
+      "homebrew/homebrew-cask" = inputs.homebrew-cask;
+      "acsandmann/homebrew-tap" = inputs.acsandmann-rift;
     };
 
     mutableTaps = false;

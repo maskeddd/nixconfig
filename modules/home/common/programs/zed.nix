@@ -58,7 +58,11 @@
       lsp = {
         luau-lsp = {
           settings = {
-            plugin.enabled = true;
+            roblox.enabled = true;
+            plugin = {
+              enabled = true;
+              proxy_path = "${pkgs.luau-lsp-proxy}/bin/luau-lsp-proxy";
+            };
           };
         };
       };
