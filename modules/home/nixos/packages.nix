@@ -27,6 +27,7 @@ in
     wl-clipboard
     playerctl
     keyd
+    vial
 
     # fonts
     nerd-fonts.jetbrains-mono

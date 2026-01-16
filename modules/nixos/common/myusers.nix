@@ -49,6 +49,7 @@ in
           "wheel"
           "input"
           "seat"
+          "wireshark"
         ];
       }
     );

@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./steam.nix
@@ -5,4 +6,8 @@
   ];
 
   programs.fish.enable = true;
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+  };
 }
