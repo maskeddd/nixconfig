@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   nix = {
     settings = {
@@ -10,7 +11,12 @@
 
   security.polkit.enable = true;
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    plugins = with pkgs; [
+      networkmanager-openvpn
+    ];
+  };
 
   time.timeZone = "Australia/Brisbane";
   i18n.defaultLocale = "en_AU.UTF-8";

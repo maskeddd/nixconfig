@@ -11,6 +11,7 @@
       stylua
       tombi
       luau-lsp-proxy
+      rust-analyzer
     ];
 
     extensions = [

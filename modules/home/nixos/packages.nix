@@ -19,6 +19,8 @@ in
     gparted
     nicotine-plus
     affinity
+    vinegar
+    bottles
 
     # desktop
     sunsetr
