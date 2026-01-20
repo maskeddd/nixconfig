@@ -7,13 +7,14 @@
     ./uni-sync.nix
   ];
 
+  services.udev.packages = [ pkgs.vial ];
+
   hardware = {
     opentabletdriver = {
       enable = true;
       daemon.enable = true;
     };
 
-    services.udev.packages = [ pkgs.vial ];
     keyboard.qmk.enable = true;
   };
 }

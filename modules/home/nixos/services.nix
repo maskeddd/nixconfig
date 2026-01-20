@@ -8,7 +8,6 @@ in
   services.flatpak = {
     packages = [
       "org.vinegarhq.Sober"
-      "org.vinegarhq.Vinegar"
       rec {
         appId = "com.hypixel.HytaleLauncher";
         sha256 = "1v153k3vns64axybkd08r63jrcj8csqks5777bncyw1rpn6rflpn";
