@@ -8,7 +8,8 @@ in
   ];
 
   programs.nixcord = {
-    enable = false;
+    enable = true;
+
     config = {
       useQuickCss = true;
       themeLinks = [

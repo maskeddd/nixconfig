@@ -15,7 +15,6 @@ in
     baobab
 
     osu-lazer-bin
-    plex-desktop
     gparted
     nicotine-plus
     affinity
