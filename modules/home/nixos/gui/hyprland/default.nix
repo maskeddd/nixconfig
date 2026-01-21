@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   ...
 }:
 {
@@ -16,7 +17,7 @@
 
     settings = lib.mkMerge [
       (import ./binds.nix)
-      (import ./exec.nix)
+      (import ./exec.nix { inherit pkgs; })
       (import ./general.nix)
       (import ./rules.nix)
       (import ./style.nix)
