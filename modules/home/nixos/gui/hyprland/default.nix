@@ -11,6 +11,8 @@
       enable = true;
       variables = [ "--all" ];
     };
+    package = null;
+    portalPackage = null;
 
     settings = lib.mkMerge [
       (import ./binds.nix)

@@ -6,6 +6,7 @@
     ./hyprlock.nix
     ./ags.nix
     ./stylix.nix
+    ./mango.nix
   ];
 
   home = {
@@ -21,6 +22,11 @@
       size = 24;
     };
   };
+
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+  # };
 
   services.polkit-gnome.enable = true;
 }

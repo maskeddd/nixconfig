@@ -49,6 +49,10 @@
     };
     affinity-nix.url = "github:mrshmllow/affinity-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    mango = {
+      url = "github:DreamMaoMao/mango";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # homebrew
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
