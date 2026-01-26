@@ -12,6 +12,8 @@
       tombi
       luau-lsp-proxy
       rust-analyzer
+      gopls
+      package-version-server
     ];
 
     extensions = [

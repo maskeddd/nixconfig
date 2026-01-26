@@ -19,7 +19,7 @@ in
     nicotine-plus
     affinity
     vinegar
-    bottles
+    protonplus
 
     # desktop
     sunsetr
