@@ -7,7 +7,7 @@
   ];
 
   programs.vscode = {
-    enable = true;
+    enable = false;
     mutableExtensionsDir = false;
     profiles.default = {
       userSettings = {
