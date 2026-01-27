@@ -14,23 +14,23 @@ in
         self.homeModules.darwin
       ];
     }
+    inputs.stylix.darwinModules.stylix
+
     ./common
     ./homebrew.nix
   ];
 
   programs.fish.enable = true;
 
-  # Use TouchID for `sudo` authentication
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  # Configure macOS system
-  # More macbooks => https://github.com/ryan4yin/nix-darwin-kickstarter/blob/main/rich-demo/modules/system.nix
   system = {
     defaults = {
       dock = {
         autohide = true;
         persistent-apps = [
           { app = "${pkgs.brave}/Applications/Brave Browser.app"; }
+          { app = "/Users/cody/Applications/Home Manager Apps/Discord.app"; }
           {
             app = "${pkgs.spotify}/Applications/Spotify.app";
           }

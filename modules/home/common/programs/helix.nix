@@ -3,11 +3,15 @@
   programs.helix = {
     enable = true;
     extraPackages = with pkgs; [
+      nil
+      nixd
+      nixfmt
       biome
       vscode-langservers-extracted
       tombi
       luau-lsp
       stylua
+      rust-analyzer
     ];
     settings = {
       editor = {

@@ -16,9 +16,6 @@ in
       icons.enable = true;
     };
     helix.enable = true;
-    vscode.profiles.default = {
-      enable = true;
-      icons.enable = true;
-    };
+    ghostty.enable = false;
   };
 }

@@ -3,8 +3,6 @@ let
   inherit (flake) inputs;
 in
 {
-  imports = [ inputs.stylix.nixosModules.stylix ];
-
   stylix = {
     enable = true;
     polarity = "dark";
@@ -36,10 +34,6 @@ in
         package = pkgs.noto-fonts-color-emoji;
         name = "Noto Color Emoji";
       };
-    };
-
-    targets = {
-      chromium.enable = false;
     };
   };
 }

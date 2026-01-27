@@ -34,8 +34,11 @@ in
       "cleanshot"
       "1password"
       "microsoft-word"
-      "icon-composer"
       "affinity"
+      "appcleaner"
+      "roblox"
+      "robloxstudio"
+      "plex"
     ];
   };
 }

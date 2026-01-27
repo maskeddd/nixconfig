@@ -4,5 +4,6 @@
 
   home.packages = with pkgs; [
     raycast
+    ice-bar
   ];
 }
