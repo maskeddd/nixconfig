@@ -14,6 +14,7 @@
       rust-analyzer
     ];
     settings = {
+      theme = "nord";
       editor = {
         line-number = "relative";
         cursorline = true;

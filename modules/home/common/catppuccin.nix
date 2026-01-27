@@ -12,10 +12,8 @@ in
     flavor = "mocha";
     accent = "lavender";
     zed = {
-      enable = true;
+      enable = false;
       icons.enable = true;
     };
-    helix.enable = true;
-    ghostty.enable = false;
   };
 }
