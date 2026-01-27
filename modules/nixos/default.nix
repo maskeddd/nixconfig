@@ -18,4 +18,6 @@ in
     ./common
     ./programs
   ];
+
+  stylix.targets.chromium.enable = false;
 }

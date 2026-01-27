@@ -6,6 +6,7 @@
     ./zed.nix
     ./spotify.nix
     ./ghostty.nix
+    ./git.nix
   ];
 
   programs = {

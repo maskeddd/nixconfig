@@ -21,11 +21,17 @@
       "tombi"
       "scss"
       "luau"
+      "nord"
     ];
 
     userSettings = {
       buffer_font_size = 16;
       buffer_font_family = "JetBrainsMono Nerd Font";
+
+      theme = {
+        light = "Nord Dark";
+        dark = "Nord Dark";
+      };
 
       collaboration_panel = {
         button = false;

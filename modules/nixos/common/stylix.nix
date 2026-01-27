@@ -1,4 +1,8 @@
-{ flake, pkgs, ... }:
+{
+  flake,
+  pkgs,
+  ...
+}:
 let
   inherit (flake) inputs;
 in
@@ -6,13 +10,13 @@ in
   stylix = {
     enable = true;
     polarity = "dark";
-    image = ../../../images/tree-stump.jpg;
+    image = ../../../images/nord-abstract.png;
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-    override = {
-      base0D = "#b4befe";
-      base07 = "#89b4fa";
-    };
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+    # override = {
+    #   base0D = "#b4befe";
+    #   base07 = "#89b4fa";
+    # };
 
     fonts = {
       serif = {
