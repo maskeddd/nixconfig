@@ -6,6 +6,7 @@
       nixcord.enable = false;
       helix.enable = false;
       vscode.enable = false;
+      ghostty.enable = true;
     };
   };
 }

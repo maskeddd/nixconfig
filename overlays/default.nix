@@ -29,8 +29,4 @@ let
   );
 
 in
-packageOverlays
-// {
-  nix-vscode-extensions =
-    (inputs.nix-vscode-extensions.overlays.default self super).nix-vscode-extensions;
-}
+packageOverlays // { }

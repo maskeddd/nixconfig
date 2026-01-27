@@ -10,11 +10,11 @@ in
         self.homeModules.nixos
       ];
     }
+    inputs.stylix.nixosModules.stylix
     ./core.nix
     ./packages.nix
     ./services
     ./hardware
-    ./gui
     ./common
     ./programs
   ];

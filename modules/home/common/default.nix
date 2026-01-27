@@ -12,5 +12,6 @@
     ./nix-index.nix
     ./packages.nix
     ./shell.nix
+    ./stylix.nix
   ];
 }

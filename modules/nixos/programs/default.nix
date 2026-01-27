@@ -5,9 +5,12 @@
     ./1password.nix
   ];
 
-  programs.fish.enable = true;
-  programs.wireshark = {
-    enable = true;
-    package = pkgs.wireshark;
+  programs = {
+    fish.enable = true;
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark;
+    };
+    hyprland.enable = true;
   };
 }

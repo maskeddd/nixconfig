@@ -4,7 +4,6 @@
     ./discord.nix
     ./helix.nix
     ./zed.nix
-    ./vscode.nix
     ./spotify.nix
     ./ghostty.nix
   ];
@@ -16,6 +15,9 @@
     btop = {
       enable = true;
       package = pkgs.btop-cuda;
+    };
+    fastfetch = {
+      enable = true;
     };
   };
 }
