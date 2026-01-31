@@ -51,12 +51,8 @@
           formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
         }
         {
-          name = "qml";
+          name = "rust";
           auto-format = true;
-          formatter = {
-            args = [ "-E" ];
-            command = "${pkgs.kdePackages.qtdeclarative}/bin/qmlls";
-          };
         }
         {
           name = "typescript";

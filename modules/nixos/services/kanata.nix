@@ -1,9 +1,49 @@
+{ pkgs, ... }:
+let
+  kanataConfig = pkgs.writeText "kanata.kbd" ''
+    (defcfg
+    )
+    (defsrc
+      grv       1    2    3    4    5    6    7    8    9    0    -    =    bspc
+      tab       q    w    e    r    t    y    u    i    o    p    [    ]    \
+      caps      a    s    d    f    g    h    j    k    l    ;    '         ret
+      lsft      z    x    c    v    b    n    m    ,    .    /    rsft
+      lctl lmet lalt           spc                 ralt rmet rctl
+    )
+    (deflayer qwerty
+      grv       1    2    3    4    5    6    7    8    9    0    -    =    bspc
+      tab       q    w    e    r    t    y    u    i    o    p    [    ]    \
+      @grl      a    s    d    f    g    h    j    k    l    ;    '         ret
+      lsft      z    x    c    v    b    n    m    ,    .    /    rsft
+      lctl lmet lalt           spc                 ralt rmet rctl
+    )
+    (deflayer gallium
+      grv       1    2    3    4    5    6    7    8    9    0    -    =    bspc
+      tab       b    l    d    c    z    j    f    o    u    ,    [    ]    \
+      @grl      n    r    t    s    v    y    h    a    e    i    /         ret
+      lsft      q    m    w    g    x    k    p    '    ;    .    rsft
+      lctl lmet lalt           spc                 ralt rmet rctl
+    )
+    (defalias
+      grl (tap-hold 200 200 grv (layer-toggle layers))
+      gal (layer-switch gallium)
+      qwr (layer-switch qwerty)
+    )
+    (deflayer layers
+      _    @qwr @gal _    _    _    _    _    _    _    _    _    _    _
+      _    _    _    _    _    _    _    _    _    _    _    _    _    _
+      _    _    _    _    _    _    _    _    _    _    _    _    _
+      _    _    _    _    _    _    _    _    _    _    _    _
+      _    _    _              _              _    _    _
+    )
+  '';
+in
 {
   services.kanata = {
     enable = true;
     keyboards = {
       default = {
-        configFile = ../common/kanata.kbd;
+        configFile = kanataConfig;
       };
     };
   };
