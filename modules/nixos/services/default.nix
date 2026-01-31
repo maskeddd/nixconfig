@@ -6,6 +6,7 @@
     ./openrgb.nix
     ./keyd.nix
     ./pipewire.nix
+    ./kanata.nix
   ];
 
   services = {
