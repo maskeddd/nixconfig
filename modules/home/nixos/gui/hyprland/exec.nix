@@ -10,6 +10,6 @@
 
     "${pkgs.steam}/bin/steam -silent"
     "${pkgs._1password-gui}/bin/1password --silent"
-    "${pkgs.pkgs.openrgb-with-all-plugins}/bin/openrgb --startminimized --profile mauve"
+    "${pkgs.pkgs.openrgb-with-all-plugins}/bin/openrgb --startminimized --profile nord"
   ];
 }
