@@ -18,6 +18,7 @@ in
 
     ./common
     ./homebrew.nix
+    ./kanata.nix
   ];
 
   programs.fish.enable = true;

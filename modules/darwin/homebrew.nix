@@ -28,7 +28,9 @@ in
       upgrade = true;
     };
     taps = builtins.attrNames config.nix-homebrew.taps;
-    brews = [ "rift" ];
+    brews = [
+      "rift"
+    ];
     casks = [
       "nordvpn"
       "cleanshot"

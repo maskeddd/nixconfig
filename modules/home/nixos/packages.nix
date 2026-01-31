@@ -20,6 +20,16 @@ in
     affinity
     vinegar
     protonplus
+    (pkgs.buildFHSEnv {
+      name = "rider-env";
+      targetPkgs =
+        pkgs:
+        (with pkgs; [
+          jetbrains.rider
+          dotnetCorePackages.dotnet_10.sdk
+        ]);
+      runScript = "nohup rider &";
+    })
 
     # desktop
     sunsetr

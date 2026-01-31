@@ -12,7 +12,7 @@ in
   home.file.".config/rift/config.toml".text = ''
     [settings]
     default_disable = false
-    animate = true
+    animate = false
     animation_duration = 0.3
     animation_fps = 100.0
     animation_easing = "ease_in_out"
@@ -45,6 +45,7 @@ in
     [settings.ui.menu_bar]
     enabled = true
     show_empty = false
+    display_style = "label"
 
     [settings.ui.stack_line]
     enabled = false
