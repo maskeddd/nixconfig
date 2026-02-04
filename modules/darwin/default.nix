@@ -18,7 +18,8 @@ in
 
     ./common
     ./homebrew.nix
-    ./kanata.nix
+    #./kanata.nix
+    ./borders.nix
   ];
 
   programs.fish.enable = true;

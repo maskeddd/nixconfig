@@ -41,6 +41,7 @@ in
       "roblox"
       "robloxstudio"
       "plex"
+      "helium-browser"
     ];
   };
 }
