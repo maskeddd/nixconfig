@@ -28,6 +28,10 @@
       buffer_font_size = 16;
       buffer_font_family = "JetBrainsMono Nerd Font";
 
+      inlay_hints = {
+        enabled = true;
+      };
+
       theme = {
         light = "Nord Dark";
         dark = "Nord Dark";

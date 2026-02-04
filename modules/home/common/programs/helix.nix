@@ -22,6 +22,10 @@
         bufferline = "multiple";
         end-of-line-diagnostics = "hint";
 
+        lsp = {
+          display-inlay-hints = true;
+        };
+
         cursor-shape = {
           insert = "bar";
           normal = "block";
