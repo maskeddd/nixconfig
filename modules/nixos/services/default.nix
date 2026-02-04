@@ -3,10 +3,6 @@
   imports = [
     ./ly.nix
     ./solaar.nix
-    ./openrgb.nix
-    ./keyd.nix
-    ./pipewire.nix
-    ./kanata.nix
   ];
 
   services = {
