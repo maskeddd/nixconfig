@@ -15,8 +15,6 @@ in
     baobab
 
     osu-lazer-bin
-    gparted
-    nicotine-plus
     affinity
     vinegar
     protonplus

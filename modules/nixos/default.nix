@@ -14,7 +14,6 @@ in
     ./core.nix
     ./packages.nix
     ./services
-    ./hardware
     ./common
     ./programs
   ];
