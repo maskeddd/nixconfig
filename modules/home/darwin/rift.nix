@@ -5,7 +5,10 @@ let
   );
 
   workspaceMoveBindings = lib.concatStringsSep "\n" (
-    lib.genList (i: ''"comb1 + ${toString (i + 1)}" = { move_window_to_workspace = ${toString i} }'') 9
+    lib.genList (
+      i:
+      ''"comb1 + ${toString (i + 1)}" = { exec = ["/bin/bash", "-c", "rift-cli execute workspace move-window ${toString i} && rift-cli execute workspace switch ${toString i}"] }''
+    ) 9
   );
 in
 {
@@ -33,14 +36,14 @@ in
     [settings.layout.gaps]
 
     [settings.layout.gaps.outer]
-    top = 12
-    left = 12
-    bottom = 12
-    right = 12
+    top = 18
+    left = 18
+    bottom = 18
+    right = 18
 
     [settings.layout.gaps.inner]
-    horizontal = 6
-    vertical = 6
+    horizontal = 18
+    vertical = 18
 
     [settings.ui.menu_bar]
     enabled = true
@@ -82,7 +85,13 @@ in
       "first",
       "second"
     ]
-    app_rules = []
+    app_rules = [
+      { title_substring = "Preferences", floating = true },
+      { app_id = "com.brave.Browser", workspace = 0 },
+      { app_id = "dev.zed.Zed", workspace = 1 },
+      { app_id = "com.hnc.Discord", workspace = 2 },
+      { app_id = "com.spotify.Client", workspace = 3  },
+    ]
 
     [modifier_combinations]
     comb1 = "Alt + Shift"
