@@ -1,3 +1,9 @@
+let
+  monitors = [
+    "DP-2"
+    "eDP-1"
+  ];
+in
 {
   programs.hyprlock = {
     enable = true;
@@ -16,7 +22,7 @@
       };
 
       input-field = {
-        monitor = "DP-2";
+        monitor = monitors;
         size = "172, 36";
         outline_thickness = 0;
         fade_on_empty = false;
@@ -34,7 +40,7 @@
 
       label = [
         {
-          monitor = "DP-2";
+          monitor = monitors;
           text = "cmd[update:60000] echo \"<span weight='600'>$(date +'%a %d %b')</span>\"";
           font_size = 25;
           font_family = "SF Pro";
@@ -43,7 +49,7 @@
           valign = "top";
         }
         {
-          monitor = "DP-2";
+          monitor = monitors;
           text = "<span weight=\"700\">$TIME</span>";
           font_size = 90;
           font_family = "SF Pro Rounded";

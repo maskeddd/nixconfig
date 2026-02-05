@@ -5,8 +5,18 @@
 
     follow_mouse = 1;
 
-    sensitivity = -0.7;
+    sensitivity = 0;
+
+    touchpad = {
+      disable_while_typing = false;
+      natural_scroll = true;
+      scroll_factor = 0.2;
+      clickfinger_behavior = 1;
+      tap-to-click = false;
+    };
   };
+
+  gesture = [ "3, horizontal, workspace" ];
 
   "$mod" = "SUPER";
   "$terminal" = "ghostty";

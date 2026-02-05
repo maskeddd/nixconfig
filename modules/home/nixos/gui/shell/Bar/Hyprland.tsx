@@ -8,17 +8,19 @@ const hypr = AstalHyprland.get_default()
 
 function focusWorkspace(id: number) {
   const active = hypr.focusedWorkspace
-
   if (active?.id !== id) {
     hypr.dispatch("workspace", id.toString())
   }
 }
 
 export function CurrentClient({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
-  const focusedClient = createBinding(hypr, "focusedClient")((c) => {
-    const model = gdkmonitor?.model
-    if (!c?.monitor || !model) return null
-    return c.monitor.model === model ? c : null
+  const focusedClient = createBinding(
+    hypr,
+    "focusedClient",
+  )((c) => {
+    const connector = gdkmonitor?.connector
+    if (!c?.monitor || !connector) return null
+    return c.monitor.name === connector ? c : null
   })
 
   return (
@@ -41,11 +43,14 @@ export function CurrentClient({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
 }
 
 export function Workspaces({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
-  const workspaces = createBinding(hypr, "workspaces")((list) => {
-    const model = gdkmonitor?.model
-    if (!model) return []
+  const workspaces = createBinding(
+    hypr,
+    "workspaces",
+  )((list) => {
+    const connector = gdkmonitor?.connector
+    if (!connector) return []
     return list
-      .filter((w) => w.monitor?.model === model)
+      .filter((w) => w.monitor?.name === connector)
       .toSorted((a, b) => a.id - b.id)
   })
 
@@ -54,11 +59,14 @@ export function Workspaces({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
       <For each={workspaces}>
         {(ws) => (
           <button
-            class={createBinding(hypr, "focusedWorkspace")((active) => {
-              const model = gdkmonitor?.model
-              if (!model) return "workspace"
+            class={createBinding(
+              hypr,
+              "focusedWorkspace",
+            )((active) => {
+              const connector = gdkmonitor?.connector
+              if (!connector) return "workspace"
               const isActive =
-                active?.monitor?.model === model && ws.id === active?.id
+                active?.monitor?.name === connector && ws.id === active?.id
               return isActive ? "workspace active" : "workspace"
             })}
             onClicked={() => focusWorkspace(ws.id)}

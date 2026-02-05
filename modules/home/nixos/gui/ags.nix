@@ -18,6 +18,8 @@ in
       inputs.astal.packages.${pkgs.system}.tray
       inputs.astal.packages.${pkgs.system}.wireplumber
       inputs.astal.packages.${pkgs.system}.notifd
+      inputs.astal.packages.${pkgs.system}.battery
+      inputs.astal.packages.${pkgs.system}.powerprofiles
       pkgs.libadwaita
     ];
   };
