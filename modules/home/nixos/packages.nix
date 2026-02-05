@@ -34,6 +34,7 @@ in
       wl-clipboard
       playerctl
       keyd
+      brightnessctl
 
       # fonts
       nerd-fonts.jetbrains-mono
