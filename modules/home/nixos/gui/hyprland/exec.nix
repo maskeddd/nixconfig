@@ -8,8 +8,7 @@
     "[workspace 3 silent] discord"
     "[workspace 4 silent] spotify"
 
-    "${pkgs.steam}/bin/steam -silent"
+    "steam -silent"
     "${pkgs._1password-gui}/bin/1password --silent"
-    "${pkgs.pkgs.openrgb-with-all-plugins}/bin/openrgb --startminimized --profile nord"
   ];
 }

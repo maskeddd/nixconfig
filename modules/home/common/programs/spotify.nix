@@ -9,7 +9,7 @@ in
   ];
 
   programs.spicetify = {
-    enable = true;
+    enable = false;
     theme = spicePkgs.themes.text;
     colorScheme = "Nord";
   };

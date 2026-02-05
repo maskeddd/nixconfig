@@ -1,2 +1,4 @@
 result
 .direnv
+*.tar.gz
+*.mac13j
