@@ -44,7 +44,7 @@ in
     ]
     ++ lib.optionals pkgs.stdenv.isx86_64 [
       osu-lazer-bin
-      affinity
+      inputs.affinity-nix.packages.x86_64-linux.v3
       vinegar
     ];
 }

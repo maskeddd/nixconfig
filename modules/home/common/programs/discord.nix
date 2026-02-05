@@ -1,4 +1,4 @@
-{ flake, ... }:
+{ flake, pkgs, ... }:
 let
   inherit (flake) inputs;
 in
@@ -8,8 +8,7 @@ in
   ];
 
   programs.nixcord = {
-    enable = false;
-
+    enable = !pkgs.stdenv.isAarch64;
     config = {
       useQuickCss = true;
       themeLinks = [

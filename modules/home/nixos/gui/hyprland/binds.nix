@@ -5,8 +5,6 @@
 
     follow_mouse = 1;
 
-    sensitivity = 0;
-
     touchpad = {
       disable_while_typing = false;
       natural_scroll = true;
@@ -15,6 +13,13 @@
       tap-to-click = false;
     };
   };
+
+  device = [
+    {
+      name = "logitech-usb-receiver";
+      sensitivity = -0.6;
+    }
+  ];
 
   gesture = [ "3, horizontal, workspace" ];
 
