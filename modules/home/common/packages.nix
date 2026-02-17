@@ -15,6 +15,5 @@
     cachix
     nix-info
     nixpkgs-fmt
-    devenv
   ];
 }
