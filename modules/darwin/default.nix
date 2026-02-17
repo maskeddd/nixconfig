@@ -34,7 +34,7 @@ in
           { app = "${pkgs.brave}/Applications/Brave Browser.app"; }
           { app = "/Users/cody/Applications/Home Manager Apps/Discord.app"; }
           {
-            app = "${pkgs.spotify}/Applications/Spotify.app";
+            app = "/Users/cody/Applications/Home Manager Apps/Spotify.app";
           }
           { app = "${pkgs.ghostty-bin}/Applications/Ghostty.app"; }
           {

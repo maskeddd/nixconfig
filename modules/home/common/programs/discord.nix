@@ -8,7 +8,7 @@ in
   ];
 
   programs.nixcord = {
-    enable = !pkgs.stdenv.isAarch64;
+    enable = pkgs.stdenv.hostPlatform.system != "aarch64-linux";
     config = {
       useQuickCss = true;
       themeLinks = [
