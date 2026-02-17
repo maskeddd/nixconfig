@@ -1,7 +1,8 @@
+
 {
   services.jankyborders = {
     enable = true;
-    style = "square";
+    style = "round";
     hidpi = true;
     width = 10.0;
   };
