@@ -1,12 +1,12 @@
 { pkgs, ... }:
 {
   imports = [
+    ./editors
     ./discord.nix
-    ./helix.nix
-    ./zed.nix
-    ./spotify.nix
     ./ghostty.nix
     ./git.nix
+    ./spotify.nix
+    ./obsidian.nix
   ];
 
   programs = {

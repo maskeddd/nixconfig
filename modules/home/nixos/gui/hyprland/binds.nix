@@ -19,6 +19,10 @@
       name = "logitech-usb-receiver";
       sensitivity = -0.6;
     }
+    {
+      name = "logitech-pro-x-wireless";
+      sensitivity = -0.6;
+    }
   ];
 
   gesture = [ "3, horizontal, workspace" ];

@@ -1,10 +1,34 @@
-{ config, pkgs, lib, ... }:
 {
-  # To use the `nix` from `inputs.nixpkgs` on templates using the standalone `home-manager` template
+  flake,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  inherit (flake) inputs;
+in
+{
+  imports = [
+    inputs.nix-index-database.homeModules.nix-index
+  ];
 
-  # `nix.package` is already set if on `NixOS` or `nix-darwin`.
-  # TODO: Avoid setting `nix.package` in two places. Does https://github.com/juspay/nixos-unified-template/issues/93 help here?
-  nix.package = lib.mkDefault pkgs.nix;
+  programs = {
+    nix-index.enable = true;
+    nix-index-database.comma.enable = true;
+  };
+
+  nix = {
+    package = lib.mkDefault pkgs.nix;
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+    };
+
+    settings.auto-optimise-store = true;
+  };
+
   home.packages = [
     config.nix.package
   ];
