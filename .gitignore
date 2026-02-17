@@ -2,3 +2,4 @@ result
 .direnv
 *.tar.gz
 *.mac13j
+.DS_STORE
