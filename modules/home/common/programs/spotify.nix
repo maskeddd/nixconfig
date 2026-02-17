@@ -9,7 +9,7 @@ in
   ];
 
   programs.spicetify = {
-    enable = !pkgs.stdenv.isAarch64;
+    enable = pkgs.stdenv.hostPlatform.system != "aarch64-linux";
     theme = spicePkgs.themes.text;
     colorScheme = "Nord";
   };
