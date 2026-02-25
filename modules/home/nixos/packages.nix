@@ -33,7 +33,6 @@ in
       slurp
       wl-clipboard
       playerctl
-      keyd
       brightnessctl
 
       # fonts
@@ -46,11 +45,6 @@ in
       osu-lazer-bin
       inputs.affinity-nix.packages.x86_64-linux.v3
       vinegar
-      (lutris.override {
-        extraPkgs = pkgs: [
-          pkgs.wineWowPackages.stagingFull
-          pkgs.winetricks
-        ];
-      })
+      lutris
     ];
 }
