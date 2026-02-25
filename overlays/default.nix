@@ -4,6 +4,7 @@ let
   inherit (flake) inputs;
   inherit (inputs) self;
   packages = self + /packages;
+  nix-vscode-extensions = system: inputs.nix-vscode-extensions.extensions.${system};
 in
 self: super:
 let
@@ -29,4 +30,7 @@ let
   );
 
 in
-packageOverlays // { }
+packageOverlays
+// {
+  nix-vscode-extensions = nix-vscode-extensions self.system;
+}
