@@ -1,7 +1,6 @@
-{ pkgs, ... }:
+{ ... }:
 {
   imports = [
-    ./ly.nix
     ./solaar.nix
   ];
 
@@ -11,6 +10,4 @@
     gnome.gnome-keyring.enable = true;
     flatpak.enable = true;
   };
-
-  systemd.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";
 }
