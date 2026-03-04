@@ -15,7 +15,7 @@ in
   home.file.".config/rift/config.toml".text = ''
     [settings]
     default_disable = false
-    animate = false
+    animate = true
     animation_duration = 0.3
     animation_fps = 100.0
     animation_easing = "ease_in_out"
@@ -27,7 +27,18 @@ in
     hot_reload = true
 
     [settings.layout]
-    mode = "bsp"
+    mode = "scrolling"
+
+    [settings.layout.scrolling]
+    alignment = "center"
+    focus_navigation_style = "anchored"
+
+    [settings.layout.scrolling.gestures]
+    enabled = true
+    distance_pct = 0.02
+    invert_horizontal = true
+    fingers = 3
+    propagate_to_workspace_swipe = true
 
     [settings.layout.stack]
     stack_offset = 40.0
@@ -58,7 +69,7 @@ in
     spacing = 0.0
 
     [settings.ui.mission_control]
-    enabled = false
+    enabled = true
     fade_enabled = false
     fade_duration_ms = 180.0
 
@@ -67,7 +78,7 @@ in
     invert_horizontal_swipe = false
     swipe_vertical_tolerance = 0.4
     skip_empty = true
-    fingers = 3
+    fingers = 4
     distance_pct = 0.08
     haptics_enabled = true
     haptic_pattern = "level_change"
