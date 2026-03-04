@@ -11,6 +11,7 @@
     tree
     gnumake
     blink-roblox
+    devenv
 
     cachix
     nix-info
