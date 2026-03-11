@@ -1,20 +1,37 @@
 { pkgs, ... }:
+let
+  biomeBin = "${pkgs.biome}/bin/biome";
+
+  biomeFormatter = file: {
+    command = biomeBin;
+    args = [
+      "format"
+      "--stdin-file-path"
+      file
+    ];
+  };
+in
 {
   programs.helix = {
     enable = true;
+
     extraPackages = with pkgs; [
+      biome
+      luau-lsp
       nil
       nixd
       nixfmt
-      biome
-      vscode-langservers-extracted
-      tombi
-      luau-lsp
-      stylua
       rust-analyzer
+      stylua
+      tinymist
+      tombi
+      typstyle
+      vscode-langservers-extracted
     ];
+
     settings = {
       theme = "nord";
+
       editor = {
         line-number = "relative";
         cursorline = true;
@@ -22,33 +39,58 @@
         bufferline = "multiple";
         end-of-line-diagnostics = "hint";
 
-        lsp = {
-          display-inlay-hints = true;
-        };
-
         cursor-shape = {
           insert = "bar";
           normal = "block";
           select = "underline";
         };
 
-        indent-guides = {
-          render = true;
-        };
+        indent-guides.render = true;
 
-        inline-diagnostics = {
-          cursor-line = "warning";
-        };
+        lsp.display-inlay-hints = true;
+
+        inline-diagnostics.cursor-line = "warning";
       };
     };
+
     languages = {
       language-server = {
         biome = {
-          command = "${pkgs.biome}/bin/biome";
+          command = biomeBin;
           args = [ "lsp-proxy" ];
         };
+
+        tinymist = {
+          command = "tinymist";
+          config = {
+            formatterMode = "typstyle";
+            exportPdf = "onType";
+            outputPath = "$root/target/$dir/$name";
+          };
+        };
       };
+
       language = [
+        {
+          name = "json";
+          auto-format = true;
+          formatter = biomeFormatter "file.json";
+          language-servers = [
+            {
+              name = "vscode-json-language-server";
+              except-features = [ "format" ];
+            }
+            "biome"
+          ];
+        }
+        {
+          name = "luau";
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.stylua}/bin/stylua";
+            args = [ "-" ];
+          };
+        }
         {
           name = "nix";
           auto-format = true;
@@ -59,35 +101,13 @@
           auto-format = true;
         }
         {
-          name = "typescript";
+          name = "toml";
           auto-format = true;
-          formatter = {
-            command = "${pkgs.biome}/bin/biome";
-            args = [
-              "format"
-              "--stdin-file-path"
-              "file.ts"
-            ];
-          };
-          language-servers = [
-            {
-              name = "typescript-language-server";
-              except-features = [ "format" ];
-            }
-            "biome"
-          ];
         }
         {
           name = "tsx";
           auto-format = true;
-          formatter = {
-            command = "${pkgs.biome}/bin/biome";
-            args = [
-              "format"
-              "--stdin-file-path"
-              "file.tsx"
-            ];
-          };
+          formatter = biomeFormatter "file.tsx";
           language-servers = [
             {
               name = "typescript-language-server";
@@ -97,36 +117,20 @@
           ];
         }
         {
-          name = "json";
+          name = "typescript";
           auto-format = true;
-          formatter = {
-            command = "${pkgs.biome}/bin/biome";
-            args = [
-              "format"
-              "--stdin-file-path"
-              "file.json"
-            ];
-          };
+          formatter = biomeFormatter "file.ts";
           language-servers = [
             {
-              name = "vscode-json-language-server";
+              name = "typescript-language-server";
               except-features = [ "format" ];
             }
             "biome"
           ];
         }
         {
-          name = "toml";
+          name = "typst";
           auto-format = true;
-        }
-
-        {
-          name = "luau";
-          auto-format = true;
-          formatter = {
-            command = "${pkgs.stylua}/bin/stylua";
-            args = [ "-" ];
-          };
         }
       ];
     };
