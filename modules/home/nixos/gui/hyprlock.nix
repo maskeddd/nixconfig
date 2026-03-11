@@ -1,8 +1,5 @@
 let
-  monitors = [
-    "DP-2"
-    "eDP-1"
-  ];
+  monitors = "DP-2";
 in
 {
   programs.hyprlock = {

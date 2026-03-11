@@ -12,6 +12,7 @@
     gnumake
     blink-roblox
     devenv
+    typst
 
     cachix
     nix-info

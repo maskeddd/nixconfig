@@ -20,5 +20,8 @@
     fastfetch = {
       enable = true;
     };
+    zathura = {
+      enable = true;
+    };
   };
 }
