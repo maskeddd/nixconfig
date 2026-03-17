@@ -3,7 +3,8 @@
   home.packages = with pkgs; [
     (prismlauncher.override {
       jdks = [
-        zulu
+        zulu21
+        zulu17
       ];
     })
   ];
