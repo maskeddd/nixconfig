@@ -26,6 +26,7 @@ in
           ]);
         runScript = "nohup rider &";
       })
+      easyeffects
 
       # desktop
       sunsetr
