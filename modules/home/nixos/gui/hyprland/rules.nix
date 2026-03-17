@@ -13,8 +13,8 @@
   layerrule = [ "no_anim on, match:namespace vicinae" ];
 
   workspace = [
-    "1, monitor:DP-2"
-    "2, monitor:DP-2"
+    "1, monitor:DP-3"
+    "2, monitor:DP-3"
     "3, monitor:DP-3"
     "4, monitor:DP-3"
   ];
