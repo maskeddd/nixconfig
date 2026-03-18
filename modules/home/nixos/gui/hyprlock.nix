@@ -1,5 +1,5 @@
 let
-  monitors = "DP-3";
+  monitors = "DP-2";
 in
 {
   programs.hyprlock = {
