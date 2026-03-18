@@ -8,14 +8,22 @@ in
   home.packages =
     with pkgs;
     [
-      #gnome
+      # Desktop utilities
+      sunsetr
+      grim
+      slurp
+      wl-clipboard
+      playerctl
+      brightnessctl
+
+      # GNOME apps
       nautilus
       loupe
       showtime
       decibels
       baobab
 
-      protonplus
+      # Development
       (pkgs.buildFHSEnv {
         name = "rider-env";
         targetPkgs =
@@ -24,25 +32,17 @@ in
             jetbrains.rider
             dotnetCorePackages.dotnet_10.sdk
           ]);
-        runScript = "nohup rider &";
+        runScript = "nohup rider > /dev/null 2>&1 &";
       })
-      easyeffects
 
-      # desktop
-      sunsetr
-      grim
-      slurp
-      wl-clipboard
-      playerctl
-      brightnessctl
-
-      # fonts
+      # Fonts
       nerd-fonts.jetbrains-mono
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
     ]
     ++ lib.optionals pkgs.stdenv.isx86_64 [
+      protonplus
       osu-lazer-bin
       inputs.affinity-nix.packages.x86_64-linux.v3
       vinegar
