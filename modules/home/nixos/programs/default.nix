@@ -1,5 +1,11 @@
 {
-  imports =
-    with builtins;
-    map (fn: ./${fn}) (filter (fn: fn != "default.nix") (attrNames (readDir ./.)));
+  imports = [
+    ./obs.nix
+    ./prism-launcher.nix
+    ./vicinae.nix
+  ];
+
+  services.easyeffects = {
+    enable = true;
+  };
 }
