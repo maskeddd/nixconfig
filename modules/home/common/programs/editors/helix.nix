@@ -27,6 +27,8 @@ in
       tombi
       typstyle
       vscode-langservers-extracted
+      gopls
+      golangci-lint-langserver
     ];
 
     settings = {
