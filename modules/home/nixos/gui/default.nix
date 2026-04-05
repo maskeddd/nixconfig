@@ -5,6 +5,7 @@
     ./hypridle.nix
     ./hyprlock.nix
     ./ags.nix
+    ./dunst.nix
   ];
 
   home = {

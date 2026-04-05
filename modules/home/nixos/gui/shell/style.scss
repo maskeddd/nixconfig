@@ -1,22 +1,8 @@
 $fg_color: #{"@theme_fg_color"};
-$text_color: #{"@theme_text_color"};
 $bg_color: #{"@theme_bg_color"};
-$base_color: #{"@theme_base_color"};
 $selected_bg_color: #{"@theme_selected_bg_color"};
-$selected_fg_color: #{"@theme_selected_fg_color"};
-$insensitive_bg_color: #{"@insensitive_bg_color"};
 $insensitive_fg_color: #{"@insensitive_fg_color"};
-$insensitive_base_color: #{"@insensitive_base_color"};
-$unfocused_fg_color: #{"@theme_unfocused_fg_color"};
-$unfocused_text_color: #{"@theme_unfocused_text_color"};
-$unfocused_bg_color: #{"@theme_unfocused_bg_color"};
-$unfocused_base_color: #{"@theme_unfocused_base_color"};
-$unfocused_selected_bg_color: #{"@theme_unfocused_selected_bg_color"};
-$unfocused_selected_fg_color: #{"@theme_unfocused_selected_fg_color"};
-$unfocused_insensitive_color: #{"@unfocused_insensitive_color"};
 $borders: #{"@borders"};
-$unfocused_borders: #{"@unfocused_borders"};
-$error: red;
 
 window {
   color: $fg_color;
@@ -28,7 +14,7 @@ window.Bar {
   font-weight: 600;
 
   > centerbox {
-    background: $bg-color;
+    background: $bg_color;
     padding: 8px 14px;
   }
 
@@ -41,6 +27,7 @@ window.Bar {
 
   .subtext {
     color: $insensitive_fg_color;
+    font-size: 14px;
     font-weight: 600;
   }
 
@@ -56,7 +43,6 @@ window.Bar {
     color: $selected_bg_color;
   }
 
-  // workspaces and tray
   .workspace,
   .tray {
     background: $borders;
@@ -95,25 +81,26 @@ window.Bar {
     }
   }
 
-  // visualizer bars
   .bars {
     font-family: "JetBrainsMono Nerd Font", monospace;
     color: $selected_bg_color;
     letter-spacing: -0.5px;
   }
 
-  // system button
   .system-icon {
     font-size: 20px;
     font-weight: 800;
     color: $selected_bg_color;
-    margin: 0px 2px;
+    margin: 0 2px;
   }
 
-  // media player popup
   .media-player {
     font-size: 18px;
     font-weight: 700;
+
+    .cover-art {
+      border-radius: 10px;
+    }
 
     .progress {
       font-family: monospace;
@@ -134,84 +121,5 @@ window.Bar {
 
   .audio .battery {
     font-family: monospace;
-  }
-}
-
-.Notification {
-  border-radius: 12px;
-  background-color: var(--popover-bg-color);
-  margin: 10px 20px 0px 0px;
-  box-shadow:
-    0 1px 5px 1px RGB(0 0 0 / 9%),
-    0 2px 14px 3px RGB(0 0 0 / 5%);
-  border: 1pt solid gtkalpha($fg-color, 0.03);
-
-  .header {
-    padding: 0.5rem;
-
-    .app-icon {
-      margin: 0 0.4rem;
-    }
-
-    .app-name {
-      margin-right: 0.3rem;
-      font-weight: bold;
-
-      &:first-child {
-        margin-left: 0.4rem;
-      }
-    }
-
-    .time {
-      margin: 0 0.4rem;
-      color: $insensitive_fg_color;
-      font-weight: 600;
-    }
-
-    button {
-      padding: 0.2rem;
-      min-width: 0;
-      min-height: 0;
-    }
-  }
-
-  separator {
-    margin: 0 0.4rem;
-    background-color: gtkalpha($fg-color, 0.1);
-  }
-
-  .content {
-    margin: 1rem;
-    margin-top: 0.5rem;
-
-    .summary {
-      font-weight: 800;
-    }
-
-    .image {
-      border: 1px solid gtkalpha($fg-color, 0.02);
-      border-radius: 12px;
-      min-width: 60px;
-      min-height: 60px;
-      background-size: cover;
-      background-position: center;
-    }
-  }
-
-  .actions {
-    margin: 1rem;
-    margin-top: 0;
-
-    button {
-      margin: 0 0.3rem;
-
-      &:first-child {
-        margin-left: 0;
-      }
-
-      &:last-child {
-        margin-right: 0;
-      }
-    }
   }
 }

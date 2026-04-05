@@ -1,7 +1,7 @@
 {
   programs.opencode = {
     enable = true;
-    settings = {
+    tui = {
       theme = "nord";
     };
   };

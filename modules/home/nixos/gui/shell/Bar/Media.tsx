@@ -6,29 +6,20 @@ import Pango from "gi://Pango"
 import Gio from "gi://Gio"
 
 const cava = AstalCava.get_default()!
-cava.framerate = 240
+cava.framerate = 120
 cava.bars = 3
+cava.source = "spotify"
 
-const blocks = [
-  "\u2581",
-  "\u2582",
-  "\u2583",
-  "\u2584",
-  "\u2585",
-  "\u2586",
-  "\u2587",
-  "\u2588",
-]
+const blocks = "▁▂▃▄▅▆▇█".split("")
 
 function formatDuration(seconds: number): string {
   const isNegative = seconds < 0
-  const absSeconds = Math.abs(seconds)
-
-  const minutes = Math.floor(absSeconds / 60)
-  const remainingSeconds = Math.floor(absSeconds % 60)
-  const paddedSeconds = remainingSeconds.toString().padStart(2, "0")
-
-  return `${isNegative ? "-" : ""}${minutes}:${paddedSeconds}`
+  const abs = Math.abs(seconds)
+  const minutes = Math.floor(abs / 60)
+  const secs = Math.floor(abs % 60)
+    .toString()
+    .padStart(2, "0")
+  return `${isNegative ? "-" : ""}${minutes}:${secs}`
 }
 
 export default function Media() {
@@ -36,36 +27,26 @@ export default function Media() {
 
   const position = createBinding(player, "position")
   const length = createBinding(player, "length")
-
-  const remaining = position.as((pos) => formatDuration(pos - length.get()))
-
-  const progress = position.as((pos) =>
-    length.get() > 0 ? pos / length.get() : 0,
+  const isPlaying = createBinding(player, "playbackStatus").as(
+    (s) => s === AstalMpris.PlaybackStatus.PLAYING,
   )
-
-  const isPlaying = createBinding(
-    player,
-    "playbackStatus",
-  )((s) => s === AstalMpris.PlaybackStatus.PLAYING)
+  const remaining = position.as((pos) => formatDuration(pos - length.get()))
+  const progress = position.as((pos) =>
+    length.peek() > 0 ? pos / length.peek() : 0,
+  )
 
   return (
     <menubutton visible={createBinding(player, "available")}>
-      <box orientation={Gtk.Orientation.HORIZONTAL}>
+      <box>
         <box widthRequest={40} halign={Gtk.Align.CENTER} class="bars">
           <With value={isPlaying}>
-            {(i) =>
-              i ? (
+            {(playing) =>
+              playing ? (
                 <label
-                  visible={isPlaying}
                   hexpand={true}
                   label={createBinding(cava, "values").as((vals) =>
                     vals
-                      .map(
-                        (v) =>
-                          blocks[
-                            Math.min(Math.floor(v * 8), blocks.length - 1)
-                          ],
-                      )
+                      .map((v) => blocks[Math.min(Math.floor(v * 8), 7)])
                       .join(""),
                   )}
                 />
@@ -79,20 +60,21 @@ export default function Media() {
           </With>
         </box>
 
-        <box valign={Gtk.Align.CENTER} orientation={Gtk.Orientation.HORIZONTAL}>
+        <box valign={Gtk.Align.CENTER}>
           <label label={createBinding(player, "title")} />
           <label label=" – " />
           <label label={createBinding(player, "artist")} />
         </box>
       </box>
+
       <popover class="media-player">
         <box
           orientation={Gtk.Orientation.VERTICAL}
-          css="padding: 16px;"
           spacing={12}
+          css="padding: 16px;"
         >
-          <box orientation={Gtk.Orientation.HORIZONTAL} spacing={18}>
-            <box overflow={Gtk.Overflow.HIDDEN} css="border-radius: 10px;">
+          <box spacing={18}>
+            <box overflow={Gtk.Overflow.HIDDEN} class="cover-art">
               <image pixelSize={80} file={createBinding(player, "coverArt")} />
             </box>
             <box
@@ -107,7 +89,6 @@ export default function Media() {
               />
               <label
                 class="subtext"
-                css="font-size: 14px;"
                 xalign={0}
                 label={createBinding(player, "artist")}
                 ellipsize={Pango.EllipsizeMode.END}
@@ -115,17 +96,13 @@ export default function Media() {
               />
             </box>
           </box>
-          <box
-            orientation={Gtk.Orientation.HORIZONTAL}
-            spacing={8}
-            class="progress"
-          >
+
+          <box spacing={8} class="progress">
             <label
               xalign={0}
               widthChars={5}
-              label={position.as((p) => formatDuration(p))}
+              label={position.as(formatDuration)}
             />
-
             <box>
               <slider
                 widthRequest={300}
@@ -133,25 +110,10 @@ export default function Media() {
                 sensitive={!createBinding(player, "canSeek")}
               />
             </box>
-
             <label xalign={1} widthChars={5} label={remaining} />
           </box>
-          <box
-            orientation={Gtk.Orientation.HORIZONTAL}
-            halign={Gtk.Align.CENTER}
-            spacing={24}
-            class="controls"
-          >
-            {/*<button onClicked={() => player.shuffle()}>
-              <image
-                iconSize={Gtk.IconSize.LARGE}
-                iconName={createBinding(player, "shuffleStatus").as((status) =>
-                  status === AstalMpris.Shuffle.ON
-                    ? "media-playlist-shuffle-symbolic"
-                    : "media-playlist-consecutive-symbolic",
-                )}
-              />
-            </button>*/}
+
+          <box halign={Gtk.Align.CENTER} spacing={24} class="controls">
             <button onClicked={() => player.previous()}>
               <image
                 iconSize={Gtk.IconSize.LARGE}
@@ -161,11 +123,10 @@ export default function Media() {
             <button onClicked={() => player.play_pause()}>
               <image
                 iconSize={Gtk.IconSize.LARGE}
-                iconName={createBinding(player, "playbackStatus").as(
-                  (status) =>
-                    status === AstalMpris.PlaybackStatus.PLAYING
-                      ? "media-playback-pause-symbolic"
-                      : "media-playback-start-symbolic",
+                iconName={createBinding(player, "playbackStatus").as((s) =>
+                  s === AstalMpris.PlaybackStatus.PLAYING
+                    ? "media-playback-pause-symbolic"
+                    : "media-playback-start-symbolic",
                 )}
               />
             </button>
