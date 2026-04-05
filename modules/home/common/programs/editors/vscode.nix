@@ -4,6 +4,7 @@
     nixd
     nil
     nixfmt
+    tinymist
   ];
 
   programs.vscode = {
@@ -55,6 +56,7 @@
         ms-python.python
         ms-toolsai.jupyter
         arcticicestudio.nord-visual-studio-code
+        myriad-dreamin.tinymist
       ];
     };
   };
