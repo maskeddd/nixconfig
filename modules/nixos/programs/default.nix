@@ -1,22 +1,19 @@
-{ pkgs, ... }:
+{ flake, ... }:
+let
+  inherit (flake) inputs;
+in
 {
   imports = [
+    inputs.aagl.nixosModules.default
+
     ./steam.nix
     ./1password.nix
+    ./niri.nix
   ];
 
   programs = {
     fish.enable = true;
-    wireshark = {
-      enable = true;
-      package = pkgs.wireshark;
-    };
     hyprland.enable = true;
+    anime-game-launcher.enable = true;
   };
-
-  environment.loginShellInit = ''
-    if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-      exec start-hyprland
-    fi
-  '';
 }

@@ -10,13 +10,9 @@ in
   stylix = {
     enable = true;
     polarity = "dark";
-    image = ../../../images/nord-abstract.png;
+    image = ../../images/nord-abstract.png;
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
-    # override = {
-    #   base0D = "#b4befe";
-    #   base07 = "#89b4fa";
-    # };
 
     fonts = {
       serif = {

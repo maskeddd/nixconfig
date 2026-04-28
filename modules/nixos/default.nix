@@ -12,9 +12,11 @@ in
     }
     inputs.stylix.nixosModules.stylix
     ./core.nix
+    ./myusers.nix
+    ./nix.nix
+    ./stylix.nix
     ./packages.nix
     ./services
-    ./common
     ./programs
   ];
 

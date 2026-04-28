@@ -1,7 +1,6 @@
-{ pkgs, ... }:
 {
   programs.steam = {
-    enable = pkgs.stdenv.isx86_64;
+    enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;

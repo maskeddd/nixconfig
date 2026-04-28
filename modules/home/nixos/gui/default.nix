@@ -1,11 +1,12 @@
 { pkgs, ... }:
 {
   imports = [
-    ./hyprland
+    ./hyprland.nix
     ./hypridle.nix
     ./hyprlock.nix
     ./ags.nix
     ./dunst.nix
+    ./niri.nix
   ];
 
   home = {
@@ -15,12 +16,12 @@
     };
 
     pointerCursor = {
+      hyprcursor.enable = true;
+      x11.enable = true;
       gtk.enable = true;
       package = pkgs.apple-cursor;
       name = "macOS";
       size = 24;
     };
   };
-
-  services.polkit-gnome.enable = true;
 }

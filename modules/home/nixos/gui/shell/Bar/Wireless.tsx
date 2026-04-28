@@ -1,42 +1,61 @@
-import { execAsync } from "ags/process"
+import { createBinding, For, With } from "ags"
+import { Gtk } from "ags/gtk4"
 import AstalNetwork from "gi://AstalNetwork"
-import Gtk from "gi://Gtk?version=4.0"
-import { createBinding, For, With } from "gnim"
 
-export default function Wireless() {
-  const network = AstalNetwork.get_default()
-  const wifi = createBinding(network, "wifi")
+const network = AstalNetwork.get_default()
 
-  const sorted = (arr: Array<AstalNetwork.AccessPoint>) => {
-    return arr.filter((ap) => !!ap.ssid).sort((a, b) => b.strength - a.strength)
-  }
+function sortAccessPoints(arr: AstalNetwork.AccessPoint[]) {
+  return arr.filter((ap) => !!ap.ssid).sort((a, b) => b.strength - a.strength)
+}
 
-  async function connect(ap: AstalNetwork.AccessPoint) {
-    // connecting to ap is not yet supported
-    // https://github.com/Aylur/astal/pull/13
+function activate(ap: AstalNetwork.AccessPoint) {
+  ap.activate(null, (_, res) => {
     try {
-      await execAsync(`nmcli d wifi connect ${ap.bssid}`)
+      ap.activate_finish(res)
     } catch (error) {
-      // you can implement a popup asking for password here
       console.error(error)
     }
-  }
+  })
+}
+
+export default function Wireless() {
+  const wifi = createBinding(network, "wifi")
 
   return (
     <box visible={wifi(Boolean)}>
       <With value={wifi}>
         {(wifi) =>
           wifi && (
-            <menubutton class="wireless">
+            <menubutton
+              class="wireless"
+              $={(self) => {
+                self.connect("notify::active", () => {
+                  if (self.active) wifi.scan()
+                })
+              }}
+            >
               <image iconName={createBinding(wifi, "iconName")} class="icon" />
               <popover>
-                <box orientation={Gtk.Orientation.VERTICAL} spacing={4}>
-                  <For each={createBinding(wifi, "accessPoints")(sorted)}>
-                    {(ap: AstalNetwork.AccessPoint) => (
-                      <button onClicked={() => connect(ap)}>
-                        <box spacing={4}>
+                <box
+                  orientation={Gtk.Orientation.VERTICAL}
+                  spacing={2}
+                  class="wireless-list"
+                >
+                  <For
+                    each={createBinding(
+                      wifi,
+                      "accessPoints",
+                    )(sortAccessPoints)}
+                  >
+                    {(ap) => (
+                      <button onClicked={() => activate(ap)}>
+                        <box spacing={10}>
                           <image iconName={createBinding(ap, "iconName")} />
-                          <label label={createBinding(ap, "ssid")} />
+                          <label
+                            label={createBinding(ap, "ssid")}
+                            hexpand
+                            xalign={0}
+                          />
                           <image
                             iconName="object-select-symbolic"
                             visible={createBinding(

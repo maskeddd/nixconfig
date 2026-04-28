@@ -44,13 +44,17 @@ window.Bar {
   }
 
   .workspace,
+  .tray > button {
+    padding: 2px;
+    min-width: 24px;
+    min-height: 24px;
+  }
+
+  .workspace,
   .tray {
     background: $borders;
     border-right: none;
     border-radius: 0;
-    padding: 2px;
-    min-width: 24px;
-    min-height: 24px;
 
     &:focus {
       outline: none;
@@ -119,7 +123,20 @@ window.Bar {
     }
   }
 
-  .audio .battery {
+  .audio .volume-label,
+  .battery label {
     font-family: monospace;
+  }
+
+  .wireless-list > button {
+    background: none;
+    padding: 6px 12px;
+    border-radius: 9px;
+    font-weight: normal;
+    transition: none;
+
+    &:hover {
+      background-color: $borders;
+    }
   }
 }

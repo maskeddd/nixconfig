@@ -1,6 +1,7 @@
 { config, ... }:
 {
   services.xserver.videoDrivers = [ "nvidia" ];
+  boot.kernelParams = [ "nvidia.NVreg_TemporaryFilePath=/var/tmp" ];
 
   hardware = {
     graphics.enable = true;

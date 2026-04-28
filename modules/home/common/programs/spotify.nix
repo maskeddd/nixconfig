@@ -1,4 +1,4 @@
-{ flake, pkgs, ... }:
+{ flake, ... }:
 let
   inherit (flake) inputs;
 in
@@ -8,6 +8,6 @@ in
   ];
 
   programs.spicetify = {
-    enable = pkgs.stdenv.hostPlatform.system != "aarch64-linux";
+    enable = true;
   };
 }
