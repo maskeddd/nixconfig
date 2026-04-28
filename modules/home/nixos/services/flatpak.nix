@@ -10,7 +10,7 @@ in
       "org.vinegarhq.Sober"
       rec {
         appId = "com.hypixel.HytaleLauncher";
-        sha256 = "OyKzn9RJWlEiY2e2VVMQ96dYWDN1r6kEez81EWSjT1Y=";
+        sha256 = "QmLLhHIam/kJETzqBr+IaishISzkxkGeDp/OCRZeyFs=";
         bundle = "${pkgs.fetchurl {
           url = "https://launcher.hytale.com/builds/release/linux/amd64/hytale-launcher-latest.flatpak";
           inherit sha256;
