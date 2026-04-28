@@ -10,7 +10,6 @@
     wl-clipboard
     playerctl
     brightnessctl
-    easyeffects
 
     protonplus
     osu-lazer-bin
