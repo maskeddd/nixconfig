@@ -1,7 +1,10 @@
 { pkgs, ... }:
 {
   imports = [
-    ./editors
+    ./helix.nix
+    ./zed.nix
+    ./vscode.nix
+    ./opencode.nix
     ./discord.nix
     ./ghostty.nix
     ./git.nix

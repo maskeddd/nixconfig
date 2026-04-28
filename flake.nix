@@ -49,6 +49,8 @@
       url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri.url = "github:sodiboo/niri-flake";
+    aagl.url = "github:ezKEa/aagl-gtk-on-nix";
 
     # Theming
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";

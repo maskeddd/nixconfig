@@ -1,31 +1,30 @@
 import AstalWp from "gi://AstalWp"
-import Gtk from "gi://Gtk?version=4.0"
-import { createBinding } from "gnim"
+import { createBinding } from "ags"
 
 const { defaultSpeaker: speaker } = AstalWp.get_default()!
 
 export default function AudioOutput() {
+  const volumeIcon = createBinding(speaker, "volumeIcon")
+  const volume = createBinding(speaker, "volume")
+  const volumeLabel = volume((v) => `${Math.round(v * 100)}%`)
+
   return (
     <menubutton class="audio">
-      <box orientation={Gtk.Orientation.HORIZONTAL} spacing={4}>
-        <image iconName={createBinding(speaker, "volumeIcon")} class="icon" />
+      <box spacing={4}>
+        <image iconName={volumeIcon} class="icon" />
         <label
+          class="volume-label"
           widthRequest={28}
           xalign={1}
-          label={createBinding(
-            speaker,
-            "volume",
-          )((v) => Math.round(v * 100) + "%")}
+          label={volumeLabel}
         />
       </box>
       <popover>
-        <box>
-          <slider
-            widthRequest={260}
-            onChangeValue={({ value }) => speaker.set_volume(value)}
-            value={createBinding(speaker, "volume")}
-          />
-        </box>
+        <slider
+          widthRequest={260}
+          onChangeValue={({ value }) => speaker.set_volume(value)}
+          value={volume}
+        />
       </popover>
     </menubutton>
   )

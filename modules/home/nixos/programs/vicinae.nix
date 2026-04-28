@@ -5,7 +5,7 @@
     systemd = {
       enable = true;
       autoStart = true;
-      target = "hyprland-session.target";
+      # target = "hyprland-session.target";
     };
   };
 }

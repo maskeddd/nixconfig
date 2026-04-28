@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       global = {
-        offset = "(20,0)";
+        offset = "(20,20)";
       };
     };
   };

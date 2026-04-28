@@ -16,7 +16,9 @@ in
     }
     inputs.stylix.darwinModules.stylix
 
-    ./common
+    ../nixos/myusers.nix
+    ../nixos/nix.nix
+    ../nixos/stylix.nix
     ./homebrew.nix
     #./kanata.nix
     ./borders.nix
@@ -55,11 +57,6 @@ in
         ShowPathbar = true; # show path bar
         ShowStatusBar = true; # show status bar
       };
-    };
-
-    keyboard = {
-      # enableKeyMapping = true;
-      # remapCapsLockToControl = true;
     };
   };
 }

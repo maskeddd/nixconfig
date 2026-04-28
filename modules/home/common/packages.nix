@@ -13,6 +13,7 @@
     blink-roblox
     devenv
     typst
+    claude-code
 
     cachix
     nix-info

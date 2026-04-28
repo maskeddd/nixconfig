@@ -4,33 +4,20 @@ let
   inherit (flake) inputs;
   inherit (inputs) self;
   packages = self + /packages;
-  nix-vscode-extensions = system: inputs.nix-vscode-extensions.extensions.${system};
 in
-self: super:
+final: prev:
 let
-
-  entries = builtins.readDir packages;
-
-  makePackage =
-    name: type:
-    let
-      pkgName =
-        if type == "regular" && builtins.match ".*\\.nix$" name != null then
-          builtins.replaceStrings [ ".nix" ] [ "" ] name
-        else
-          name;
-    in
-    {
-      name = pkgName;
-      value = self.callPackage (packages + "/${name}") { };
-    };
-
   packageOverlays = builtins.listToAttrs (
-    builtins.attrValues (builtins.mapAttrs makePackage entries)
+    builtins.attrValues (
+      builtins.mapAttrs (name: _: {
+        name = builtins.replaceStrings [ ".nix" ] [ "" ] name;
+        value = final.callPackage (packages + "/${name}") { };
+      }) (builtins.readDir packages)
+    )
   );
-
 in
 packageOverlays
+// inputs.affinity-nix.overlays.default final prev
 // {
-  nix-vscode-extensions = nix-vscode-extensions self.system;
+  nix-vscode-extensions = inputs.nix-vscode-extensions.extensions.${final.system};
 }

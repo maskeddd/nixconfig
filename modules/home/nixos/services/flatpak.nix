@@ -7,7 +7,6 @@ in
 
   services.flatpak = {
     packages = [
-      "tv.plex.PlexDesktop"
       "org.vinegarhq.Sober"
       rec {
         appId = "com.hypixel.HytaleLauncher";
