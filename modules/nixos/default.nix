@@ -19,6 +19,4 @@ in
     ./services
     ./programs
   ];
-
-  stylix.targets.chromium.enable = false;
 }

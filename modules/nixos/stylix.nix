@@ -16,7 +16,7 @@ in
 
     fonts = {
       serif = {
-        package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
+        package = inputs.apple-fonts.packages.${pkgs.system}.ny;
         name = "New York";
       };
 
