@@ -7,12 +7,6 @@
         mutableUserSettings = false;
 
         extraPackages = with pkgs; [
-          nixd
-          nil
-          stylua
-          tombi
-          rust-analyzer
-          gopls
           package-version-server
         ];
 
