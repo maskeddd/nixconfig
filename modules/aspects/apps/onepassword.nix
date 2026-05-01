@@ -17,21 +17,13 @@
       };
     };
 
-    homeManager =
-      { pkgs, ... }:
-      let
-        onePassPath =
-          if pkgs.stdenv.isLinux then
-            "~/.1password/agent.sock"
-          else
-            "\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
-      in
-      {
-        programs.ssh = {
-          enable = true;
-          enableDefaultConfig = false;
-          matchBlocks."*".identityAgent = onePassPath;
-        };
-      };
+    homeManager.programs.ssh = {
+      enable = true;
+      enableDefaultConfig = false;
+    };
+
+    hmLinux.programs.ssh.matchBlocks."*".identityAgent = "~/.1password/agent.sock";
+
+    hmDarwin.programs.ssh.matchBlocks."*".identityAgent = "\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
   };
 }

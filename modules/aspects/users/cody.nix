@@ -6,6 +6,7 @@
       aspects.dev
       aspects.git
       aspects.zed
+      aspects.helix
       aspects.vscode
       aspects.spotify
       aspects.discord
@@ -22,6 +23,7 @@
         gaming
         gnome
         obs
+        audio
       ];
       nixos.users.users.cody.extraGroups = [
         "input"
