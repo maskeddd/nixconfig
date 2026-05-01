@@ -1,0 +1,31 @@
+{
+  den.aspects.fans.nixos = {
+    hardware.uni-sync = {
+      enable = true;
+      devices = [
+        {
+          device_id = "VID:3314/PID:41216/SN:6243168001/PATH:1-6.4:1.1";
+          sync_rgb = true;
+          channels = [
+            {
+              mode = "PWM";
+              speed = 50;
+            }
+            {
+              mode = "PWM";
+              speed = 50;
+            }
+            {
+              mode = "PWM";
+              speed = 50;
+            }
+            {
+              mode = "PWM";
+              speed = 50;
+            }
+          ];
+        }
+      ];
+    };
+  };
+}
