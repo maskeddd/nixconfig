@@ -9,6 +9,8 @@
     darwin =
       { pkgs, ... }:
       {
+        system.stateVersion = 6;
+
         security.pam.services.sudo_local.touchIdAuth = true;
 
         system.defaults = {
