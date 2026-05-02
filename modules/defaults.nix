@@ -27,16 +27,19 @@
             "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
           ];
         };
-
-        gc = {
-          automatic = true;
-          dates = "weekly";
-        };
       };
     };
 
     nixos = {
       system.stateVersion = "25.05";
+
+      programs.nh = {
+        enable = true;
+        clean = {
+          enable = true;
+          extraArgs = "--keep 3 --keep-since 7d";
+        };
+      };
 
       security.polkit.enable = true;
 
