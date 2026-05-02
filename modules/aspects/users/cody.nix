@@ -5,9 +5,7 @@
       aspects.shell
       aspects.dev
       aspects.git
-      aspects.zed
-      aspects.helix
-      aspects.vscode
+      aspects.editors
       aspects.spotify
       aspects.discord
       aspects.applications
@@ -17,19 +15,12 @@
       (provides.user-shell "fish")
     ];
 
-    provides.desktop = {
-      includes = with den.aspects; [
-        hyprland
-        gaming
-        gnome
-        obs
-        audio
-      ];
-      nixos.users.users.cody.extraGroups = [
-        "input"
-        "uinput"
-        "seat"
-      ];
-    };
+    provides.desktop.includes = with den.aspects; [
+      hyprland
+      gaming
+      gnome
+      obs
+      audio
+    ];
   };
 }

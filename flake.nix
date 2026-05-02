@@ -5,6 +5,10 @@
 
   inputs = {
     aagl.url = "github:ezKEa/aagl-gtk-on-nix";
+    acsandmann-rift = {
+      url = "github:acsandmann/homebrew-tap";
+      flake = false;
+    };
     affinity-nix.url = "github:mrshmllow/affinity-nix";
     ags = {
       url = "github:aylur/ags";
@@ -32,8 +36,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
     import-tree.url = "github:vic/import-tree";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
