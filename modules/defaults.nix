@@ -78,7 +78,7 @@
     homeManager.home.stateVersion = "24.11";
   };
 
-  den.ctx.hm-host.nixos.home-manager = {
+  den.ctx.hm-host.os.home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
   };
