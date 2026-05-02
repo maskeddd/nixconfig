@@ -22,5 +22,11 @@
       {
         home.packages = [ pkgs.affinity-v3 ];
       };
+
+    hmDarwin =
+      { pkgs, ... }:
+      {
+        home.packages = [ pkgs.appcleaner ];
+      };
   };
 }

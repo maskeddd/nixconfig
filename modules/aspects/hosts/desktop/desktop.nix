@@ -9,5 +9,11 @@
       fans
     ];
     nixos.imports = [ ./_hardware-configuration.nix ];
+
+    provides.cody.nixos.users.users.cody.extraGroups = [
+      "input"
+      "uinput"
+      "seat"
+    ];
   };
 }

@@ -3,7 +3,7 @@
   den.default = {
     includes = [
       den.aspects.theme
-      den.provides.hostname
+      (den.lib.perHost den.provides.hostname)
     ];
 
     os = {
