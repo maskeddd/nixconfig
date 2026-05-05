@@ -8,11 +8,8 @@
 
       programs.nixcord = {
         enable = true;
+        vesktop.enable = true;
         config = {
-          useQuickCss = true;
-          themeLinks = [
-            "https://raw.githubusercontent.com/refact0r/midnight-discord/refs/heads/master/themes/flavors/midnight-nord.theme.css"
-          ];
           plugins = {
             anonymiseFileNames.enable = true;
             betterGifPicker.enable = true;

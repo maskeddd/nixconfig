@@ -16,6 +16,7 @@
           tombi
           rust-analyzer
           gopls
+          jdt-language-server
         ];
       };
 

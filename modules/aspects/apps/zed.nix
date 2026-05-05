@@ -20,11 +20,6 @@
         userSettings = {
           inlay_hints.enabled = true;
 
-          theme = {
-            light = "Nord Dark";
-            dark = "Nord Dark";
-          };
-
           collaboration_panel.button = false;
           toolbar = {
             breadcrumbs = false;
@@ -36,6 +31,15 @@
 
           languages = {
             "Nix".formatter.external.command = "${pkgs.nixfmt}/bin/nixfmt";
+          };
+
+          lsp = {
+            svelte-language-server = {
+              binary = {
+                path = "svelteserver";
+                arguments = [ "--stdio" ];
+              };
+            };
           };
         };
       };
