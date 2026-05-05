@@ -2,9 +2,13 @@
 let
   mkStylixConfig = pkgs: {
     enable = true;
+    image = ../../assets/wallpapers/at.png;
     polarity = "dark";
-    image = ../../assets/wallpapers/nord-abstract.png;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    override = {
+      base07 = "89b4fa";
+      base0D = "b4befe";
+    };
     fonts = {
       serif = {
         package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
@@ -40,17 +44,43 @@ in
       {
         stylix = mkStylixConfig pkgs;
       };
-    nixos.imports = [ inputs.stylix.nixosModules.stylix ];
+
+    nixos =
+      { pkgs, ... }:
+      {
+        imports = [ inputs.stylix.nixosModules.stylix ];
+
+        fonts.packages = with pkgs; [
+          noto-fonts
+          noto-fonts-cjk-sans
+        ];
+      };
     darwin.imports = [ inputs.stylix.darwinModules.stylix ];
 
-    homeManager.stylix.targets = {
-      zed = {
-        colors.enable = false;
+    homeManager = {
+      stylix.targets = {
+        zed.colors.enable = false;
+        helix.enable = false;
+        spicetify.enable = true;
+        nixcord.enable = false;
       };
-      spicetify.enable = true;
-      nixcord.enable = false;
-      helix.enable = false;
-      vscode.colors.enable = false;
+
+      programs = {
+        helix.settings.theme = "catppuccin_mocha";
+        nixcord.config = {
+          useQuickCss = true;
+          themeLinks = [
+            "https://raw.githubusercontent.com/refact0r/midnight-discord/refs/heads/master/themes/flavors/midnight-catppuccin-mocha.theme.css"
+          ];
+        };
+        zed-editor = {
+          extensions = [ "catppuccin" ];
+          userSettings.theme = {
+            light = "Catppuccin Latte";
+            dark = "Catppuccin Mocha";
+          };
+        };
+      };
     };
 
     hmLinux =

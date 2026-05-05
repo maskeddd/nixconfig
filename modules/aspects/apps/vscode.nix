@@ -9,7 +9,7 @@
     os.nixpkgs.overlays = [ inputs.nix-vscode-extensions.overlays.default ];
 
     homeManager =
-      { pkgs, lib, ... }:
+      { pkgs, ... }:
       {
         programs.vscode = {
           enable = true;
@@ -29,13 +29,11 @@
               "workbench.activityBar.location" = "hidden";
               "workbench.layoutControl.enabled" = false;
               "workbench.tree.stickyScroll.enabled" = false;
-              "workbench.colorTheme" = lib.mkForce "Nord";
 
               "window.titleBarStyle" = "native";
               "window.menuBarVisibility" = "toggle";
               "window.customTitleBarVisibility" = "never";
 
-              "terminal.integrated.stickyScroll.enabled" = false;
               "terminal.integrated.minimumContrastRatio" = 1;
               "terminal.integrated.defaultProfile.linux" = "fish";
               "terminal.integrated.profiles.linux" = {
@@ -59,7 +57,6 @@
               tombi-toml.tombi
               ms-python.python
               ms-toolsai.jupyter
-              arcticicestudio.nord-visual-studio-code
               myriad-dreamin.tinymist
             ];
           };
