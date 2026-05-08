@@ -13,14 +13,21 @@
           telegram-desktop
           qbittorrent
         ];
-
-        programs.zathura.enable = true;
       };
 
     hmLinux =
       { pkgs, ... }:
       {
         home.packages = [ pkgs.affinity-v3 ];
+
+        xdg.mimeApps = {
+          enable = true;
+          defaultApplications = {
+            "text/html" = "brave-browser.desktop";
+            "x-scheme-handler/about" = "brave-browser.desktop";
+            "x-scheme-handler/unknown" = "brave-browser.desktop";
+          };
+        };
       };
 
     hmDarwin =
