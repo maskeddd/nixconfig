@@ -8,6 +8,14 @@
     nixos = {
       imports = [ inputs.aagl.nixosModules.default ];
 
+      nixpkgs.overlays = [
+        (final: prev: {
+          openldap = prev.openldap.overrideAttrs (_: {
+            doCheck = !prev.stdenv.hostPlatform.isi686;
+          });
+        })
+      ];
+
       programs = {
         steam = {
           enable = true;
@@ -25,8 +33,8 @@
         home.packages = with pkgs; [
           protonplus
           osu-lazer-bin
-          heroic
           vinegar
+          lutris
 
           (prismlauncher.override {
             jdks = with pkgs; [
