@@ -13,7 +13,6 @@ import Wireless from "./Wireless"
 
 export default function Bar({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
-  const isLaptop = gdkmonitor.connector === "eDP-1"
 
   return (
     <window
@@ -33,14 +32,8 @@ export default function Bar({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
           <Workspaces gdkmonitor={gdkmonitor} />
           <CurrentClient gdkmonitor={gdkmonitor} />
         </box>
-        <box $type="center">{!isLaptop && <Media />}</box>
+        <box $type="center"><Media /></box>
         <box $type="end">
-          {isLaptop && (
-            <>
-              <Divider />
-              <Media />
-            </>
-          )}
           <Tray />
           <Battery />
           <Divider />
