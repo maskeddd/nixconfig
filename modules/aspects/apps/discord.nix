@@ -8,7 +8,6 @@
 
       programs.nixcord = {
         enable = true;
-        discord.krisp.enable = true;
         config = {
           plugins = {
             anonymiseFileNames.enable = true;
@@ -24,11 +23,6 @@
       };
     };
 
-    hmLinux = {
-      xdg.mimeApps = {
-        enable = true;
-        defaultApplications."x-scheme-handler/discord" = "discord.desktop";
-      };
-    };
+    hmLinux.xdg.mimeApps.defaultApplications."x-scheme-handler/discord" = "discord.desktop";
   };
 }

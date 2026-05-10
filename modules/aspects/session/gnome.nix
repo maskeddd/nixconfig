@@ -40,16 +40,13 @@
           lib.filter (s: s != "") (lib.splitString ";" (lib.removePrefix "MimeType=" line));
       in
       {
-        xdg.mimeApps = {
-          enable = true;
-          defaultApplications =
-            lib.genAttrs (extractMimeTypes "${pkgs.loupe}/share/applications/org.gnome.Loupe.desktop") (
-              _: "org.gnome.Loupe.desktop"
-            )
-            // lib.genAttrs
-              (extractMimeTypes "${pkgs.decibels}/share/applications/org.gnome.Decibels.desktop")
-              (_: "org.gnome.Decibels.desktop");
-        };
+        xdg.mimeApps.defaultApplications =
+          lib.genAttrs (extractMimeTypes "${pkgs.loupe}/share/applications/org.gnome.Loupe.desktop") (
+            _: "org.gnome.Loupe.desktop"
+          )
+          // lib.genAttrs (extractMimeTypes "${pkgs.decibels}/share/applications/org.gnome.Decibels.desktop") (
+            _: "org.gnome.Decibels.desktop"
+          );
       };
   };
 }

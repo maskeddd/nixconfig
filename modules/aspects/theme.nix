@@ -1,34 +1,4 @@
 { inputs, ... }:
-let
-  mkStylixConfig = pkgs: {
-    enable = true;
-    image = ../../assets/wallpapers/at.png;
-    polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-    override = {
-      base07 = "89b4fa";
-      base0D = "b4befe";
-    };
-    fonts = {
-      serif = {
-        package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
-        name = "New York";
-      };
-      sansSerif = {
-        package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
-        name = "SF Pro Text";
-      };
-      monospace = {
-        package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font";
-      };
-      emoji = {
-        package = pkgs.noto-fonts-color-emoji;
-        name = "Noto Color Emoji";
-      };
-    };
-  };
-in
 {
   flake-file.inputs = {
     stylix = {
@@ -42,7 +12,34 @@ in
     os =
       { pkgs, ... }:
       {
-        stylix = mkStylixConfig pkgs;
+        stylix = {
+          enable = true;
+          image = ../../assets/wallpapers/at.png;
+          polarity = "dark";
+          base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+          override = {
+            base07 = "89b4fa";
+            base0D = "b4befe";
+          };
+          fonts = {
+            serif = {
+              package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
+              name = "New York";
+            };
+            sansSerif = {
+              package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
+              name = "SF Pro Text";
+            };
+            monospace = {
+              package = pkgs.nerd-fonts.jetbrains-mono;
+              name = "JetBrainsMono Nerd Font";
+            };
+            emoji = {
+              package = pkgs.noto-fonts-color-emoji;
+              name = "Noto Color Emoji";
+            };
+          };
+        };
       };
 
     nixos =
