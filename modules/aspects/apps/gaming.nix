@@ -29,6 +29,9 @@
 
     homeManager =
       { pkgs, ... }:
+      let
+        hytaleHash = "QmLLhHIam/kJETzqBr+IaishISzkxkGeDp/OCRZeyFs=";
+      in
       {
         home.packages = with pkgs; [
           protonplus
@@ -50,10 +53,10 @@
           "org.vinegarhq.Sober"
           {
             appId = "com.hypixel.HytaleLauncher";
-            sha256 = "QmLLhHIam/kJETzqBr+IaishISzkxkGeDp/OCRZeyFs=";
+            sha256 = hytaleHash;
             bundle = "${pkgs.fetchurl {
               url = "https://launcher.hytale.com/builds/release/linux/amd64/hytale-launcher-latest.flatpak";
-              sha256 = "QmLLhHIam/kJETzqBr+IaishISzkxkGeDp/OCRZeyFs=";
+              sha256 = hytaleHash;
             }}";
           }
         ];

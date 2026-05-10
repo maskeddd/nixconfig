@@ -1,6 +1,6 @@
 { den, lib, ... }:
 {
-  den.ctx.user.includes = [
+  den.schema.user.includes = [
     (
       {
         class,

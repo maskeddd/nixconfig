@@ -3,7 +3,7 @@
   den.default = {
     includes = [
       den.aspects.theme
-      (den.lib.perHost den.provides.hostname)
+      den.provides.hostname
     ];
 
     os = {
@@ -76,16 +76,22 @@
     };
 
     homeManager.home.stateVersion = "24.11";
+
+    hmLinux.xdg.mimeApps.enable = true;
   };
 
-  den.ctx.hm-host.os.home-manager = {
-    useUserPackages = true;
-    useGlobalPkgs = true;
-  };
+  den.schema.host.includes = [
+    {
+      os.home-manager = {
+        useUserPackages = true;
+        useGlobalPkgs = true;
+      };
+    }
+  ];
 
   # enable hm by default
   den.schema.user.classes = lib.mkDefault [ "homeManager" ];
 
   # bidirectional host<->user contributions via .provides.
-  den.ctx.user.includes = [ den.provides.mutual-provider ];
+  den.schema.user.includes = [ den.provides.mutual-provider ];
 }

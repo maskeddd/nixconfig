@@ -29,12 +29,9 @@
           noDisplay = true;
         };
 
-        xdg.mimeApps = {
-          enable = true;
-          defaultApplications = {
-            "x-scheme-handler/http" = "spotify-redirect.desktop";
-            "x-scheme-handler/https" = "spotify-redirect.desktop";
-          };
+        xdg.mimeApps.defaultApplications = {
+          "x-scheme-handler/http" = "spotify-redirect.desktop";
+          "x-scheme-handler/https" = "spotify-redirect.desktop";
         };
       };
   };
