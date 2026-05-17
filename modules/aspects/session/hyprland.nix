@@ -193,7 +193,7 @@
               "1, monitor:DP-3"
               "2, monitor:DP-3"
               "3, monitor:DP-2"
-              "4, monitor:DP-2"
+              "4, monitor:DP-3"
             ];
 
             exec-once = [

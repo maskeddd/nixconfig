@@ -16,8 +16,6 @@
           mutableExtensionsDir = false;
           profiles.default = {
             userSettings = {
-              "catppuccin-icons.hidesExplorerArrows" = true;
-
               "editor.fontLigatures" = true;
               "editor.minimap.enabled" = false;
               "editor.formatOnSave" = true;
@@ -28,7 +26,6 @@
 
               "workbench.activityBar.location" = "hidden";
               "workbench.layoutControl.enabled" = false;
-              "workbench.tree.stickyScroll.enabled" = false;
 
               "window.titleBarStyle" = "native";
               "window.menuBarVisibility" = "toggle";
@@ -58,6 +55,8 @@
               ms-python.python
               ms-toolsai.jupyter
               myriad-dreamin.tinymist
+              gleam.gleam
+              ms-toolsai.jupyter-renderers
             ];
           };
         };

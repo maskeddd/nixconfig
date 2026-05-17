@@ -6,6 +6,7 @@
         home.packages = with pkgs; [
           gnumake
           claude-code
+          codex
           typst
 
           nixd
