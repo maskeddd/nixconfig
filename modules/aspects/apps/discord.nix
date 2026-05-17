@@ -1,15 +1,13 @@
 { inputs, ... }:
 {
   flake-file.inputs.nixcord.url = "github:FlameFlag/nixcord";
-
   den.aspects.discord = {
     homeManager = {
       imports = [ inputs.nixcord.homeModules.nixcord ];
-
       programs.nixcord = {
         enable = true;
-        discord.krisp.enable = true;
         vesktop.enable = true;
+        discord.krisp.enable = true;
         config = {
           plugins = {
             anonymiseFileNames.enable = true;
@@ -24,7 +22,8 @@
         };
       };
     };
-
-    hmLinux.xdg.mimeApps.defaultApplications."x-scheme-handler/discord" = "discord.desktop";
+    hmLinux = {
+      xdg.mimeApps.defaultApplications."x-scheme-handler/discord" = "discord.desktop";
+    };
   };
 }

@@ -10,7 +10,6 @@
       {
         home.packages = with pkgs; [
           brave
-          telegram-desktop
           qbittorrent
         ];
       };
