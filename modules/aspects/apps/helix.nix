@@ -8,6 +8,9 @@
           typstyle
           golangci-lint-langserver
           svelte-language-server
+          tailwindcss-language-server
+          vscode-langservers-extracted
+          marksman
           vtsls
         ];
         settings = {
@@ -41,6 +44,10 @@
               command = "vtsls";
               args = [ "--stdio" ];
             };
+            tailwindcss-ls = {
+              command = "tailwindcss-language-server";
+              args = [ "--stdio" ];
+            };
           };
           language = [
             {
@@ -66,21 +73,68 @@
             }
             {
               name = "typescript";
-              language-servers = [ "vtsls" ];
+              language-servers = [
+                "vtsls"
+                "tailwindcss-ls"
+              ];
               auto-format = true;
             }
             {
               name = "tsx";
-              language-servers = [ "vtsls" ];
+              language-servers = [
+                "vtsls"
+                "tailwindcss-ls"
+              ];
               auto-format = true;
             }
             {
               name = "javascript";
-              language-servers = [ "vtsls" ];
+              language-servers = [
+                "vtsls"
+                "tailwindcss-ls"
+              ];
+              auto-format = true;
             }
             {
               name = "jsx";
-              language-servers = [ "vtsls" ];
+              language-servers = [
+                "vtsls"
+                "tailwindcss-ls"
+              ];
+              auto-format = true;
+            }
+            {
+              name = "html";
+              language-servers = [
+                "vscode-html-language-server"
+                "tailwindcss-ls"
+              ];
+              auto-format = true;
+            }
+            {
+              name = "css";
+              language-servers = [
+                "vscode-css-language-server"
+                "tailwindcss-ls"
+              ];
+              auto-format = true;
+            }
+            {
+              name = "json";
+              language-servers = [ "vscode-json-language-server" ];
+              auto-format = true;
+            }
+            {
+              name = "markdown";
+              language-servers = [ "marksman" ];
+            }
+            {
+              name = "svelte";
+              language-servers = [
+                "svelteserver"
+                "tailwindcss-ls"
+              ];
+              auto-format = true;
             }
           ];
         };

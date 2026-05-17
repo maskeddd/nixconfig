@@ -22,58 +22,70 @@
             "https://ezkea.cachix.org"
             "https://cache.garnix.io"
           ];
+
           trusted-public-keys = [
             "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
             "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
           ];
+
+          trusted-users = [ "cody" ];
         };
       };
     };
 
-    nixos = {
-      system.stateVersion = "25.05";
+    nixos =
+      { pkgs, ... }:
+      {
+        system.stateVersion = "25.05";
 
-      programs.nh = {
-        enable = true;
-        clean = {
+        programs.nh = {
           enable = true;
-          extraArgs = "--keep 3 --keep-since 7d";
+          clean = {
+            enable = true;
+            extraArgs = "--keep 3 --keep-since 7d";
+          };
         };
-      };
 
-      security.polkit.enable = true;
+        security.polkit.enable = true;
 
-      services.openssh.enable = true;
+        services.openssh.enable = true;
 
-      networking.networkmanager.enable = true;
+        networking.networkmanager.enable = true;
 
-      time.timeZone = "Australia/Brisbane";
-      i18n.defaultLocale = "en_AU.UTF-8";
-      i18n.extraLocaleSettings = {
-        LC_ADDRESS = "en_AU.UTF-8";
-        LC_IDENTIFICATION = "en_AU.UTF-8";
-        LC_MEASUREMENT = "en_AU.UTF-8";
-        LC_MONETARY = "en_AU.UTF-8";
-        LC_NAME = "en_AU.UTF-8";
-        LC_NUMERIC = "en_AU.UTF-8";
-        LC_PAPER = "en_AU.UTF-8";
-        LC_TELEPHONE = "en_AU.UTF-8";
-        LC_TIME = "en_AU.UTF-8";
-      };
-
-      services.xserver.xkb = {
-        layout = "au";
-        variant = "";
-      };
-
-      boot.loader = {
-        systemd-boot = {
-          enable = true;
-          configurationLimit = 3;
+        time.timeZone = "Australia/Brisbane";
+        i18n.defaultLocale = "en_AU.UTF-8";
+        i18n.extraLocaleSettings = {
+          LC_ADDRESS = "en_AU.UTF-8";
+          LC_IDENTIFICATION = "en_AU.UTF-8";
+          LC_MEASUREMENT = "en_AU.UTF-8";
+          LC_MONETARY = "en_AU.UTF-8";
+          LC_NAME = "en_AU.UTF-8";
+          LC_NUMERIC = "en_AU.UTF-8";
+          LC_PAPER = "en_AU.UTF-8";
+          LC_TELEPHONE = "en_AU.UTF-8";
+          LC_TIME = "en_AU.UTF-8";
         };
-        efi.canTouchEfiVariables = true;
+
+        services.xserver.xkb = {
+          layout = "au";
+          variant = "";
+        };
+
+        boot.kernelPackages = pkgs.linuxPackages_latest;
+
+        boot.loader = {
+          systemd-boot = {
+            enable = true;
+            configurationLimit = 3;
+          };
+          efi.canTouchEfiVariables = true;
+        };
+
+        zramSwap.enable = true;
+
+        # zram caps RAM hard; rely on userspace OOM to avoid lockups
+        systemd.oomd.enable = true;
       };
-    };
 
     homeManager.home.stateVersion = "24.11";
 

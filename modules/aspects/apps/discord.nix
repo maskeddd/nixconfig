@@ -8,6 +8,8 @@
 
       programs.nixcord = {
         enable = true;
+        discord.krisp.enable = true;
+        vesktop.enable = true;
         config = {
           plugins = {
             anonymiseFileNames.enable = true;

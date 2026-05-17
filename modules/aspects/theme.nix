@@ -6,6 +6,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   den.aspects.theme = {
@@ -54,31 +55,45 @@
       };
     darwin.imports = [ inputs.stylix.darwinModules.stylix ];
 
-    homeManager = {
-      stylix.targets = {
-        zed.colors.enable = false;
-        helix.enable = false;
-        spicetify.enable = true;
-        nixcord.enable = false;
-      };
+    homeManager =
+      { lib, ... }:
+      {
+        imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
-      programs = {
-        helix.settings.theme = "catppuccin_mocha";
-        nixcord.config = {
-          useQuickCss = true;
-          themeLinks = [
-            "https://raw.githubusercontent.com/refact0r/midnight-discord/refs/heads/master/themes/flavors/midnight-catppuccin-mocha.theme.css"
-          ];
-        };
-        zed-editor = {
-          extensions = [ "catppuccin" ];
-          userSettings.theme = {
-            light = "Catppuccin Latte";
-            dark = "Catppuccin Mocha";
+        catppuccin = {
+          accent = "lavender";
+          vscode.profiles.default = {
+            enable = true;
+            icons.enable = true;
           };
         };
+
+        stylix.targets = {
+          zed.colors.enable = false;
+          helix.enable = false;
+          spicetify.enable = true;
+          nixcord.enable = false;
+          vscode.colors.enable = false;
+        };
+
+        programs = {
+          helix.settings.theme = "catppuccin_mocha";
+          nixcord.config = {
+            useQuickCss = true;
+            themeLinks = [
+              "https://raw.githubusercontent.com/refact0r/midnight-discord/refs/heads/master/themes/flavors/midnight-catppuccin-mocha.theme.css"
+            ];
+          };
+          zed-editor = {
+            extensions = [ "catppuccin" ];
+            userSettings.theme = {
+              light = "Catppuccin Latte";
+              dark = "Catppuccin Mocha";
+            };
+          };
+          vscode.profiles.default.userSettings."workbench.colorTheme" = lib.mkForce "Catppuccin Mocha";
+        };
       };
-    };
 
     hmLinux =
       { pkgs, ... }:
