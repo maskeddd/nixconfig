@@ -7,7 +7,10 @@
     ];
 
     darwin =
-      { pkgs, ... }:
+      { config, pkgs, ... }:
+      let
+        hm = config.home-manager.users.cody;
+      in
       {
         system.stateVersion = 6;
 
@@ -19,8 +22,8 @@
             tilesize = 64;
             persistent-apps = [
               { app = "${pkgs.brave}/Applications/Brave Browser.app"; }
-              { app = "/Users/cody/Applications/Home Manager Apps/Discord.app"; }
-              { app = "/Users/cody/Applications/Home Manager Apps/Spotify.app"; }
+              { app = "${hm.programs.nixcord.finalPackage.discord}/Applications/Discord.app"; }
+              { app = "${hm.programs.spicetify.spicedSpotify}/Applications/Spotify.app"; }
               { app = "${pkgs.ghostty-bin}/Applications/Ghostty.app"; }
               { app = "${pkgs.zed-editor}/Applications/Zed.app"; }
               { app = "/System/Applications/System Settings.app"; }

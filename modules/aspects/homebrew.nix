@@ -46,12 +46,12 @@
           "nordvpn"
           "cleanshot"
           "1password"
-          "microsoft-word"
           "affinity"
           "roblox"
           "robloxstudio"
           "plex"
           "helium-browser"
+          "codex-app"
         ];
       };
     };
