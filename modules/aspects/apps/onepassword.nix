@@ -22,8 +22,8 @@
       enableDefaultConfig = false;
     };
 
-    hmLinux.programs.ssh.matchBlocks."*".identityAgent = "~/.1password/agent.sock";
+    hmLinux.programs.ssh.settings."*".IdentityAgent = "~/.1password/agent.sock";
 
-    hmDarwin.programs.ssh.matchBlocks."*".identityAgent = "\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
+    hmDarwin.programs.ssh.settings."*".IdentityAgent = "\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
   };
 }

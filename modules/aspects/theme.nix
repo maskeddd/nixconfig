@@ -52,11 +52,16 @@
           noto-fonts
           noto-fonts-cjk-sans
         ];
+
+        stylix.targets.chromium.enable = false;
       };
     darwin.imports = [ inputs.stylix.darwinModules.stylix ];
 
     homeManager =
-      { lib, ... }:
+      { lib, pkgs, ... }:
+      let
+        spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
+      in
       {
         imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
@@ -66,12 +71,14 @@
             enable = true;
             icons.enable = true;
           };
+          hyprtoolkit.enable = true;
+          brave.enable = true;
         };
 
         stylix.targets = {
           zed.colors.enable = false;
           helix.enable = false;
-          spicetify.enable = true;
+          spicetify.enable = false;
           nixcord.enable = false;
           vscode.colors.enable = false;
         };
@@ -81,8 +88,12 @@
           nixcord.config = {
             useQuickCss = true;
             themeLinks = [
-              "https://raw.githubusercontent.com/refact0r/midnight-discord/refs/heads/master/themes/flavors/midnight-catppuccin-mocha.theme.css"
+              "https://catppuccin.github.io/discord/dist/catppuccin-mocha-lavender.theme.css"
             ];
+          };
+          spicetify = {
+            theme = spicePkgs.themes.catppuccin;
+            colorScheme = "mocha";
           };
           zed-editor = {
             extensions = [ "catppuccin" ];

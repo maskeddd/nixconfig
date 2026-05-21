@@ -17,7 +17,12 @@
     hmLinux =
       { pkgs, ... }:
       {
-        home.packages = [ pkgs.affinity-v3 ];
+        home.packages = [
+          pkgs.affinity-v3
+          pkgs.libreoffice
+          pkgs.hunspell
+          pkgs.hunspellDicts.en-au
+        ];
 
         xdg.mimeApps.defaultApplications = {
           "text/html" = "brave-browser.desktop";

@@ -101,7 +101,7 @@
           { title_substring = "Preferences", floating = true },
           { app_id = "com.brave.Browser", workspace = 0 },
           { app_id = "dev.zed.Zed", workspace = 1 },
-          { app_id = "com.hnc.Discord", workspace = 2 },
+          { app_id = "dev.vencord.Vesktop", workspace = 2 },
           { app_id = "com.spotify.Client", workspace = 3 },
         ]
 

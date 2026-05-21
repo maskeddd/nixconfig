@@ -7,7 +7,7 @@
       programs.nixcord = {
         enable = true;
         vesktop.enable = true;
-        discord.krisp.enable = true;
+        discord.enable = false;
         config = {
           plugins = {
             anonymiseFileNames.enable = true;
@@ -23,7 +23,7 @@
       };
     };
     hmLinux = {
-      xdg.mimeApps.defaultApplications."x-scheme-handler/discord" = "discord.desktop";
+      xdg.mimeApps.defaultApplications."x-scheme-handler/discord" = "vesktop.desktop";
     };
   };
 }
