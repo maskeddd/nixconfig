@@ -43,6 +43,7 @@
             enable = true;
             variables = [ "--all" ];
           };
+          configType = "hyprlang";
 
           settings = {
             "$mod" = "SUPER";
@@ -68,10 +69,7 @@
               layout = "dwindle";
             };
 
-            dwindle = {
-              pseudotile = true;
-              preserve_split = true;
-            };
+            dwindle.preserve_split = true;
 
             master.new_status = "master";
 
@@ -180,7 +178,7 @@
               "match:class .*, suppress_event maximize"
               "match:class = ^$, match:title = ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false, no_focus true"
               "workspace 1, match:class ^(brave-browser)$"
-              "workspace 3, match:class ^(discord)$"
+              "workspace 3, match:class ^(vesktop)$"
               "workspace 3, match:class ^(spotify)$"
               "workspace 4, match:class ^(steam)$"
               "workspace 2, match:class ^(csgo_linux64)$"
@@ -200,7 +198,7 @@
               "sunsetr"
               "ags run"
               "[workspace 1 silent] brave"
-              "[workspace 3 silent] discord"
+              "[workspace 3 silent] vesktop"
               "[workspace 3 silent] spotify"
               "steam -silent"
               "1password --silent"
