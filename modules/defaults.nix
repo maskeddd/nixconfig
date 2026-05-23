@@ -77,14 +77,16 @@
         systemd.oomd.enable = true;
       };
 
-    homeManager = {
-      home.stateVersion = "24.11";
+    homeManager =
+      { config, ... }:
+      {
+        home.stateVersion = "24.11";
 
-      programs.nh = {
-        enable = true;
-        flake = "/Users/cody/nixconfig";
+        programs.nh = {
+          enable = true;
+          flake = "${config.home.homeDirectory}/nixconfig";
+        };
       };
-    };
 
     hmLinux.xdg.mimeApps.enable = true;
   };
