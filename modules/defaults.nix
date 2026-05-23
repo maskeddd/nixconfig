@@ -38,14 +38,6 @@
       {
         system.stateVersion = "25.05";
 
-        programs.nh = {
-          enable = true;
-          clean = {
-            enable = true;
-            extraArgs = "--keep 3 --keep-since 7d";
-          };
-        };
-
         security.polkit.enable = true;
 
         services.openssh.enable = true;
@@ -82,12 +74,17 @@
         };
 
         zramSwap.enable = true;
-
-        # zram caps RAM hard; rely on userspace OOM to avoid lockups
         systemd.oomd.enable = true;
       };
 
-    homeManager.home.stateVersion = "24.11";
+    homeManager = {
+      home.stateVersion = "24.11";
+
+      programs.nh = {
+        enable = true;
+        flake = "/Users/cody/nixconfig";
+      };
+    };
 
     hmLinux.xdg.mimeApps.enable = true;
   };
