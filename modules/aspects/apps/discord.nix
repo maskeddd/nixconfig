@@ -18,6 +18,7 @@
             spotifyControls.enable = true;
             silentTyping.enable = true;
             gameActivityToggle.enable = true;
+            voiceChatDoubleClick.enable = true;
           };
         };
       };

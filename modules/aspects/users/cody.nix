@@ -9,6 +9,7 @@
       aspects.spotify
       aspects.discord
       aspects.applications
+      aspects.kopuz
       aspects.onepassword
       provides.define-user
       provides.primary-user

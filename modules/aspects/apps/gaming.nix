@@ -5,6 +5,13 @@
   den.aspects.gaming = {
     includes = [ den.aspects.flatpak ];
 
+    os.nix.settings = {
+      substituters = [ "https://ezkea.cachix.org" ];
+      trusted-public-keys = [
+        "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
+      ];
+    };
+
     nixos = {
       imports = [ inputs.aagl.nixosModules.default ];
 
@@ -28,7 +35,7 @@
     };
 
     homeManager =
-      { pkgs, ... }:
+      { pkgs, lib, ... }:
       let
         hytaleHash = "QmLLhHIam/kJETzqBr+IaishISzkxkGeDp/OCRZeyFs=";
       in
@@ -49,6 +56,14 @@
 
           patchelfUnstable
         ];
+        programs.mangohud = {
+          enable = true;
+          settings = {
+            full = true;
+            background_alpha = lib.mkForce 0.5;
+            output_folder = "~/Documents/mangohud/";
+          };
+        };
         services.flatpak.packages = [
           "org.vinegarhq.Sober"
           {

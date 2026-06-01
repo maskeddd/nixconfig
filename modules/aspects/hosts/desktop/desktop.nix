@@ -14,6 +14,7 @@
       "input"
       "uinput"
       "seat"
+      "librepods"
     ];
   };
 }
