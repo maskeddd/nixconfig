@@ -11,6 +11,8 @@
           desktopManager.gnome.enable = true;
         };
 
+        environment.etc."xdg/monitors.xml".source = ./monitors.xml;
+
         environment.gnome.excludePackages = with pkgs; [
           gnome-tour
           gnome-user-docs

@@ -2,11 +2,8 @@
 {
   den.aspects.hyprland = {
     includes = with den.aspects; [
-      vicinae
       hyprlock
-      hypridle
-      dunst
-      ags
+      dms
     ];
 
     nixos = {
@@ -24,7 +21,6 @@
         services.polkit-gnome.enable = true;
 
         home.packages = with pkgs; [
-          sunsetr
           grim
           slurp
           wl-clipboard
@@ -48,7 +44,7 @@
           settings = {
             "$mod" = "SUPER";
             "$terminal" = "ghostty";
-            "$menu" = "vicinae toggle";
+            "$menu" = "dms ipc call spotlight toggle";
             "$files" = "nautilus";
             "$lock" = "hyprlock";
 
@@ -72,8 +68,6 @@
             dwindle.preserve_split = true;
 
             master.new_status = "master";
-
-            cursor.no_hardware_cursors = 1;
 
             misc = {
               force_default_wallpaper = 1;
@@ -195,8 +189,6 @@
             ];
 
             exec-once = [
-              "sunsetr"
-              "ags run"
               "[workspace 1 silent] brave"
               "[workspace 3 silent] vesktop"
               "[workspace 3 silent] spotify"

@@ -28,6 +28,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     den.url = "github:vic/den";
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -46,6 +50,7 @@
       flake = false;
     };
     import-tree.url = "github:vic/import-tree";
+    kopuz.url = "github:temidaradev/kopuz";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nix-vscode-extensions = {

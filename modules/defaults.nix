@@ -8,26 +8,13 @@
 
     os = {
       nixpkgs.config.allowUnfree = true;
-
       nix = {
         settings = {
           experimental-features = [
             "nix-command"
             "flakes"
           ];
-
           auto-optimise-store = true;
-
-          substituters = [
-            "https://ezkea.cachix.org"
-            "https://cache.garnix.io"
-          ];
-
-          trusted-public-keys = [
-            "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
-            "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-          ];
-
           trusted-users = [ "cody" ];
         };
       };
@@ -37,34 +24,13 @@
       { pkgs, ... }:
       {
         system.stateVersion = "25.05";
-
         security.polkit.enable = true;
-
         services.openssh.enable = true;
-
         networking.networkmanager.enable = true;
-
         time.timeZone = "Australia/Brisbane";
         i18n.defaultLocale = "en_AU.UTF-8";
-        i18n.extraLocaleSettings = {
-          LC_ADDRESS = "en_AU.UTF-8";
-          LC_IDENTIFICATION = "en_AU.UTF-8";
-          LC_MEASUREMENT = "en_AU.UTF-8";
-          LC_MONETARY = "en_AU.UTF-8";
-          LC_NAME = "en_AU.UTF-8";
-          LC_NUMERIC = "en_AU.UTF-8";
-          LC_PAPER = "en_AU.UTF-8";
-          LC_TELEPHONE = "en_AU.UTF-8";
-          LC_TIME = "en_AU.UTF-8";
-        };
-
-        services.xserver.xkb = {
-          layout = "au";
-          variant = "";
-        };
-
+        services.xserver.xkb.layout = "au";
         boot.kernelPackages = pkgs.linuxPackages_latest;
-
         boot.loader = {
           systemd-boot = {
             enable = true;
@@ -72,16 +38,13 @@
           };
           efi.canTouchEfiVariables = true;
         };
-
         zramSwap.enable = true;
-        systemd.oomd.enable = true;
       };
 
     homeManager =
       { config, ... }:
       {
         home.stateVersion = "24.11";
-
         programs.nh = {
           enable = true;
           flake = "${config.home.homeDirectory}/nixconfig";
@@ -102,7 +65,6 @@
 
   # enable hm by default
   den.schema.user.classes = lib.mkDefault [ "homeManager" ];
-
   # bidirectional host<->user contributions via .provides.
   den.schema.user.includes = [ den.provides.mutual-provider ];
 }

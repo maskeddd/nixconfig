@@ -5,23 +5,29 @@
   den.aspects.applications = {
     os.nixpkgs.overlays = [ inputs.affinity-nix.overlays.default ];
 
+    nixos = {
+      programs.librepods.enable = true;
+    };
+
     homeManager =
       { pkgs, ... }:
       {
         home.packages = with pkgs; [
           brave
           qbittorrent
+          nicotine-plus
         ];
       };
 
     hmLinux =
       { pkgs, ... }:
       {
-        home.packages = [
-          pkgs.affinity-v3
-          pkgs.libreoffice
-          pkgs.hunspell
-          pkgs.hunspellDicts.en-au
+        home.packages = with pkgs; [
+          affinity-v3
+          plex-desktop
+          libreoffice
+          hunspell
+          hunspellDicts.en-au
         ];
 
         xdg.mimeApps.defaultApplications = {
