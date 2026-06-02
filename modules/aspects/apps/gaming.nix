@@ -12,27 +12,30 @@
       ];
     };
 
-    nixos = {
-      imports = [ inputs.aagl.nixosModules.default ];
+    nixos =
+      { pkgs, ... }:
+      {
+        imports = [ inputs.aagl.nixosModules.default ];
 
-      nixpkgs.overlays = [
-        (final: prev: {
-          openldap = prev.openldap.overrideAttrs (_: {
-            doCheck = !prev.stdenv.hostPlatform.isi686;
-          });
-        })
-      ];
+        nixpkgs.overlays = [
+          (final: prev: {
+            openldap = prev.openldap.overrideAttrs (_: {
+              doCheck = !prev.stdenv.hostPlatform.isi686;
+            });
+          })
+        ];
 
-      programs = {
-        steam = {
-          enable = true;
-          remotePlay.openFirewall = true;
-          dedicatedServer.openFirewall = true;
-          localNetworkGameTransfers.openFirewall = true;
+        programs = {
+          steam = {
+            enable = true;
+            remotePlay.openFirewall = true;
+            dedicatedServer.openFirewall = true;
+            localNetworkGameTransfers.openFirewall = true;
+            extraPackages = with pkgs; [ SDL2 ];
+          };
+          anime-game-launcher.enable = true;
         };
-        anime-game-launcher.enable = true;
       };
-    };
 
     homeManager =
       { pkgs, lib, ... }:
