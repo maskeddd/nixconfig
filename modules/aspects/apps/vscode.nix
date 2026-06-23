@@ -9,8 +9,15 @@
     os.nixpkgs.overlays = [ inputs.nix-vscode-extensions.overlays.default ];
 
     homeManager =
-      { pkgs, ... }:
+      { lib, pkgs, ... }:
       {
+        catppuccin.vscode.profiles.default = {
+          enable = true;
+          icons.enable = true;
+        };
+
+        stylix.targets.vscode.colors.enable = false;
+
         programs.vscode = {
           enable = true;
           mutableExtensionsDir = false;
@@ -25,6 +32,7 @@
               "breadcrumbs.enabled" = false;
 
               "workbench.activityBar.location" = "hidden";
+              "workbench.colorTheme" = lib.mkForce "Catppuccin Mocha";
               "workbench.layoutControl.enabled" = false;
 
               "window.titleBarStyle" = "native";
@@ -33,19 +41,15 @@
 
               "terminal.integrated.minimumContrastRatio" = 1;
               "terminal.integrated.defaultProfile.linux" = "fish";
-              "terminal.integrated.profiles.linux" = {
-                fish = {
-                  "path" = "${pkgs.fish}/bin/fish";
-                };
-              };
+              "terminal.integrated.profiles.linux".fish.path = "${pkgs.fish}/bin/fish";
 
               "nix.enableLanguageServer" = true;
               "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
-              "nix.serverSettings" = {
-                nixd = {
-                  formatting.command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
-                };
-              };
+              "nix.serverSettings".nixd.formatting.command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
+
+              "qt-qml.qmlls.useQmlImportPathEnvVar" = true;
+              "qt-qml.qmlls.customExePath" = "${pkgs.qt6.qtdeclarative}/bin/qmlls";
+              "qt-qml.doNotAskForQmllsDownload" = true;
             };
 
             extensions = with pkgs.nix-vscode-extensions.vscode-marketplace; [
@@ -55,8 +59,9 @@
               ms-python.python
               ms-toolsai.jupyter
               myriad-dreamin.tinymist
-              gleam.gleam
               ms-toolsai.jupyter-renderers
+              theqtcompany.qt-qml
+              theqtcompany.qt-core
             ];
           };
         };

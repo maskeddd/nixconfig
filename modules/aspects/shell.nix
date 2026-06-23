@@ -54,23 +54,22 @@
 
           direnv = {
             enable = true;
-            nix-direnv = {
-              enable = true;
-            };
-            config.global = {
-              hide_env_diff = true;
-            };
+            nix-direnv.enable = true;
+            config.global.hide_env_diff = true;
           };
 
           bat.enable = true;
           fzf.enable = true;
           jq.enable = true;
           fastfetch.enable = true;
-          btop = {
-            enable = true;
-            package = pkgs.btop-cuda;
-          };
+          btop.enable = true;
         };
+      };
+
+    hmLinux =
+      { pkgs, ... }:
+      {
+        programs.btop.package = pkgs.btop-cuda;
       };
 
     hmDarwin =

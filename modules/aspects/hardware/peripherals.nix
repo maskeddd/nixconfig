@@ -8,12 +8,10 @@
   den.aspects.peripherals.nixos = {
     imports = [ inputs.solaar.nixosModules.default ];
 
-    services = {
-      solaar = {
-        enable = true;
-        window = "hide";
-        batteryIcons = "regular";
-      };
+    services.solaar = {
+      enable = true;
+      window = "hide";
+      batteryIcons = "regular";
     };
 
     hardware = {

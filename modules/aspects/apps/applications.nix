@@ -5,10 +5,6 @@
   den.aspects.applications = {
     os.nixpkgs.overlays = [ inputs.affinity-nix.overlays.default ];
 
-    nixos = {
-      programs.librepods.enable = true;
-    };
-
     homeManager =
       { pkgs, ... }:
       {
@@ -17,6 +13,8 @@
           qbittorrent
           nicotine-plus
         ];
+
+        catppuccin.brave.enable = true;
       };
 
     hmLinux =
@@ -25,9 +23,6 @@
         home.packages = with pkgs; [
           affinity-v3
           plex-desktop
-          libreoffice
-          hunspell
-          hunspellDicts.en-au
         ];
 
         xdg.mimeApps.defaultApplications = {

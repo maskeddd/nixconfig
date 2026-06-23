@@ -1,7 +1,5 @@
-{ inputs, den, ... }:
+{ inputs, ... }:
 {
-
-  den.aspects.desktop.includes = [ (den.provides.tty-autologin "cody") ];
 
   den.aspects.desktop.nixos.virtualisation.vmVariant = {
     virtualisation = {

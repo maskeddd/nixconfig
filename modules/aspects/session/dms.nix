@@ -8,12 +8,14 @@
   };
 
   den.aspects.dms.homeManager =
-    { lib, ... }:
+    { lib, pkgs, ... }:
     {
       imports = [ inputs.dms.homeModules.dank-material-shell ];
 
       programs.dank-material-shell = {
         enable = true;
+
+        quickshell.package = pkgs.quickshell;
 
         systemd = {
           enable = true;
@@ -34,6 +36,7 @@
         };
 
         settings = {
+          loginctlLockIntegration = false;
           use24HourClock = false;
           clockDateFormat = "ddd MMM d";
           useAutoLocation = true;

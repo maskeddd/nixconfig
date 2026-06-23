@@ -5,15 +5,21 @@
     homeManager =
       { pkgs, ... }:
       {
+        stylix.targets.zed.colors.enable = false;
+
         programs.zed-editor = {
           enable = true;
           mutableUserSettings = false;
 
           extensions = [
+            "catppuccin"
             "nix"
             "tombi"
             "scss"
-            "svelte"
+            "oxc"
+            "vue"
+            "odin"
+            "qml"
           ];
 
           userSettings = {
@@ -28,9 +34,12 @@
 
             terminal.shell.program = "fish";
 
-            languages = {
-              "Nix".formatter.external.command = "${pkgs.nixfmt}/bin/nixfmt";
+            theme = {
+              light = "Catppuccin Latte";
+              dark = "Catppuccin Mocha";
             };
+
+            languages."Nix".formatter.external.command = "${pkgs.nixfmt}/bin/nixfmt";
           };
         };
       };
