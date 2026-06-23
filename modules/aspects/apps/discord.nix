@@ -9,10 +9,14 @@
         vesktop.enable = true;
         discord.enable = false;
         config = {
+          useQuickCss = true;
+          themeLinks = [
+            "https://catppuccin.github.io/discord/dist/catppuccin-mocha-lavender.theme.css"
+          ];
           plugins = {
             anonymiseFileNames.enable = true;
             betterGifPicker.enable = true;
-            ClearURLs.enable = true;
+            clearUrls.enable = true;
             memberCount.enable = true;
             messageLogger.enable = true;
             spotifyControls.enable = true;
@@ -22,9 +26,8 @@
           };
         };
       };
+      stylix.targets.nixcord.enable = false;
     };
-    hmLinux = {
-      xdg.mimeApps.defaultApplications."x-scheme-handler/discord" = "vesktop.desktop";
-    };
+    hmLinux.xdg.mimeApps.defaultApplications."x-scheme-handler/discord" = "vesktop.desktop";
   };
 }

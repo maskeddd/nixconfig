@@ -10,18 +10,7 @@
       flake = false;
     };
     affinity-nix.url = "github:mrshmllow/affinity-nix";
-    ags = {
-      url = "github:aylur/ags";
-      inputs = {
-        astal.follows = "astal";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
-    astal = {
-      url = "github:aylur/astal";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     catppuccin.url = "github:catppuccin/nix";
     darwin = {
       url = "github:nix-darwin/nix-darwin";

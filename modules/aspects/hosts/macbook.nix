@@ -3,7 +3,6 @@
   den.aspects.macbook = {
     includes = with den.aspects; [
       homebrew
-      borders
     ];
 
     darwin =

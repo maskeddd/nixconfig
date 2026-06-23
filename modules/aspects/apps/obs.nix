@@ -1,9 +1,10 @@
 {
-  den.aspects.obs.homeManager =
+  den.aspects.obs.nixos =
     { pkgs, ... }:
     {
       programs.obs-studio = {
         enable = true;
+        enableVirtualCamera = true;
 
         package = pkgs.obs-studio.override {
           cudaSupport = true;

@@ -57,54 +57,16 @@
       };
     darwin.imports = [ inputs.stylix.darwinModules.stylix ];
 
-    homeManager =
-      { lib, pkgs, ... }:
-      let
-        spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
-      in
-      {
-        imports = [ inputs.catppuccin.homeModules.catppuccin ];
+    homeManager = {
+      imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
-        catppuccin = {
-          accent = "lavender";
-          vscode.profiles.default = {
-            enable = true;
-            icons.enable = true;
-          };
-          hyprtoolkit.enable = true;
-          brave.enable = true;
-        };
-
-        stylix.targets = {
-          zed.colors.enable = false;
-          helix.enable = false;
-          spicetify.enable = false;
-          nixcord.enable = false;
-          vscode.colors.enable = false;
-        };
-
-        programs = {
-          helix.settings.theme = "catppuccin_mocha";
-          nixcord.config = {
-            useQuickCss = true;
-            themeLinks = [
-              "https://catppuccin.github.io/discord/dist/catppuccin-mocha-lavender.theme.css"
-            ];
-          };
-          spicetify = {
-            theme = spicePkgs.themes.catppuccin;
-            colorScheme = "mocha";
-          };
-          zed-editor = {
-            extensions = [ "catppuccin" ];
-            userSettings.theme = {
-              light = "Catppuccin Latte";
-              dark = "Catppuccin Mocha";
-            };
-          };
-          vscode.profiles.default.userSettings."workbench.colorTheme" = lib.mkForce "Catppuccin Mocha";
-        };
+      catppuccin = {
+        enable = true;
+        autoEnable = false;
+        accent = "lavender";
+        hyprtoolkit.enable = true;
       };
+    };
 
     hmLinux =
       { pkgs, ... }:

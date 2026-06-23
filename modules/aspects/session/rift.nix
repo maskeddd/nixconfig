@@ -3,15 +3,28 @@
   den.aspects.rift.hmDarwin =
     { pkgs, lib, ... }:
     let
+      workspaceKeys = [
+        "1"
+        "2"
+        "3"
+        "4"
+        "5"
+        "6"
+        "7"
+        "8"
+        "9"
+        "0"
+      ];
+
       workspaceSwitchBindings = lib.concatStringsSep "\n" (
-        lib.genList (i: ''"Alt + ${toString (i + 1)}" = { switch_to_workspace = ${toString i} }'') 9
+        lib.imap0 (i: key: ''"Alt + ${key}" = { switch_to_workspace = ${toString i} }'') workspaceKeys
       );
 
       workspaceMoveBindings = lib.concatStringsSep "\n" (
-        lib.genList (
-          i:
-          ''"comb1 + ${toString (i + 1)}" = { exec = ["/bin/bash", "-c", "rift-cli execute workspace move-window ${toString i} && rift-cli execute workspace switch ${toString i}"] }''
-        ) 9
+        lib.imap0 (
+          i: key:
+          ''"comb1 + ${key}" = { exec = ["/bin/bash", "-c", "rift-cli execute workspace move-window ${toString i} && rift-cli execute workspace switch ${toString i}"] }''
+        ) workspaceKeys
       );
     in
     {

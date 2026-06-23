@@ -2,6 +2,8 @@
   den.aspects.helix.homeManager =
     { pkgs, ... }:
     {
+      stylix.targets.helix.enable = false;
+
       programs.helix = {
         enable = true;
         extraPackages = with pkgs; [
@@ -14,6 +16,7 @@
           vtsls
         ];
         settings = {
+          theme = "catppuccin_mocha";
           editor = {
             line-number = "relative";
             cursorline = true;
@@ -47,6 +50,10 @@
             tailwindcss-ls = {
               command = "tailwindcss-language-server";
               args = [ "--stdio" ];
+            };
+            qmlls = {
+              args = [ "-E" ];
+              command = "${pkgs.qt6.qtdeclarative}/bin/qmlls";
             };
           };
           language = [

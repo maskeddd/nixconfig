@@ -19,6 +19,16 @@
           gopls
           jdt-language-server
         ];
+
+        programs.opencode = {
+          enable = true;
+          settings = {
+            plugin = [ "opencode-claude-auth@latest" ];
+          };
+        };
+
+        catppuccin.opencode.enable = true;
+        stylix.targets.opencode.colors.enable = false;
       };
 
     hmLinux =

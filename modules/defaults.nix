@@ -20,26 +20,16 @@
       };
     };
 
-    nixos =
-      { pkgs, ... }:
-      {
-        system.stateVersion = "25.05";
-        security.polkit.enable = true;
-        services.openssh.enable = true;
-        networking.networkmanager.enable = true;
-        time.timeZone = "Australia/Brisbane";
-        i18n.defaultLocale = "en_AU.UTF-8";
-        services.xserver.xkb.layout = "au";
-        boot.kernelPackages = pkgs.linuxPackages_latest;
-        boot.loader = {
-          systemd-boot = {
-            enable = true;
-            configurationLimit = 3;
-          };
-          efi.canTouchEfiVariables = true;
-        };
-        zramSwap.enable = true;
-      };
+    nixos = {
+      system.stateVersion = "25.05";
+      security.polkit.enable = true;
+      services.openssh.enable = true;
+      networking.networkmanager.enable = true;
+      time.timeZone = "Australia/Brisbane";
+      i18n.defaultLocale = "en_AU.UTF-8";
+      services.xserver.xkb.layout = "au";
+      zramSwap.enable = true;
+    };
 
     homeManager =
       { config, ... }:
@@ -64,7 +54,11 @@
   ];
 
   # enable hm by default
-  den.schema.user.classes = lib.mkDefault [ "homeManager" ];
+  den.schema.user.classes = lib.mkDefault [
+    "homeManager"
+    "hmLinux"
+    "hmDarwin"
+  ];
   # bidirectional host<->user contributions via .provides.
   den.schema.user.includes = [ den.provides.mutual-provider ];
 }
