@@ -30,7 +30,8 @@
               breadcrumbs = false;
               quick_actions = false;
             };
-            agent.enabled = false;
+            agent.enabled = true;
+            agent_servers."codex-acp".type = "registry";
 
             terminal.shell.program = "fish";
 
