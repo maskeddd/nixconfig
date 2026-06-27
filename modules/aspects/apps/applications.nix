@@ -11,7 +11,6 @@
         home.packages = with pkgs; [
           brave
           qbittorrent
-          nicotine-plus
         ];
 
         catppuccin.brave.enable = true;
@@ -23,6 +22,7 @@
         home.packages = with pkgs; [
           affinity-v3
           plex-desktop
+          nicotine-plus
         ];
 
         xdg.mimeApps.defaultApplications = {
