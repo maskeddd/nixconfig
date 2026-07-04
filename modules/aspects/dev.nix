@@ -4,7 +4,6 @@
       { pkgs, ... }:
       {
         home.packages = with pkgs; [
-          gnumake
           claude-code
           codex
           typst
@@ -13,20 +12,11 @@
           nil
           nixfmt
           tinymist
-          stylua
-          tombi
-          rust-analyzer
-          gopls
-          jdt-language-server
+
+          godot-mono
         ];
 
-        programs.opencode = {
-          enable = true;
-          settings = {
-            plugin = [ "opencode-claude-auth@latest" ];
-          };
-        };
-
+        programs.opencode.enable = true;
         catppuccin.opencode.enable = true;
         stylix.targets.opencode.colors.enable = false;
       };
@@ -43,7 +33,9 @@
                 jetbrains.rider
                 dotnetCorePackages.dotnet_10.sdk
               ]);
-            runScript = "nohup rider > /dev/null 2>&1 &";
+            runScript = pkgs.writeShellScript "rider-env-run" ''
+              nohup rider "$@" > /dev/null 2>&1 &
+            '';
           })
         ];
       };

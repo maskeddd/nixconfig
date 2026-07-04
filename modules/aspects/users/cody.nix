@@ -5,11 +5,12 @@
       aspects.shell
       aspects.dev
       aspects.git
-      aspects.editors
+      aspects.zed
+      aspects.helix
+      aspects.neovim
       aspects.spotify
       aspects.discord
       aspects.applications
-      aspects.kopuz
       aspects.onepassword
       provides.define-user
       provides.primary-user

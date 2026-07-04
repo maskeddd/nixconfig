@@ -71,6 +71,19 @@
     hmLinux =
       { pkgs, ... }:
       {
+        gtk = {
+          enable = true;
+          iconTheme = {
+            package = pkgs.adwaita-icon-theme;
+            name = "Adwaita";
+          };
+        };
+
+        dconf = {
+          enable = true;
+          settings."org/gnome/desktop/interface".icon-theme = "Adwaita";
+        };
+
         home.pointerCursor = {
           hyprcursor.enable = true;
           x11.enable = true;

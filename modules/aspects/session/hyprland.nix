@@ -2,9 +2,7 @@
 {
   den.aspects.hyprland = {
     includes = with den.aspects; [
-      hyprlock
-      hypridle
-      dms
+      caelestia
     ];
 
     nixos = {
@@ -27,6 +25,7 @@
           wl-clipboard
           playerctl
           brightnessctl
+          sunsetr
         ];
 
         services.hyprpaper = {
@@ -42,9 +41,9 @@
           settings = {
             "$mod" = "SUPER";
             "$terminal" = "ghostty";
-            "$menu" = "dms ipc call spotlight toggle";
+            "$menu" = "caelestia shell drawers toggle launcher";
             "$files" = "nautilus";
-            "$lock" = "hyprlock";
+            "$lock" = "caelestia shell lock lock";
 
             monitor = [
               "DP-2, 2560x1440@120, 0x0, 1, transform, 1"
@@ -58,8 +57,9 @@
 
             general = {
               gaps_in = 5;
-              gaps_out = "20, 20, 20, 20";
-              border_size = 4;
+              gaps_out = 10;
+              gaps_workspaces = 20;
+              border_size = 3;
               layout = "dwindle";
             };
 
@@ -76,7 +76,7 @@
             };
 
             decoration = {
-              rounding = 0;
+              rounding = 15;
               rounding_power = 2;
               shadow.enabled = false;
               blur.enabled = false;
@@ -189,13 +189,13 @@
             ];
 
             exec-once = [
+              "sunsetr"
               "steam -silent"
               "1password --silent"
               "[workspace 1 silent] brave"
               "[workspace 3 silent] vesktop"
               "[workspace 3 silent] spotify"
             ];
-
           };
         };
       };

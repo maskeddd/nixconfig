@@ -8,6 +8,11 @@
 
     os = {
       nixpkgs.config.allowUnfree = true;
+      nixpkgs.overlays = [
+        (final: _prev: {
+          pnpm_10_29_2 = final.pnpm_10;
+        })
+      ];
       nix = {
         settings = {
           experimental-features = [
