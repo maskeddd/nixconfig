@@ -85,7 +85,7 @@
         };
 
         home.pointerCursor = {
-          hyprcursor.enable = true;
+          enable = true;
           x11.enable = true;
           gtk.enable = true;
           package = pkgs.apple-cursor;

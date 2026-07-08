@@ -2,7 +2,9 @@
 {
   den.aspects.hyprland = {
     includes = with den.aspects; [
-      caelestia
+      noctalia
+      hyprlock
+      hypridle
     ];
 
     nixos = {
@@ -41,9 +43,9 @@
           settings = {
             "$mod" = "SUPER";
             "$terminal" = "ghostty";
-            "$menu" = "caelestia shell drawers toggle launcher";
+            "$menu" = "noctalia msg panel-toggle launcher";
             "$files" = "nautilus";
-            "$lock" = "caelestia shell lock lock";
+            "$lock" = "hyprlock";
 
             monitor = [
               "DP-2, 2560x1440@120, 0x0, 1, transform, 1"
@@ -54,6 +56,8 @@
               accel_profile = "flat";
               sensitivity = -0.3;
             };
+
+            cursor.enable_hyprcursor = false;
 
             general = {
               gaps_in = 5;
