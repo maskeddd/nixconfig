@@ -19,6 +19,7 @@
 
     provides.desktop.includes = with den.aspects; [
       hyprland
+      mangowm
       gaming
       gnome
       obs

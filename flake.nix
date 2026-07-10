@@ -11,10 +11,6 @@
     };
     affinity-nix.url = "github:mrshmllow/affinity-nix";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
-    caelestia-shell = {
-      url = "github:dim-ghub/caelestia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     catppuccin.url = "github:catppuccin/nix";
     darwin = {
       url = "github:nix-darwin/nix-darwin";
@@ -39,6 +35,10 @@
       flake = false;
     };
     import-tree.url = "github:vic/import-tree";
+    mangowm = {
+      url = "github:mangowm/mango";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nixcord.url = "github:FlameFlag/nixcord";

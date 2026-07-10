@@ -41,6 +41,8 @@
 
         desktop_widgets.enabled = false;
 
+        lockscreen.enabled = false;
+
         location = {
           auto_locate = true;
         };
