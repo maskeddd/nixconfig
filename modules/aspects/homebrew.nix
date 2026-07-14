@@ -29,6 +29,7 @@
           "homebrew/homebrew-cask" = inputs.homebrew-cask;
           "acsandmann/homebrew-tap" = inputs.acsandmann-rift;
         };
+        trust.formulae = [ "acsandmann/tap/rift" ];
         mutableTaps = false;
       };
 
@@ -43,15 +44,13 @@
           "rift"
         ];
         casks = [
-          "nordvpn"
           "cleanshot"
           "1password"
           "affinity"
           "roblox"
-          "robloxstudio"
           "plex"
-          "helium-browser"
           "codex-app"
+          "zed"
         ];
       };
     };

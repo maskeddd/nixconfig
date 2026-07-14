@@ -3,172 +3,144 @@
   den.aspects.rift.hmDarwin =
     { pkgs, lib, ... }:
     let
-      workspaceKeys = [
-        "1"
-        "2"
-        "3"
-        "4"
-        "5"
-        "6"
-        "7"
-        "8"
-        "9"
-        "0"
-      ];
+      workspaceCount = 9;
+      workspaceKeys = builtins.genList (i: toString (i + 1)) workspaceCount;
 
-      workspaceSwitchBindings = lib.concatStringsSep "\n" (
-        lib.imap0 (i: key: ''"Alt + ${key}" = { switch_to_workspace = ${toString i} }'') workspaceKeys
+      workspaceSwitchBindings = builtins.listToAttrs (
+        lib.imap0 (i: key: lib.nameValuePair "Alt + ${key}" { switch_to_workspace = i; }) workspaceKeys
       );
 
-      workspaceMoveBindings = lib.concatStringsSep "\n" (
+      workspaceMoveBindings = builtins.listToAttrs (
         lib.imap0 (
           i: key:
-          ''"comb1 + ${key}" = { exec = ["/bin/bash", "-c", "rift-cli execute workspace move-window ${toString i} && rift-cli execute workspace switch ${toString i}"] }''
+          lib.nameValuePair "comb1 + ${key}" {
+            exec = [
+              "/bin/bash"
+              "-c"
+              "rift-cli execute workspace move-window ${toString i} && rift-cli execute workspace switch ${toString i}"
+            ];
+          }
         ) workspaceKeys
       );
+
     in
     {
-      home.file.".config/rift/config.toml".text = ''
-        [settings]
-        default_disable = false
-        animate = true
-        animation_duration = 0.3
-        animation_fps = 100.0
-        animation_easing = "ease_in_out"
-        focus_follows_mouse = true
-        mouse_follows_focus = true
-        mouse_hides_on_focus = true
-        auto_focus_blacklist = []
-        run_on_start = []
-        hot_reload = true
+      home.file.".config/rift/config.toml".source = (pkgs.formats.toml { }).generate "rift-config.toml" {
+        settings = {
+          default_disable = false;
+          animate = true;
 
-        [settings.layout]
-        mode = "bsp"
+          layout = {
+            mode = "bsp";
 
-        [settings.layout.scrolling]
-        alignment = "center"
-        focus_navigation_style = "anchored"
+            gaps = {
+              outer = {
+                top = 9;
+                left = 9;
+                bottom = 9;
+                right = 9;
+              };
 
-        [settings.layout.scrolling.gestures]
-        enabled = true
-        distance_pct = 0.02
-        invert_horizontal = true
-        fingers = 3
-        propagate_to_workspace_swipe = true
+              inner = {
+                horizontal = 9;
+                vertical = 9;
+              };
+            };
+          };
 
-        [settings.layout.stack]
-        stack_offset = 40.0
-        default_orientation = "perpendicular"
+          ui = {
+            menu_bar = {
+              enabled = true;
+              display_style = "label";
+            };
 
-        [settings.layout.gaps.outer]
-        top = 18
-        left = 18
-        bottom = 18
-        right = 18
+            stack_line = {
+              thickness = 0.0;
+              spacing = 0.0;
+            };
 
-        [settings.layout.gaps.inner]
-        horizontal = 18
-        vertical = 18
+            mission_control.enabled = true;
+          };
 
-        [settings.ui.menu_bar]
-        enabled = true
-        show_empty = false
-        display_style = "label"
+          gestures = {
+            enabled = true;
+            skip_empty = true;
+            fingers = 4;
+          };
+        };
 
-        [settings.ui.stack_line]
-        enabled = false
-        horiz_placement = "top"
-        vert_placement = "left"
-        thickness = 0.0
-        spacing = 0.0
+        virtual_workspaces = {
+          default_workspace_count = workspaceCount;
+          app_rules = [
+            {
+              title_substring = "Preferences";
+              floating = true;
+            }
+            {
+              app_id = "com.brave.Browser";
+              workspace = 0;
+            }
+            {
+              app_id = "dev.zed.Zed";
+              workspace = 1;
+            }
+            {
+              app_id = "dev.vencord.Vesktop";
+              workspace = 2;
+            }
+            {
+              app_id = "com.hnc.Discord";
+              workspace = 2;
+            }
+            {
+              app_id = "com.spotify.Client";
+              workspace = 3;
+            }
+          ];
+        };
 
-        [settings.ui.mission_control]
-        enabled = true
-        fade_enabled = false
-        fade_duration_ms = 180.0
+        modifier_combinations.comb1 = "Alt + Shift";
 
-        [settings.gestures]
-        enabled = true
-        invert_horizontal_swipe = false
-        swipe_vertical_tolerance = 0.4
-        skip_empty = true
-        fingers = 4
-        distance_pct = 0.08
-        haptics_enabled = true
-        haptic_pattern = "level_change"
+        keys = {
+          "Alt + Z" = "toggle_space_activated";
 
-        [settings.window_snapping]
-        drag_swap_fraction = 0.3
+          "Alt + Left".move_focus = "left";
+          "Alt + Down".move_focus = "down";
+          "Alt + Up".move_focus = "up";
+          "Alt + Right".move_focus = "right";
 
-        [virtual_workspaces]
-        enabled = true
-        default_workspace_count = 10
-        auto_assign_windows = true
-        preserve_focus_per_workspace = true
-        workspace_auto_back_and_forth = false
-        workspace_names = [
-          "first",
-          "second"
-        ]
-        app_rules = [
-          { title_substring = "Preferences", floating = true },
-          { app_id = "com.brave.Browser", workspace = 0 },
-          { app_id = "dev.zed.Zed", workspace = 1 },
-          { app_id = "dev.vencord.Vesktop", workspace = 2 },
-          { app_id = "com.spotify.Client", workspace = 3 },
-        ]
+          "Alt + Enter".exec = [
+            "bash"
+            "-c"
+            "open -a \"${pkgs.ghostty-bin}/Applications/Ghostty.app\""
+          ];
+          "Alt + E".exec = [
+            "open"
+            "-a"
+            "Finder"
+          ];
 
-        [modifier_combinations]
-        comb1 = "Alt + Shift"
+          "Alt + Tab" = "switch_to_last_workspace";
+          "Alt + Q" = "close_window";
 
-        [keys]
-        # Toggle space
-        "Alt + Z" = "toggle_space_activated"
+          "Alt + Shift + Left".join_window = "left";
+          "Alt + Shift + Right".join_window = "right";
+          "Alt + Shift + Up".join_window = "up";
+          "Alt + Shift + Down".join_window = "down";
 
-        # Focus movement
-        "Alt + H" = { move_focus = "left" }
-        "Alt + J" = { move_focus = "down" }
-        "Alt + K" = { move_focus = "up" }
-        "Alt + L" = { move_focus = "right" }
+          "Alt + Comma" = "toggle_stack";
+          "Alt + Slash" = "toggle_orientation";
+          "Alt + Ctrl + E" = "unjoin_windows";
 
-        # Window movement
-        "comb1 + H" = { move_node = "left" }
-        "comb1 + J" = { move_node = "down" }
-        "comb1 + K" = { move_node = "up" }
-        "comb1 + L" = { move_node = "right" }
+          "Alt + F" = "toggle_fullscreen";
+          "Alt + Shift + F" = "toggle_window_floating";
+          "comb1 + Ctrl + Space" = "toggle_focus_floating";
 
-        # Workspace switching
-        ${workspaceSwitchBindings}
-
-        # Move window to workspace
-        ${workspaceMoveBindings}
-
-        # Terminal
-        "Alt + Enter" = { "exec" = ["bash", "-c", "open -a \"${pkgs.ghostty-bin}/Applications/Ghostty.app\""] }
-
-        # Workspace navigation
-        "Alt + Tab" = "switch_to_last_workspace"
-
-        # Window joining
-        "Alt + Shift + Left" = { join_window = "left" }
-        "Alt + Shift + Right" = { join_window = "right" }
-        "Alt + Shift + Up" = { join_window = "up" }
-        "Alt + Shift + Down" = { join_window = "down" }
-
-        # Layout controls
-        "Alt + Comma" = "toggle_stack"
-        "Alt + Slash" = "toggle_orientation"
-        "Alt + Ctrl + E" = "unjoin_windows"
-
-        # Window states
-        "Alt + Shift + Space" = "toggle_window_floating"
-        "Alt + F" = "toggle_fullscreen"
-        "Alt + Shift + F" = "toggle_fullscreen_within_gaps"
-        "comb1 + Ctrl + Space" = "toggle_focus_floating"
-
-        # Window resizing
-        "Alt + Shift + Equal" = "resize_window_grow"
-        "Alt + Shift + Minus" = "resize_window_shrink"
-      '';
+          "Alt + Shift + Equal" = "resize_window_grow";
+          "Alt + Shift + Minus" = "resize_window_shrink";
+        }
+        // workspaceSwitchBindings
+        // workspaceMoveBindings;
+      };
     };
 }

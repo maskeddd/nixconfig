@@ -12,8 +12,6 @@
           nil
           nixfmt
           tinymist
-
-          godot-mono
         ];
 
         programs.opencode.enable = true;

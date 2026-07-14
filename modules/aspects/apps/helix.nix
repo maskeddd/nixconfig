@@ -9,10 +9,8 @@
         extraPackages = with pkgs; [
           typstyle
           golangci-lint-langserver
-          svelte-language-server
           tailwindcss-language-server
           vscode-langservers-extracted
-          marksman
           vtsls
         ];
         settings = {
@@ -75,10 +73,6 @@
               auto-format = true;
             }
             {
-              name = "java";
-              auto-format = true;
-            }
-            {
               name = "typescript";
               language-servers = [
                 "vtsls"
@@ -129,18 +123,6 @@
             {
               name = "json";
               language-servers = [ "vscode-json-language-server" ];
-              auto-format = true;
-            }
-            {
-              name = "markdown";
-              language-servers = [ "marksman" ];
-            }
-            {
-              name = "svelte";
-              language-servers = [
-                "svelteserver"
-                "tailwindcss-ls"
-              ];
               auto-format = true;
             }
           ];
