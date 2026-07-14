@@ -36,7 +36,10 @@
     hmDarwin =
       { pkgs, ... }:
       {
-        home.packages = [ pkgs.appcleaner ];
+        home.packages = with pkgs; [
+          appcleaner
+          thaw
+        ];
       };
   };
 }
