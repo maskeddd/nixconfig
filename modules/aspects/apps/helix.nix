@@ -7,6 +7,8 @@
       programs.helix = {
         enable = true;
         extraPackages = with pkgs; [
+          nixd
+          nixfmt
           typstyle
           golangci-lint-langserver
           tailwindcss-language-server
