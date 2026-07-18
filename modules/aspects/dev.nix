@@ -9,6 +9,9 @@
           typst
 
           jetbrains.rider
+
+          nixd
+          nil
         ];
 
         programs.opencode.enable = true;

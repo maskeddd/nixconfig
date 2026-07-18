@@ -23,6 +23,8 @@
           ];
 
           userSettings = {
+            format_on_save = "on";
+
             inlay_hints.enabled = true;
 
             collaboration_panel.button = false;

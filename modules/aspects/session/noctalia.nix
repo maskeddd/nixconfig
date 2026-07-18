@@ -1,76 +1,85 @@
 { inputs, ... }:
 {
   flake-file.inputs.noctalia = {
-    url = "github:noctalia-dev/noctalia";
+    url = "github:noctalia-dev/noctalia/cachix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  den.aspects.noctalia.homeManager = {
-    imports = [ inputs.noctalia.homeModules.default ];
+  den.aspects.noctalia = {
+    os.nix.settings = {
+      substituters = [ "https://noctalia.cachix.org" ];
+      trusted-public-keys = [
+        "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      ];
+    };
 
-    stylix.targets.noctalia.colors.enable = false;
+    homeManager = {
+      imports = [ inputs.noctalia.homeModules.default ];
 
-    programs.noctalia = {
-      enable = true;
-      systemd.enable = true;
+      stylix.targets.noctalia.colors.enable = false;
 
-      settings = {
-        bar.default = {
-          center = [ "media" ];
-          end = [
-            "tray"
-            "notifications"
-            "clipboard"
-            "volume"
-            "network"
-            "battery"
-            "control-center"
-            "clock"
-          ];
-          margin_edge = 0;
-          margin_ends = 0;
-          radius = 0;
-          radius_bottom_left = -80;
-          radius_bottom_right = -80;
-          start = [
-            "session"
-            "workspaces"
-          ];
-          widget_spacing = 14;
-        };
+      programs.noctalia = {
+        enable = true;
+        systemd.enable = true;
 
-        desktop_widgets.enabled = false;
-
-        lockscreen.enabled = false;
-
-        location = {
-          auto_locate = true;
-        };
-
-        shell = {
-          font_family = "SF Pro Text";
-          panel.borders = false;
-        };
-
-        theme = {
-          builtin = "Catppuccin";
-          community_palette = "Catppuccin Lavender";
-          mode = "dark";
-          source = "community";
-
-          templates = {
-            enable_builtin_templates = false;
-            enable_community_templates = false;
+        settings = {
+          bar.default = {
+            center = [ "media" ];
+            end = [
+              "tray"
+              "notifications"
+              "clipboard"
+              "volume"
+              "network"
+              "battery"
+              "control-center"
+              "clock"
+            ];
+            margin_edge = 0;
+            margin_ends = 0;
+            radius = 0;
+            radius_bottom_left = -80;
+            radius_bottom_right = -80;
+            start = [
+              "session"
+              "workspaces"
+            ];
+            widget_spacing = 14;
           };
-        };
 
-        wallpaper.enabled = false;
+          desktop_widgets.enabled = false;
 
-        calendar.enabled = true;
+          lockscreen.enabled = false;
 
-        widget = {
-          clock.format = "{:%a %d %b %-I:%M %p}";
-          network.show_label = false;
+          location = {
+            auto_locate = true;
+          };
+
+          shell = {
+            font_family = "SF Pro Text";
+            panel.borders = false;
+          };
+
+          theme = {
+            builtin = "Catppuccin";
+            community_palette = "Catppuccin Lavender";
+            mode = "dark";
+            source = "community";
+
+            templates = {
+              enable_builtin_templates = false;
+              enable_community_templates = false;
+            };
+          };
+
+          wallpaper.enabled = false;
+
+          calendar.enabled = true;
+
+          widget = {
+            clock.format = "{:%a %d %b %-I:%M %p}";
+            network.show_label = false;
+          };
         };
       };
     };
