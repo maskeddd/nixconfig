@@ -59,6 +59,4 @@
     "hmLinux"
     "hmDarwin"
   ];
-  # bidirectional host<->user contributions via .provides.
-  den.schema.user.includes = [ den.provides.mutual-provider ];
 }

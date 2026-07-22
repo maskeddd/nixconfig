@@ -35,10 +35,6 @@
       flake = false;
     };
     import-tree.url = "github:vic/import-tree";
-    mangowm = {
-      url = "github:mangowm/mango";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nixcord.url = "github:FlameFlag/nixcord";

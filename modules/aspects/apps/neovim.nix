@@ -22,7 +22,6 @@
             ripgrep
             rustfmt
             stylua
-            tombi
           ];
 
           globals.mapleader = " ";

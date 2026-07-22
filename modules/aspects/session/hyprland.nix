@@ -37,6 +37,8 @@
 
         wayland.windowManager.hyprland = {
           enable = true;
+          package = null;
+          portalPackage = null;
           systemd.variables = [ "--all" ];
           configType = "hyprlang";
 
@@ -174,16 +176,11 @@
               "match:class .*, suppress_event maximize"
               "match:class = ^$, match:title = ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false, no_focus true"
               "workspace 1, match:class ^(brave-browser)$"
-              "workspace 3, match:class ^(discord)$"
               "workspace 3, match:class ^(vesktop)$"
               "workspace 3, match:class ^(spotify)$"
               "workspace 4, match:class ^(steam)$"
-              "workspace 2, match:class ^(csgo_linux64)$"
-              "fullscreen on, match:class ^(csgo_linux64)$"
               "content game, match:class ^(osu!)$"
             ];
-
-            layerrule = [ "no_anim on, match:namespace vicinae" ];
 
             workspace = [
               "1, monitor:DP-3"

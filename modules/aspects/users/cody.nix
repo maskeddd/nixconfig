@@ -19,11 +19,9 @@
 
     provides.desktop.includes = with den.aspects; [
       hyprland
-      mangowm
       gaming
       gnome
       obs
-      audio
     ];
 
     provides.macbook.includes = [ den.aspects.rift ];

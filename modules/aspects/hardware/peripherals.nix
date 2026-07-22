@@ -8,24 +8,11 @@
   den.aspects.peripherals.nixos = {
     imports = [ inputs.solaar.nixosModules.default ];
 
-    services.solaar = {
-      enable = true;
-      window = "hide";
-      batteryIcons = "regular";
-    };
+    services.solaar.enable = true;
 
     hardware = {
-      logitech.wireless = {
-        enable = true;
-        enableGraphical = true;
-      };
-
       keyboard.qmk.enable = true;
-
-      opentabletdriver = {
-        enable = true;
-        daemon.enable = true;
-      };
+      opentabletdriver.enable = true;
     };
   };
 }

@@ -89,10 +89,6 @@
               workspace = 2;
             }
             {
-              app_id = "com.hnc.Discord";
-              workspace = 2;
-            }
-            {
               app_id = "com.spotify.Client";
               workspace = 3;
             }

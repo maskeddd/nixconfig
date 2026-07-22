@@ -23,12 +23,9 @@
             };
           };
 
-          fish = {
-            enable = true;
-            interactiveShellInit = ''
-              set fish_greeting
-            '';
-          };
+          fish.interactiveShellInit = ''
+            set fish_greeting
+          '';
 
           starship = {
             enable = true;

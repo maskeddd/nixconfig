@@ -24,7 +24,7 @@
           };
           fonts = {
             serif = {
-              package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
+              package = inputs.apple-fonts.packages.${pkgs.system}.ny;
               name = "New York";
             };
             sansSerif = {
@@ -79,10 +79,7 @@
           };
         };
 
-        dconf = {
-          enable = true;
-          settings."org/gnome/desktop/interface".icon-theme = "Adwaita";
-        };
+        dconf.settings."org/gnome/desktop/interface".icon-theme = "Adwaita";
 
         home.pointerCursor = {
           enable = true;

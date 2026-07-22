@@ -15,7 +15,6 @@
     in
     {
       services.udev.packages = [ pkgs.openrgb ];
-      boot.kernelModules = [ "i2c-dev" ];
       hardware.i2c.enable = true;
 
       systemd.services.set-rgb = {
@@ -25,7 +24,6 @@
           Type = "oneshot";
           RemainAfterExit = true;
         };
-        after = [ "multi-user.target" ];
         wantedBy = [ "multi-user.target" ];
         restartIfChanged = false;
       };
