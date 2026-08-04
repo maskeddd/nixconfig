@@ -22,6 +22,7 @@
       gaming
       gnome
       obs
+      audio
     ];
 
     provides.macbook.includes = [ den.aspects.rift ];

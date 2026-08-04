@@ -4,12 +4,7 @@
       { pkgs, ... }:
       {
         home.packages = with pkgs; [
-          claude-code
-          codex
           typst
-
-          jetbrains.rider
-
           nixd
           nil
         ];
@@ -17,6 +12,38 @@
         programs.opencode.enable = true;
         catppuccin.opencode.enable = true;
         stylix.targets.opencode.colors.enable = false;
+      };
+
+    hmLinux =
+      { pkgs, ... }:
+      {
+        home.packages = with pkgs; [
+          (buildFHSEnv {
+            name = "rider-fhs";
+            executableName = "rider";
+            targetPkgs =
+              fhsPkgs: with fhsPkgs; [
+                jetbrains.rider
+                dotnetCorePackages.sdk_10_0
+                sdl3
+                fna3d
+                libbass
+                libbass_fx
+              ];
+            runScript = lib.getExe jetbrains.rider;
+            extraInstallCommands = ''
+              mkdir -p $out/share
+              ln -s ${jetbrains.rider}/share/applications $out/share/applications
+              ln -s ${jetbrains.rider}/share/icons $out/share/icons
+            '';
+          })
+        ];
+      };
+
+    hmDarwin =
+      { pkgs, ... }:
+      {
+        home.packages = [ pkgs.jetbrains.rider ];
       };
   };
 }

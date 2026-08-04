@@ -12,6 +12,7 @@
       environment.etc."1password/custom_allowed_browsers" = {
         text = ''
           brave
+          brave-origin
         '';
         mode = "0755";
       };
@@ -24,6 +25,7 @@
 
     hmLinux.programs.ssh.settings."*".IdentityAgent = "~/.1password/agent.sock";
 
-    hmDarwin.programs.ssh.settings."*".IdentityAgent = "\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
+    hmDarwin.programs.ssh.settings."*".IdentityAgent =
+      "\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
   };
 }

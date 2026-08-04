@@ -13,6 +13,9 @@
           tailwindcss-language-server
           vscode-langservers-extracted
           vtsls
+          rust-analyzer
+          wgsl-analyzer
+          lua-language-server
         ];
         settings = {
           theme = "catppuccin_mocha";

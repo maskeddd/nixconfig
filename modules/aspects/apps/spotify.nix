@@ -24,7 +24,7 @@
             if [[ "$1" =~ open\.spotify\.com/(track|album|playlist|artist|episode|show)/([a-zA-Z0-9]+) ]]; then
               exec ${config.programs.spicetify.spicedSpotify}/bin/spotify --uri="spotify:''${BASH_REMATCH[1]}:''${BASH_REMATCH[2]}"
             fi
-            exec ${pkgs.brave}/bin/brave "$1"
+            exec ${pkgs.brave-origin}/bin/brave-origin "$1"
           '')
         ];
 

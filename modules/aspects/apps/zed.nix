@@ -20,6 +20,7 @@
             "oxc"
             "vue"
             "odin"
+            "lua"
           ];
 
           userSettings = {
