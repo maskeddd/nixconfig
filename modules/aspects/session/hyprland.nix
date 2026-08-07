@@ -8,22 +8,6 @@
     ];
 
     nixos = {
-      nixpkgs.overlays = [
-        (_final: prev: {
-          hyprland = prev.hyprland.override {
-            glaze = prev.glaze.overrideAttrs (_: rec {
-              version = "7.9.1";
-              src = prev.fetchFromGitHub {
-                owner = "stephenberry";
-                repo = "glaze";
-                tag = "v${version}";
-                hash = "sha256-NRRq5MGF2f5PW0teYnq58ELzson+U6KHVPaY6r30KLA=";
-              };
-            });
-          };
-        })
-      ];
-
       programs.hyprland.enable = true;
       services.gnome.gnome-keyring.enable = true;
       environment.sessionVariables = {
@@ -39,12 +23,26 @@
 
         home.packages = with pkgs; [
           grim
+          jq
           slurp
           wl-clipboard
           playerctl
           brightnessctl
           sunsetr
         ];
+
+        programs.satty = {
+          enable = true;
+          settings.general = {
+            fullscreen = true;
+            floating-hack = true;
+            early-exit = [ "all" ];
+            initial-tool = "brush";
+            copy-command = "wl-copy";
+            actions-on-enter = [ "save-to-clipboard" ];
+            output-filename = "~/Pictures/Screenshots/screenshot-%Y%m%d-%H%M%S.png";
+          };
+        };
 
         services.hyprpaper = {
           enable = true;
