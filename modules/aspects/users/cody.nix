@@ -3,11 +3,11 @@
   den.aspects.cody = {
     includes = with den; [
       aspects.shell
+      aspects.ghostty
       aspects.dev
       aspects.git
       aspects.zed
       aspects.helix
-      aspects.neovim
       aspects.spotify
       aspects.discord
       aspects.applications

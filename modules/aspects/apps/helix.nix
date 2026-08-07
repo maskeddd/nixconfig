@@ -1,21 +1,49 @@
 {
   den.aspects.helix.homeManager =
     { pkgs, ... }:
+    let
+      autoFormat = name: {
+        inherit name;
+        auto-format = true;
+      };
+      withLanguageServers = name: language-servers: autoFormat name // { inherit language-servers; };
+      webFormatter = {
+        command = "oxfmt";
+        args = [
+          "--stdin-filepath"
+          "%{buffer_name}"
+        ];
+      };
+      webLanguage =
+        name: language-servers: withLanguageServers name language-servers // { formatter = webFormatter; };
+      typescript =
+        name:
+        webLanguage name [
+          "vtsls"
+          "oxlint"
+          "tailwindcss-ls"
+        ];
+    in
     {
       stylix.targets.helix.enable = false;
 
       programs.helix = {
         enable = true;
         extraPackages = with pkgs; [
-          nixd
-          typstyle
           golangci-lint-langserver
+          lua-language-server
+          nixd
+          oxfmt
+          oxlint
+          rust-analyzer
           tailwindcss-language-server
+          tinymist
+          tombi
+          typstyle
           vscode-langservers-extracted
           vtsls
-          rust-analyzer
+          vue-language-server
           wgsl-analyzer
-          lua-language-server
         ];
         settings = {
           theme = "catppuccin_mocha";
@@ -37,6 +65,14 @@
         };
         languages = {
           language-server = {
+            oxlint = {
+              command = "oxlint";
+              args = [ "--lsp" ];
+            };
+            tailwindcss-ls = {
+              command = "tailwindcss-language-server";
+              args = [ "--stdio" ];
+            };
             tinymist = {
               command = "tinymist";
               config = {
@@ -45,90 +81,53 @@
                 outputPath = "$root/target/$dir/$name";
               };
             };
+            tombi = {
+              command = "tombi";
+              args = [ "lsp" ];
+            };
             vtsls = {
               command = "vtsls";
               args = [ "--stdio" ];
             };
-            tailwindcss-ls = {
-              command = "tailwindcss-language-server";
-              args = [ "--stdio" ];
-            };
-            qmlls = {
-              args = [ "-E" ];
-              command = "${pkgs.qt6.qtdeclarative}/bin/qmlls";
-            };
           };
           language = [
-            {
-              name = "nix";
-              auto-format = true;
-              formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
-            }
-            {
-              name = "rust";
-              auto-format = true;
-            }
-            {
-              name = "toml";
-              auto-format = true;
-            }
-            {
-              name = "typst";
-              auto-format = true;
-            }
-            {
-              name = "typescript";
-              language-servers = [
-                "vtsls"
-                "tailwindcss-ls"
-              ];
-              auto-format = true;
-            }
-            {
-              name = "tsx";
-              language-servers = [
-                "vtsls"
-                "tailwindcss-ls"
-              ];
-              auto-format = true;
-            }
-            {
-              name = "javascript";
-              language-servers = [
-                "vtsls"
-                "tailwindcss-ls"
-              ];
-              auto-format = true;
-            }
-            {
-              name = "jsx";
-              language-servers = [
-                "vtsls"
-                "tailwindcss-ls"
-              ];
-              auto-format = true;
-            }
-            {
-              name = "html";
-              language-servers = [
-                "vscode-html-language-server"
-                "tailwindcss-ls"
-              ];
-              auto-format = true;
-            }
-            {
-              name = "css";
-              language-servers = [
-                "vscode-css-language-server"
-                "tailwindcss-ls"
-              ];
-              auto-format = true;
-            }
-            {
-              name = "json";
-              language-servers = [ "vscode-json-language-server" ];
-              auto-format = true;
-            }
+            (
+              (autoFormat "nix")
+              // {
+                formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
+              }
+            )
+            (autoFormat "rust")
+            (withLanguageServers "toml" [ "tombi" ])
+            (
+              (autoFormat "typst")
+              // {
+                soft-wrap.enable = true;
+              }
+            )
+            (typescript "typescript")
+            (typescript "tsx")
+            (typescript "javascript")
+            (typescript "jsx")
+            (webLanguage "html" [
+              "vscode-html-language-server"
+              "tailwindcss-ls"
+            ])
+            (webLanguage "css" [
+              "vscode-css-language-server"
+              "tailwindcss-ls"
+            ])
+            (webLanguage "scss" [
+              "vscode-css-language-server"
+              "tailwindcss-ls"
+            ])
+            (webLanguage "json" [ "vscode-json-language-server" ])
+            (webLanguage "jsonc" [ "vscode-json-language-server" ])
+            (webLanguage "vue" [
+              "vuels"
+              "oxlint"
+              "tailwindcss-ls"
+            ])
           ];
         };
       };

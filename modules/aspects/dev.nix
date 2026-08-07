@@ -6,11 +6,15 @@
         home.packages = with pkgs; [
           typst
           nixd
-          nil
         ];
 
-        programs.opencode.enable = true;
+        programs = {
+          opencode.enable = true;
+          lazygit.enable = true;
+        };
+        catppuccin.lazygit.enable = true;
         catppuccin.opencode.enable = true;
+        stylix.targets.lazygit.enable = false;
         stylix.targets.opencode.colors.enable = false;
       };
 
@@ -25,10 +29,6 @@
               fhsPkgs: with fhsPkgs; [
                 jetbrains.rider
                 dotnetCorePackages.sdk_10_0
-                sdl3
-                fna3d
-                libbass
-                libbass_fx
               ];
             runScript = lib.getExe jetbrains.rider;
             extraInstallCommands = ''

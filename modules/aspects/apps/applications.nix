@@ -20,6 +20,7 @@
           qbittorrent
           godot-mono
         ];
+        programs.zathura.enable = true;
       };
 
     hmDarwin =

@@ -15,14 +15,6 @@
         };
 
         programs = {
-          ghostty = {
-            enable = true;
-            settings = {
-              command = "${pkgs.fish}/bin/fish";
-              macos-titlebar-style = "hidden";
-            };
-          };
-
           fish.interactiveShellInit = ''
             set fish_greeting
           '';
@@ -67,12 +59,6 @@
       { pkgs, ... }:
       {
         programs.btop.package = pkgs.btop-cuda;
-      };
-
-    hmDarwin =
-      { pkgs, ... }:
-      {
-        programs.ghostty.package = pkgs.ghostty-bin;
       };
   };
 }
