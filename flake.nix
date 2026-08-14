@@ -43,10 +43,6 @@
       url = "github:noctalia-dev/noctalia/cachix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    solaar = {
-      url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     stylix = {
       url = "github:nix-community/stylix";
