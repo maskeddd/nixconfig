@@ -39,7 +39,6 @@
           protonplus
           osu-lazer-bin
           vinegar
-          lutris
 
           (prismlauncher.override {
             jdks = with pkgs; [

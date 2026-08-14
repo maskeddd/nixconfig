@@ -26,6 +26,9 @@
           gnome-music
           gnome-text-editor
           gnome-console
+          gnome-connections
+          gnome-logs
+          gnome-system-monitor
         ];
       };
 
@@ -46,9 +49,9 @@
           lib.genAttrs (extractMimeTypes "${pkgs.loupe}/share/applications/org.gnome.Loupe.desktop") (
             _: "org.gnome.Loupe.desktop"
           )
-          // lib.genAttrs (extractMimeTypes "${pkgs.decibels}/share/applications/org.gnome.Decibels.desktop") (
-            _: "org.gnome.Decibels.desktop"
-          );
+          //
+            lib.genAttrs (extractMimeTypes "${pkgs.decibels}/share/applications/org.gnome.Decibels.desktop")
+              (_: "org.gnome.Decibels.desktop");
       };
   };
 }

@@ -7,7 +7,10 @@
       programs.nixcord = {
         enable = true;
         vesktop.enable = true;
-        discord.enable = false;
+        discord = {
+          vencord.enable = true;
+          krisp.enable = true;
+        };
         config = {
           useQuickCss = true;
           themeLinks = [

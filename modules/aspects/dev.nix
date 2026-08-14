@@ -6,6 +6,7 @@
         home.packages = with pkgs; [
           typst
           nixd
+          nil
         ];
 
         programs = {
