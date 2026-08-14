@@ -24,11 +24,11 @@
           };
           fonts = {
             serif = {
-              package = inputs.apple-fonts.packages.${pkgs.system}.ny;
+              package = inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.ny;
               name = "New York";
             };
             sansSerif = {
-              package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
+              package = inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-pro;
               name = "SF Pro Text";
             };
             monospace = {

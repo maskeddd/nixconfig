@@ -3,7 +3,7 @@
     { pkgs, lib, ... }:
     let
       signerBinary =
-        if pkgs.stdenv.isDarwin then
+        if pkgs.stdenv.hostPlatform.isDarwin then
           "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
         else
           lib.getExe' pkgs._1password-gui "op-ssh-sign";
