@@ -57,6 +57,10 @@
 
           shell = {
             font_family = "SF Pro Text";
+            button_borders = false;
+            input_borders = false;
+            popup_borders = false;
+            card_borders = false;
             panel.borders = false;
           };
 

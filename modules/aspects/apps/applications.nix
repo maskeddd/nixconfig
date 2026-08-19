@@ -1,13 +1,22 @@
 { inputs, ... }:
 {
-  flake-file.inputs.affinity-nix.url = "github:mrshmllow/affinity-nix";
+  flake-file.inputs = {
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
+    helium = {
+      url = "github:amaanq/helium-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 
   den.aspects.applications = {
     os.nixpkgs.overlays = [ inputs.affinity-nix.overlays.default ];
 
-    homeManager = {
-      catppuccin.brave.enable = true;
-    };
+    homeManager =
+      { pkgs, ... }:
+      {
+        catppuccin.brave.enable = true;
+        home.packages = [ inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.helium-widevine ];
+      };
 
     hmLinux =
       { pkgs, ... }:

@@ -1,4 +1,4 @@
-{ den, ... }:
+{ den, inputs, ... }:
 {
   den.aspects.macbook = {
     includes = with den.aspects; [
@@ -20,7 +20,7 @@
             autohide = true;
             tilesize = 64;
             persistent-apps = [
-              { app = "${pkgs.brave}/Applications/Brave Browser.app"; }
+              { app = "${inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.helium-widevine}/Applications/Helium.app"; }
               { app = "${hm.programs.nixcord.finalPackage.vesktop}/Applications/Vesktop.app"; }
               { app = "${hm.programs.spicetify.spicedSpotify}/Applications/Spotify.app"; }
               { app = "${pkgs.ghostty-bin}/Applications/Ghostty.app"; }

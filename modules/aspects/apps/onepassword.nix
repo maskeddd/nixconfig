@@ -13,6 +13,7 @@
         text = ''
           brave
           brave-origin
+          helium
         '';
         mode = "0755";
       };

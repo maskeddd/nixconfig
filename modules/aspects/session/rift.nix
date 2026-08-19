@@ -77,7 +77,7 @@
               floating = true;
             }
             {
-              app_id = "com.brave.Browser";
+              app_id = "net.imput.helium";
               workspace = 0;
             }
             {
