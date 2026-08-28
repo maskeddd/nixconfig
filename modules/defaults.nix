@@ -23,8 +23,13 @@
     nixos = {
       system.stateVersion = "25.05";
       security.polkit.enable = true;
-      services.openssh.enable = true;
-      services.cloudflare-warp.enable = true;
+      services = {
+        openssh.enable = true;
+        mullvad-vpn = {
+          enable = true;
+          gui.enable = true;
+        };
+      };
       networking.networkmanager.enable = true;
       time.timeZone = "Australia/Brisbane";
       i18n.defaultLocale = "en_AU.UTF-8";
@@ -42,7 +47,6 @@
         };
       };
 
-    hmLinux.xdg.mimeApps.enable = true;
   };
 
   den.schema.host.includes = [

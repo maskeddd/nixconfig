@@ -39,9 +39,10 @@
         };
 
         xdg.mimeApps.defaultApplications = {
-          "x-scheme-handler/http" = "spotify-redirect.desktop";
-          "x-scheme-handler/https" = "spotify-redirect.desktop";
+          "x-scheme-handler/http" = "spotify-url-handler.desktop";
+          "x-scheme-handler/https" = "spotify-url-handler.desktop";
         };
+        xdg.mimeApps.defaultApplicationPackages = [ config.programs.spicetify.spicedSpotify ];
       };
   };
 }

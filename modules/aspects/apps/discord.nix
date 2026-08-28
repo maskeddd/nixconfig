@@ -31,6 +31,10 @@
       };
       stylix.targets.nixcord.enable = false;
     };
-    hmLinux.xdg.mimeApps.defaultApplications."x-scheme-handler/discord" = "vesktop.desktop";
+    hmLinux =
+      { config, ... }:
+      {
+        xdg.mimeApps.defaultApplicationPackages = [ config.programs.nixcord.vesktop.package ];
+      };
   };
 }

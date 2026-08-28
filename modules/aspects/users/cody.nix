@@ -20,7 +20,6 @@
     provides.desktop.includes = with den.aspects; [
       hyprland
       gaming
-      gnome
       obs
       audio
     ];

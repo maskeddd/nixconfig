@@ -166,6 +166,7 @@ hl.window_rule({ match = { class = "^(helium)$" }, workspace = "1" })
 hl.window_rule({ match = { class = "^(vesktop)$" }, workspace = "4" })
 hl.window_rule({ match = { class = "^(spotify)$" }, workspace = "4" })
 hl.window_rule({ match = { class = "^(steam)$" }, workspace = "3" })
+hl.window_rule({ match = { class = [[^org\.gnome\.NautilusPreviewer$]] }, float = true })
 hl.window_rule({ match = { class = "^(osu!)$" }, content = "game" })
 
 hl.workspace_rule({ workspace = "1", monitor = "DP-3" })

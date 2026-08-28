@@ -5,14 +5,21 @@
       noctalia
       hyprlock
       hypridle
+      flatpak
     ];
 
     nixos = {
       programs.hyprland.enable = true;
-      services.gnome.gnome-keyring.enable = true;
-      environment.sessionVariables = {
-        NIXOS_OZONE_WL = "1";
-        ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+      services = {
+        displayManager.gdm.enable = true;
+        gnome.gnome-keyring.enable = true;
+      };
+      environment = {
+        etc."xdg/monitors.xml".source = ./monitors.xml;
+        sessionVariables = {
+          NIXOS_OZONE_WL = "1";
+          ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+        };
       };
     };
 
