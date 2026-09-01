@@ -6,7 +6,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
-    catppuccin.url = "github:catppuccin/nix";
   };
 
   den.aspects.theme = {
@@ -15,13 +14,9 @@
       {
         stylix = {
           enable = true;
-          image = ../../assets/wallpapers/at.png;
+          image = ../../assets/wallpapers/morning.jpg;
           polarity = "dark";
-          base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-          override = {
-            base07 = "89b4fa";
-            base0D = "b4befe";
-          };
+          base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa-dragon.yaml";
           fonts = {
             serif = {
               package = inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.ny;
@@ -56,17 +51,6 @@
         stylix.targets.chromium.enable = false;
       };
     darwin.imports = [ inputs.stylix.darwinModules.stylix ];
-
-    homeManager = {
-      imports = [ inputs.catppuccin.homeModules.catppuccin ];
-
-      catppuccin = {
-        enable = true;
-        autoEnable = false;
-        accent = "lavender";
-        hyprtoolkit.enable = true;
-      };
-    };
 
     hmLinux =
       { pkgs, ... }:

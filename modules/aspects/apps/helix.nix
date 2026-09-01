@@ -25,8 +25,6 @@
         ];
     in
     {
-      stylix.targets.helix.enable = false;
-
       programs.helix = {
         enable = true;
         extraPackages = with pkgs; [
@@ -46,7 +44,6 @@
           wgsl-analyzer
         ];
         settings = {
-          theme = "catppuccin_mocha";
           editor = {
             line-number = "relative";
             cursorline = true;

@@ -13,10 +13,6 @@
           opencode.enable = true;
           lazygit.enable = true;
         };
-        catppuccin.lazygit.enable = true;
-        catppuccin.opencode.enable = true;
-        stylix.targets.lazygit.enable = false;
-        stylix.targets.opencode.colors.enable = false;
       };
 
     hmLinux =

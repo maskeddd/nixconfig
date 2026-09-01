@@ -16,8 +16,6 @@
     homeManager = {
       imports = [ inputs.noctalia.homeModules.default ];
 
-      stylix.targets.noctalia.colors.enable = false;
-
       programs.noctalia = {
         enable = true;
         systemd.enable = true;
@@ -38,8 +36,6 @@
             margin_edge = 0;
             margin_ends = 0;
             radius = 0;
-            radius_bottom_left = -80;
-            radius_bottom_right = -80;
             start = [
               "session"
               "workspaces"
@@ -62,18 +58,6 @@
             popup_borders = false;
             card_borders = false;
             panel.borders = false;
-          };
-
-          theme = {
-            builtin = "Catppuccin";
-            community_palette = "Catppuccin Lavender";
-            mode = "dark";
-            source = "community";
-
-            templates = {
-              enable_builtin_templates = false;
-              enable_community_templates = false;
-            };
           };
 
           wallpaper.enabled = false;

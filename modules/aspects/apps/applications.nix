@@ -9,7 +9,21 @@
   };
 
   den.aspects.applications = {
-    os.nixpkgs.overlays = [ inputs.affinity-nix.overlays.default ];
+    os.nixpkgs.overlays = [
+      inputs.affinity-nix.overlays.default
+      (final: prev: {
+        nautilus = prev.nautilus.overrideAttrs (old: {
+          buildInputs =
+            old.buildInputs
+            ++ (with final.gst_all_1; [
+              gst-plugins-good
+              gst-plugins-bad
+              gst-plugins-ugly
+              gst-libav
+            ]);
+        });
+      })
+    ];
 
     nixos = {
       programs = {
@@ -29,7 +43,6 @@
     homeManager =
       { pkgs, ... }:
       {
-        catppuccin.brave.enable = true;
         home.packages = [ inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.helium-widevine ];
       };
 
@@ -56,7 +69,6 @@
           showtime
           file-roller
         ];
-        programs.zathura.enable = true;
 
         xdg.mimeApps = {
           enable = true;

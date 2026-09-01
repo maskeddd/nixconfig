@@ -16,10 +16,7 @@
       };
       environment = {
         etc."xdg/monitors.xml".source = ./monitors.xml;
-        sessionVariables = {
-          NIXOS_OZONE_WL = "1";
-          ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-        };
+        sessionVariables.NIXOS_OZONE_WL = "1";
       };
     };
 
@@ -30,6 +27,7 @@
 
         home.packages = with pkgs; [
           grim
+          glib.bin
           jq
           slurp
           wl-clipboard

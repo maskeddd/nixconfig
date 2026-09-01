@@ -5,8 +5,6 @@
     homeManager =
       { pkgs, ... }:
       {
-        stylix.targets.zed.colors.enable = false;
-
         programs.zed-editor = {
           enable = true;
           package = if pkgs.stdenv.hostPlatform.isDarwin then null else pkgs.zed-editor;
@@ -19,7 +17,6 @@
             "scss"
             "oxc"
             "vue"
-            "odin"
             "lua"
           ];
 
@@ -33,15 +30,19 @@
               breadcrumbs = false;
               quick_actions = false;
             };
-            agent.enabled = true;
+
+            project_panel.dock = "left";
+            git_panel.dock = "left";
+            outline_panel.dock = "left";
+
+            agent = {
+              dock = "right";
+              sidebar_side = "right";
+            };
+
             agent_servers."codex-acp".type = "registry";
 
             terminal.shell.program = "fish";
-
-            theme = {
-              light = "Catppuccin Latte";
-              dark = "Catppuccin Mocha";
-            };
 
             languages."Nix".formatter.external.command = "${pkgs.nixfmt}/bin/nixfmt";
           };

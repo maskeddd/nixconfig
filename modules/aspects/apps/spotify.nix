@@ -2,19 +2,13 @@
 {
   flake-file.inputs.spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   den.aspects.spotify = {
-    homeManager =
-      { pkgs, ... }:
-      {
-        imports = [ inputs.spicetify-nix.homeManagerModules.spicetify ];
+    homeManager = {
+      imports = [ inputs.spicetify-nix.homeManagerModules.spicetify ];
 
-        programs.spicetify = {
-          enable = true;
-          theme = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system}.themes.catppuccin;
-          colorScheme = "mocha";
-        };
-
-        stylix.targets.spicetify.enable = false;
+      programs.spicetify = {
+        enable = true;
       };
+    };
 
     hmLinux =
       { config, pkgs, ... }:

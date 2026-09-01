@@ -13,9 +13,6 @@
         };
         config = {
           useQuickCss = true;
-          themeLinks = [
-            "https://catppuccin.github.io/discord/dist/catppuccin-mocha-lavender.theme.css"
-          ];
           plugins = {
             anonymiseFileNames.enable = true;
             betterGifPicker.enable = true;
@@ -29,7 +26,6 @@
           };
         };
       };
-      stylix.targets.nixcord.enable = false;
     };
     hmLinux =
       { config, ... }:

@@ -11,7 +11,6 @@
     };
     affinity-nix.url = "github:mrshmllow/affinity-nix";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
-    catppuccin.url = "github:catppuccin/nix";
     darwin = {
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
