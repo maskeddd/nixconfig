@@ -1,6 +1,9 @@
 { den, inputs, ... }:
 {
-  flake-file.inputs.aagl.url = "github:ezKEa/aagl-gtk-on-nix";
+  flake-file.inputs.aagl = {
+    url = "github:ezKEa/aagl-gtk-on-nix";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   den.aspects.gaming = {
     includes = [ den.aspects.flatpak ];
@@ -30,15 +33,13 @@
       };
 
     homeManager =
-      { pkgs, lib, ... }:
-      let
-        hytaleHash = "QmLLhHIam/kJETzqBr+IaishISzkxkGeDp/OCRZeyFs=";
-      in
+      { pkgs, ... }:
       {
         home.packages = with pkgs; [
           protonplus
           osu-lazer-bin
           vinegar
+          bottles
 
           (prismlauncher.override {
             jdks = with pkgs; [
@@ -48,26 +49,17 @@
             ];
           })
 
+          (heroic.override {
+            extraPkgs =
+              pkgs': with pkgs'; [
+                gamemode
+              ];
+          })
+
           patchelfUnstable
         ];
-        programs.mangohud = {
-          enable = true;
-          settings = {
-            full = true;
-            background_alpha = lib.mkForce 0.5;
-            output_folder = "~/Documents/mangohud/";
-          };
-        };
         services.flatpak.packages = [
           "org.vinegarhq.Sober"
-          {
-            appId = "com.hypixel.HytaleLauncher";
-            sha256 = hytaleHash;
-            bundle = "${pkgs.fetchurl {
-              url = "https://launcher.hytale.com/builds/release/linux/amd64/hytale-launcher-latest.flatpak";
-              sha256 = hytaleHash;
-            }}";
-          }
         ];
       };
   };

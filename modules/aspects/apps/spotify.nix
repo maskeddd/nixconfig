@@ -1,6 +1,9 @@
 { inputs, ... }:
 {
-  flake-file.inputs.spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+  flake-file.inputs.spicetify-nix = {
+    url = "github:Gerg-L/spicetify-nix";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
   den.aspects.spotify = {
     homeManager = {
       imports = [ inputs.spicetify-nix.homeManagerModules.spicetify ];
@@ -33,8 +36,8 @@
         };
 
         xdg.mimeApps.defaultApplications = {
-          "x-scheme-handler/http" = "spotify-url-handler.desktop";
-          "x-scheme-handler/https" = "spotify-url-handler.desktop";
+          "x-scheme-handler/http" = "spotify-redirect.desktop";
+          "x-scheme-handler/https" = "spotify-redirect.desktop";
         };
         xdg.mimeApps.defaultApplicationPackages = [ config.programs.spicetify.spicedSpotify ];
       };

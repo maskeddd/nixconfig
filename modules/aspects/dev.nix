@@ -12,13 +12,16 @@
         programs = {
           opencode.enable = true;
           lazygit.enable = true;
+          devenv.enable = true;
         };
       };
 
     hmLinux =
       { pkgs, ... }:
       {
+
         home.packages = with pkgs; [
+          jetbrains.idea
           (buildFHSEnv {
             name = "rider-fhs";
             executableName = "rider";

@@ -1,6 +1,9 @@
 { inputs, ... }:
 {
-  flake-file.inputs.nixcord.url = "github:FlameFlag/nixcord";
+  flake-file.inputs.nixcord = {
+    url = "github:4evy/nixcord";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
   den.aspects.discord = {
     homeManager = {
       imports = [ inputs.nixcord.homeModules.nixcord ];
@@ -23,6 +26,7 @@
             silentTyping.enable = true;
             gameActivityToggle.enable = true;
             voiceChatDoubleClick.enable = true;
+            viewRaw.enable = true;
           };
         };
       };

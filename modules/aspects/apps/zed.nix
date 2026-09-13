@@ -11,7 +11,6 @@
           mutableUserSettings = false;
 
           extensions = [
-            "catppuccin"
             "nix"
             "tombi"
             "scss"
