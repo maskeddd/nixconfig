@@ -46,11 +46,11 @@
         casks = [
           "cleanshot"
           "1password"
+          "helium-browser"
           "affinity"
-          "roblox"
           "plex"
-          "codex-app"
           "zed"
+          "thaw@beta"
         ];
       };
     };

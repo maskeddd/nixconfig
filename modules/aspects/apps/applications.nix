@@ -43,16 +43,11 @@
       };
     };
 
-    homeManager =
-      { pkgs, ... }:
-      {
-        home.packages = [ inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.helium-widevine ];
-      };
-
     hmLinux =
       { pkgs, ... }:
       {
         home.packages = with pkgs; [
+          inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.helium-widevine
           brave-origin
           affinity-v3
           plex-desktop
@@ -93,9 +88,7 @@
       { pkgs, ... }:
       {
         home.packages = with pkgs; [
-          brave
           appcleaner
-          thaw
         ];
       };
   };
