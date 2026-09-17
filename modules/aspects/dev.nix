@@ -21,7 +21,6 @@
       {
 
         home.packages = with pkgs; [
-          jetbrains.idea
           (buildFHSEnv {
             name = "rider-fhs";
             executableName = "rider";
@@ -43,7 +42,7 @@
     hmDarwin =
       { pkgs, ... }:
       {
-        home.packages = [ pkgs.jetbrains.rider ];
+        home.packages = with pkgs; [ jetbrains.rider ];
       };
   };
 }
