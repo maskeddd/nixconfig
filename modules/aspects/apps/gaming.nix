@@ -43,10 +43,9 @@
 
           (prismlauncher.override {
             jdks = with pkgs; [
-              zulu25
-              zulu21
-              zulu17
+              temurin-bin-25
             ];
+            additionalLibs = [ libxkbcommon ];
           })
 
           (heroic.override {

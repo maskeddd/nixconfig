@@ -53,7 +53,6 @@
           plex-desktop
           nicotine-plus
           qbittorrent
-          godot-mono
 
           baobab
           decibels
@@ -66,6 +65,8 @@
           papers
           showtime
           file-roller
+
+          vial
         ];
 
         xdg.mimeApps = {
