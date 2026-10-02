@@ -2,6 +2,39 @@
   den.aspects.dev = {
     homeManager =
       { pkgs, ... }:
+      {
+        home.packages = with pkgs; [
+          typst
+          nixd
+          nixfmt
+          nil
+        ];
+
+        programs = {
+          opencode = {
+            enable = true;
+            enableMcpIntegration = true;
+            settings = {
+              plugin = [ "opencode-claude-auth@latest" ];
+            };
+          };
+
+          mcp = {
+            enable = true;
+          };
+
+          claude-code = {
+            enable = true;
+            enableMcpIntegration = true;
+          };
+
+          lazygit.enable = true;
+          devenv.enable = true;
+        };
+      };
+
+    hmLinux =
+      { pkgs, ... }:
       let
         vinegarWine = pkgs.lib.findFirst (
           package: (package.pname or "") == "wine64"
@@ -23,31 +56,6 @@
       in
       {
         home.packages = with pkgs; [
-          typst
-          nixd
-          nil
-        ];
-
-        programs = {
-          opencode = {
-            enable = true;
-            enableMcpIntegration = true;
-          };
-          mcp = {
-            enable = true;
-            servers = pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
-              Roblox_Studio.command = "${robloxStudioMcp}";
-            };
-          };
-          lazygit.enable = true;
-          devenv.enable = true;
-        };
-      };
-
-    hmLinux =
-      { pkgs, ... }:
-      {
-        home.packages = with pkgs; [
           (buildFHSEnv {
             name = "rider-fhs";
             executableName = "rider";
@@ -64,6 +72,8 @@
             '';
           })
         ];
+
+        programs.mcp.servers.Roblox_Studio.command = "${robloxStudioMcp}";
       };
 
     hmDarwin =

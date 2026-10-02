@@ -1,10 +1,7 @@
 { inputs, ... }:
 {
   flake-file.inputs = {
-    affinity-nix = {
-      url = "github:mrshmllow/affinity-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
     helium = {
       url = "github:amaanq/helium-flake";
       inputs.nixpkgs.follows = "nixpkgs";

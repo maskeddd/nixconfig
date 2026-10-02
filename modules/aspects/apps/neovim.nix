@@ -1,6 +1,9 @@
 { inputs, ... }:
 {
-  flake-file.inputs.nixvim.url = "github:nix-community/nixvim";
+  flake-file.inputs.nixvim = {
+    url = "github:nix-community/nixvim";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   den.aspects.neovim.homeManager =
     { pkgs, ... }:
@@ -11,6 +14,7 @@
 
       programs.nixvim = {
         enable = true;
+        nixpkgs.source = inputs.nixpkgs;
 
         globals.mapleader = " ";
 
