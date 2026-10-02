@@ -44,12 +44,12 @@
           "rift"
         ];
         casks = [
-          "cleanshot"
           "1password"
           "helium-browser"
           "affinity"
           "plex"
           "zed"
+          "linearmouse"
           "thaw@beta"
         ];
       };

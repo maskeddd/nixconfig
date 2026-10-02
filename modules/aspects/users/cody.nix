@@ -8,6 +8,7 @@
       aspects.git
       aspects.zed
       aspects.helix
+      aspects.neovim
       aspects.spotify
       aspects.discord
       aspects.applications

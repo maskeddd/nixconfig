@@ -20,6 +20,8 @@
           ];
 
           userSettings = {
+            auto_update = false;
+
             format_on_save = "on";
 
             inlay_hints.enabled = true;
