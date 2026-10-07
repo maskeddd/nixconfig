@@ -55,7 +55,6 @@
       };
     darwin.imports = [ inputs.stylix.darwinModules.stylix ];
 
-    # no rofi here; stylix's rofi target still sets a renamed HM option and warns
     homeManager.stylix.targets.rofi.enable = false;
 
     hmLinux =
