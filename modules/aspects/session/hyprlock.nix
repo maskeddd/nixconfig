@@ -1,7 +1,9 @@
 {
   den.aspects.hyprlock.homeManager =
+    { host, ... }:
     let
-      monitor = "DP-3";
+      # set per host in den.hosts; empty means every monitor
+      monitor = host.primaryMonitor or "";
     in
     {
       programs.hyprlock = {

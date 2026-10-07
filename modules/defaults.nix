@@ -3,64 +3,42 @@
   den.default = {
     includes = [
       den.aspects.theme
-      den.provides.hostname
+      den.batteries.hostname
     ];
 
     os = {
       nixpkgs.config.allowUnfree = true;
-      nix = {
-        settings = {
-          experimental-features = [
-            "nix-command"
-            "flakes"
-          ];
-          auto-optimise-store = true;
-          extra-substituters = [ "https://cache.forall.systems" ];
-          extra-trusted-public-keys = [
-            "cache.forall.systems:5PmD7QO4MSF8YgyRZtkSGXRDo96H3bybIf2SsQh8ScI="
-          ];
-          trusted-users = [ "cody" ];
-        };
+      nix.settings.experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      home-manager = {
+        useUserPackages = true;
+        useGlobalPkgs = true;
       };
     };
 
     nixos = {
-      system.stateVersion = "25.05";
-      security.polkit.enable = true;
-      services = {
-        openssh.enable = true;
-        mullvad-vpn = {
-          enable = true;
-          gui.enable = true;
-        };
+      nix.settings = {
+        auto-optimise-store = true;
+        trusted-users = [ "@wheel" ];
       };
+      services.xserver.xkb.layout = "au";
       networking.networkmanager.enable = true;
       time.timeZone = "Australia/Brisbane";
       i18n.defaultLocale = "en_AU.UTF-8";
-      services.xserver.xkb.layout = "au";
       zramSwap.enable = true;
     };
 
-    homeManager =
-      { config, ... }:
-      {
-        home.stateVersion = "24.11";
-        programs.nh = {
-          enable = true;
-          flake = "${config.home.homeDirectory}/nixconfig";
-        };
-      };
+    darwin.nix = {
+      # auto-optimise-store is unreliable on macOS; optimise on a schedule instead
+      optimise.automatic = true;
+      settings.trusted-users = [ "@admin" ];
+    };
+
+    homeManager.home.stateVersion = "24.11";
 
   };
-
-  den.schema.host.includes = [
-    {
-      os.home-manager = {
-        useUserPackages = true;
-        useGlobalPkgs = true;
-      };
-    }
-  ];
 
   # enable hm by default
   den.schema.user.classes = lib.mkDefault [

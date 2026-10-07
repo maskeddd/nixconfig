@@ -1,5 +1,7 @@
 { den, ... }:
 {
+  den.hosts.aarch64-darwin.macbook.users.cody = { };
+
   den.aspects.macbook = {
     includes = with den.aspects; [
       homebrew
@@ -8,7 +10,7 @@
     darwin =
       { config, pkgs, ... }:
       let
-        hm = config.home-manager.users.cody;
+        hm = config.home-manager.users.${config.system.primaryUser};
       in
       {
         system.stateVersion = 6;
@@ -24,7 +26,7 @@
               { app = "${hm.programs.nixcord.finalPackage.vesktop}/Applications/Vesktop.app"; }
               { app = "${hm.programs.spicetify.spicedSpotify}/Applications/Spotify.app"; }
               { app = "${pkgs.ghostty-bin}/Applications/Ghostty.app"; }
-              { app = "/Applications/Zed.app"; }
+              { app = "${pkgs.zed-editor}/Applications/Zed.app"; }
               { app = "/System/Applications/System Settings.app"; }
             ];
           };

@@ -1,28 +1,38 @@
-{ ... }:
+{ inputs, ... }:
 {
+  flake-file.inputs.acsandmann-rift = {
+    url = "github:acsandmann/homebrew-tap";
+    flake = false;
+  };
+
+  den.aspects.rift.darwin = {
+    nix-homebrew = {
+      taps."acsandmann/homebrew-tap" = inputs.acsandmann-rift;
+      trust.formulae = [ "acsandmann/tap/rift" ];
+    };
+    homebrew.brews = [ "rift" ];
+  };
+
   den.aspects.rift.hmDarwin =
     { pkgs, lib, ... }:
     let
       workspaceCount = 9;
-      workspaceKeys = builtins.genList (i: toString (i + 1)) workspaceCount;
 
-      workspaceSwitchBindings = builtins.listToAttrs (
-        lib.imap0 (i: key: lib.nameValuePair "Alt + ${key}" { switch_to_workspace = i; }) workspaceKeys
-      );
-
-      workspaceMoveBindings = builtins.listToAttrs (
-        lib.imap0 (
-          i: key:
-          lib.nameValuePair "comb1 + ${key}" {
-            exec = [
-              "/bin/bash"
-              "-c"
-              "rift-cli execute workspace move-window ${toString i} && rift-cli execute workspace switch ${toString i}"
-            ];
+      workspaceBindings = lib.mergeAttrsList (
+        builtins.genList (
+          i:
+          let
+            key = toString (i + 1);
+          in
+          {
+            "Alt + ${key}".switch_to_workspace = i;
+            "comb1 + ${key}".move_window_to_workspace = {
+              workspace = i;
+              follow = true;
+            };
           }
-        ) workspaceKeys
+        ) workspaceCount
       );
-
     in
     {
       home.file.".config/rift/config.toml".source = (pkgs.formats.toml { }).generate "rift-config.toml" {
@@ -71,28 +81,36 @@
 
         virtual_workspaces = {
           default_workspace_count = workspaceCount;
-          app_rules = [
-            {
-              title_substring = "Preferences";
-              floating = true;
-            }
-            {
-              app_id = "net.imput.helium";
-              workspace = 0;
-            }
-            {
-              app_id = "dev.zed.Zed";
-              workspace = 1;
-            }
-            {
-              app_id = "dev.vencord.Vesktop";
-              workspace = 2;
-            }
-            {
-              app_id = "com.spotify.Client";
-              workspace = 3;
-            }
-          ];
+          app_rules =
+            map (rule: rule // { floating = true; }) [
+              { app_id = "com.apple.systempreferences"; }
+              { app_id = "com.apple.calculator"; }
+              { app_id = "com.apple.archiveutility"; }
+              { app_id = "com.apple.installer"; }
+              { app_id = "com.apple.DigitalColorMeter"; }
+              { app_id = "com.apple.SystemProfiler"; }
+              { app_id = "com.apple.PhotoBooth"; }
+              { app_id = "com.apple.QuickTimePlayerX"; }
+              { title_substring = "Preferences"; }
+            ]
+            ++ [
+              {
+                app_id = "net.imput.helium";
+                workspace = 0;
+              }
+              {
+                app_id = "dev.zed.Zed";
+                workspace = 1;
+              }
+              {
+                app_id = "dev.vencord.Vesktop";
+                workspace = 2;
+              }
+              {
+                app_id = "com.spotify.Client";
+                workspace = 3;
+              }
+            ];
         };
 
         modifier_combinations.comb1 = "Alt + Shift";
@@ -106,9 +124,17 @@
           "Alt + Right".move_focus = "right";
 
           "Alt + Enter".exec = [
-            "bash"
-            "-c"
-            "open -a \"${pkgs.ghostty-bin}/Applications/Ghostty.app\""
+            "osascript"
+            "-e"
+            ''
+              tell application "Ghostty"
+                if it is running then
+                  new window
+                else
+                  activate
+                end if
+              end tell
+            ''
           ];
           "Alt + E".exec = [
             "open"
@@ -135,8 +161,7 @@
           "Alt + Shift + Equal" = "resize_window_grow";
           "Alt + Shift + Minus" = "resize_window_shrink";
         }
-        // workspaceSwitchBindings
-        // workspaceMoveBindings;
+        // workspaceBindings;
       };
     };
 }

@@ -5,9 +5,10 @@
     homeManager =
       { pkgs, ... }:
       {
+        home.shellAliases.zed = "zeditor";
+
         programs.zed-editor = {
           enable = true;
-          package = if pkgs.stdenv.hostPlatform.isDarwin then null else pkgs.zed-editor;
           mutableUserSettings = false;
 
           extensions = [
@@ -48,6 +49,12 @@
             languages."Nix".formatter.external.command = "${pkgs.nixfmt}/bin/nixfmt";
           };
         };
+      };
+
+    hmLinux =
+      { pkgs, ... }:
+      {
+        xdg.mimeApps.defaultApplicationPackages = [ pkgs.zed-editor ];
       };
   };
 }

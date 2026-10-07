@@ -11,6 +11,6 @@
       };
     };
 
-    homeManager.services.easyeffects.enable = true;
+    provides.to-users.homeManager.services.easyeffects.enable = true;
   };
 }

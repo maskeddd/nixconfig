@@ -1,4 +1,10 @@
 {
+  den.aspects.peripherals.provides.to-users.homeManager =
+    { pkgs, ... }:
+    {
+      home.packages = [ pkgs.vial ];
+    };
+
   den.aspects.peripherals.nixos = {
     services.keyd = {
       enable = true;

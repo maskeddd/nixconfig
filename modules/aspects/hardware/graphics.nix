@@ -1,4 +1,10 @@
 {
+  den.aspects.graphics.provides.to-users.homeManager =
+    { pkgs, ... }:
+    {
+      programs.btop.package = pkgs.btop-cuda;
+    };
+
   den.aspects.graphics.nixos = {
     services.xserver.videoDrivers = [ "nvidia" ];
     boot.kernelParams = [ "nvidia.NVreg_TemporaryFilePath=/var/tmp" ];

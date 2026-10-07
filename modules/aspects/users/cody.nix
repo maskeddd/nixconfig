@@ -12,17 +12,18 @@
       aspects.spotify
       aspects.discord
       aspects.applications
+      aspects.helium
+      aspects.affinity
       aspects.onepassword
-      provides.define-user
-      provides.primary-user
-      (provides.user-shell "fish")
+      batteries.define-user
+      batteries.primary-user
+      (batteries.user-shell "fish")
     ];
 
     provides.desktop.includes = with den.aspects; [
       hyprland
       gaming
       obs
-      audio
     ];
 
     provides.macbook.includes = [ den.aspects.rift ];

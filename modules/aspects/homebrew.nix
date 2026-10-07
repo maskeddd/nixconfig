@@ -10,10 +10,6 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-    acsandmann-rift = {
-      url = "github:acsandmann/homebrew-tap";
-      flake = false;
-    };
   };
 
   den.aspects.homebrew.darwin =
@@ -23,13 +19,11 @@
 
       nix-homebrew = {
         enable = true;
-        user = "cody";
+        user = config.system.primaryUser;
         taps = {
           "homebrew/homebrew-core" = inputs.homebrew-core;
           "homebrew/homebrew-cask" = inputs.homebrew-cask;
-          "acsandmann/homebrew-tap" = inputs.acsandmann-rift;
         };
-        trust.formulae = [ "acsandmann/tap/rift" ];
         mutableTaps = false;
       };
 
@@ -40,17 +34,13 @@
           upgrade = true;
         };
         taps = builtins.attrNames config.nix-homebrew.taps;
-        brews = [
-          "rift"
-        ];
         casks = [
           "1password"
           "helium-browser"
           "affinity"
           "plex"
-          "zed"
           "linearmouse"
-          "thaw@beta"
+          "roblox"
         ];
       };
     };

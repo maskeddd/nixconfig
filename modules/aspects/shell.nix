@@ -10,10 +10,6 @@
           tree
         ];
 
-        home.shellAliases = {
-          zed = "zeditor";
-        };
-
         programs = {
           fish.interactiveShellInit = ''
             set fish_greeting
@@ -53,12 +49,6 @@
           fastfetch.enable = true;
           btop.enable = true;
         };
-      };
-
-    hmLinux =
-      { pkgs, ... }:
-      {
-        programs.btop.package = pkgs.btop-cuda;
       };
   };
 }

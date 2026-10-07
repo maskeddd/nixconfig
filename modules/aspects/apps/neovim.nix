@@ -10,8 +10,6 @@
     {
       imports = [ inputs.nixvim.homeModules.nixvim ];
 
-      home.packages = with pkgs; [ neovide ];
-
       programs.nixvim = {
         enable = true;
         nixpkgs.source = inputs.nixpkgs;

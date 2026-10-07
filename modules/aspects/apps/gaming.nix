@@ -6,7 +6,7 @@
   };
 
   den.aspects.gaming = {
-    includes = [ den.aspects.flatpak ];
+    includes = [ den.aspects.roblox ];
 
     os.nix.settings = {
       substituters = [ "https://ezkea.cachix.org" ];
@@ -38,7 +38,6 @@
         home.packages = with pkgs; [
           protonplus
           osu-lazer-bin
-          vinegar
           bottles
 
           (prismlauncher.override {
@@ -56,9 +55,6 @@
           })
 
           patchelfUnstable
-        ];
-        services.flatpak.packages = [
-          "org.vinegarhq.Sober"
         ];
       };
   };

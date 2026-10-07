@@ -34,26 +34,7 @@
       };
 
     hmLinux =
-      { pkgs, ... }:
-      let
-        vinegarWine = pkgs.lib.findFirst (
-          package: (package.pname or "") == "wine64"
-        ) (throw "Vinegar's Wine dependency was not found") pkgs.vinegar.buildInputs;
-        robloxStudioMcp = pkgs.writeShellScript "roblox-studio-mcp" ''
-          data_home="''${XDG_DATA_HOME:-"$HOME/.local/share"}"
-          shopt -s nullglob
-          servers=("$data_home"/vinegar/versions/version-*/StudioMCP.exe)
-
-          if (( ''${#servers[@]} != 1 )); then
-            printf 'Expected one Vinegar StudioMCP.exe, found %d\n' "''${#servers[@]}" >&2
-            exit 1
-          fi
-
-          export WINEPREFIX="$data_home/vinegar/prefixes/studio"
-          export WINEDEBUG=-all
-          exec ${pkgs.lib.getExe vinegarWine} "''${servers[0]}"
-        '';
-      in
+      { pkgs, lib, ... }:
       {
         home.packages = with pkgs; [
           (buildFHSEnv {
@@ -72,14 +53,12 @@
             '';
           })
         ];
-
-        programs.mcp.servers.Roblox_Studio.command = "${robloxStudioMcp}";
       };
 
     hmDarwin =
       { pkgs, ... }:
       {
-        home.packages = with pkgs; [ jetbrains.rider ];
+        home.packages = [ pkgs.jetbrains.rider ];
       };
   };
 }

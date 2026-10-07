@@ -6,7 +6,7 @@
         class,
         aspect-chain,
       }:
-      den._.forward {
+      den.batteries.forward {
         each = [
           "Linux"
           "Darwin"

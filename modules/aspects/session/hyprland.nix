@@ -5,7 +5,7 @@
       noctalia
       hyprlock
       hypridle
-      flatpak
+      gnome-apps
     ];
 
     nixos = {
@@ -15,7 +15,6 @@
         gnome.gnome-keyring.enable = true;
       };
       environment = {
-        etc."xdg/monitors.xml".source = ./monitors.xml;
         sessionVariables.NIXOS_OZONE_WL = "1";
       };
     };
@@ -24,11 +23,11 @@
       { pkgs, ... }:
       {
         services.polkit-gnome.enable = true;
+        xdg.mimeApps.enable = true;
 
         home.packages = with pkgs; [
           grim
           glib.bin
-          jq
           slurp
           wl-clipboard
           playerctl
