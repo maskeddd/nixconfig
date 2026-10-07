@@ -5,14 +5,13 @@
   den.aspects.flatpak = {
     nixos.services.flatpak.enable = true;
 
-    homeManager = {
-      imports = [ inputs.nix-flatpak.homeManagerModules.nix-flatpak ];
-      services.flatpak = {
-        enable = true;
-        update.onActivation = true;
-        uninstallUnmanaged = true;
-        uninstallUnused = true;
-      };
+    homeManager.imports = [ inputs.nix-flatpak.homeManagerModules.nix-flatpak ];
+
+    hmLinux.services.flatpak = {
+      enable = true;
+      update.onActivation = true;
+      uninstallUnmanaged = true;
+      uninstallUnused = true;
     };
   };
 }

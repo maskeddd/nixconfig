@@ -1,24 +1,28 @@
 { den, ... }:
 {
   den.aspects.cody = {
-    includes = with den; [
-      aspects.shell
-      aspects.ghostty
-      aspects.dev
-      aspects.git
-      aspects.zed
-      aspects.helix
-      aspects.neovim
-      aspects.spotify
-      aspects.discord
-      aspects.applications
-      aspects.helium
-      aspects.affinity
-      aspects.onepassword
-      batteries.define-user
-      batteries.primary-user
-      (batteries.user-shell "fish")
-    ];
+    includes =
+      (with den.aspects; [
+        shell
+        ghostty
+        dev
+        git
+        zed
+        helix
+        neovim
+        spotify
+        discord
+        applications
+        blender
+        helium
+        affinity
+        onepassword
+      ])
+      ++ (with den.batteries; [
+        define-user
+        primary-user
+        (user-shell "fish")
+      ]);
 
     provides.desktop.includes = with den.aspects; [
       hyprland
@@ -26,6 +30,9 @@
       obs
     ];
 
-    provides.macbook.includes = [ den.aspects.rift ];
+    provides.macbook.includes = with den.aspects; [
+      rift
+      roblox
+    ];
   };
 }

@@ -3,6 +3,11 @@
   den.aspects.roblox = {
     includes = [ den.aspects.flatpak ];
 
+    darwin.homebrew.casks = [
+      "roblox"
+      "robloxstudio"
+    ];
+
     hmLinux =
       { pkgs, lib, ... }:
       let
@@ -10,7 +15,6 @@
           package: (package.pname or "") == "wine64"
         ) (throw "Vinegar's Wine dependency was not found") pkgs.vinegar.buildInputs;
 
-        # Roblox Studio's MCP server, run through Vinegar's Wine prefix
         robloxStudioMcp = pkgs.writeShellScript "roblox-studio-mcp" ''
           data_home="''${XDG_DATA_HOME:-"$HOME/.local/share"}"
           shopt -s nullglob

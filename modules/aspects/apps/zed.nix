@@ -18,6 +18,7 @@
             "oxc"
             "vue"
             "lua"
+            "svelte"
           ];
 
           userSettings = {

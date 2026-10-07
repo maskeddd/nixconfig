@@ -40,7 +40,6 @@
           "affinity"
           "plex"
           "linearmouse"
-          "roblox"
         ];
       };
     };

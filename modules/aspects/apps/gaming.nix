@@ -8,17 +8,17 @@
   den.aspects.gaming = {
     includes = [ den.aspects.roblox ];
 
-    os.nix.settings = {
-      substituters = [ "https://ezkea.cachix.org" ];
-      trusted-public-keys = [
-        "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
-      ];
-    };
-
     nixos =
       { pkgs, ... }:
       {
         imports = [ inputs.aagl.nixosModules.default ];
+
+        nix.settings = {
+          substituters = [ "https://ezkea.cachix.org" ];
+          trusted-public-keys = [
+            "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
+          ];
+        };
 
         programs = {
           steam = {
@@ -32,7 +32,7 @@
         };
       };
 
-    homeManager =
+    hmLinux =
       { pkgs, ... }:
       {
         home.packages = with pkgs; [
@@ -43,6 +43,7 @@
           (prismlauncher.override {
             jdks = with pkgs; [
               temurin-bin-25
+              temurin-bin-17
             ];
             additionalLibs = [ libxkbcommon ];
           })

@@ -5,7 +5,6 @@
       {
         home.packages = with pkgs; [
           brave-origin
-          plex-desktop
           nicotine-plus
           qbittorrent
         ];
