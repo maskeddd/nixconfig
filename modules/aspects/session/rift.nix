@@ -103,7 +103,7 @@
                 workspace = 1;
               }
               {
-                app_id = "dev.vencord.Vesktop";
+                app_id = "com.hnc.Discord";
                 workspace = 2;
               }
               {

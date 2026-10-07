@@ -9,7 +9,6 @@
       imports = [ inputs.nixcord.homeModules.nixcord ];
       programs.nixcord = {
         enable = true;
-        vesktop.enable = true;
         discord = {
           vencord.enable = true;
           krisp.enable = true;
@@ -34,6 +33,7 @@
     hmLinux =
       { config, ... }:
       {
+        programs.nixcord.vesktop.enable = true;
         xdg.mimeApps.defaultApplicationPackages = [ config.programs.nixcord.vesktop.package ];
       };
   };
