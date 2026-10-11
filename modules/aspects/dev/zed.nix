@@ -64,7 +64,10 @@
             git_panel.dock = "left";
             outline_panel.dock = "left";
 
-            agent.dock = "right";
+            agent = {
+              threads_sidebar.position = "right";
+              dock = "right";
+            };
 
             agent_servers = {
               "codex-acp".type = "registry";
