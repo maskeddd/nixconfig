@@ -3,7 +3,33 @@
     nixos.programs.nix-ld.enable = true;
 
     homeManager =
-      { pkgs, ... }:
+      { pkgs, lib, ... }:
+      let
+        scriptLanguages = [
+          "JavaScript"
+          "JSX"
+          "TypeScript"
+          "TSX"
+          "Vue.js"
+          "Svelte"
+        ];
+        oxlintLanguages = scriptLanguages ++ [ "Astro" ];
+        oxfmtLanguages = scriptLanguages ++ [
+          "JSON"
+          "JSON5"
+          "JSONC"
+          "HTML"
+          "CSS"
+          "SCSS"
+          "LESS"
+          "GraphQL"
+          "Handlebars"
+          "Markdown"
+          "MDX"
+          "YAML"
+          "TOML"
+        ];
+      in
       {
         home.shellAliases.zed = "zeditor";
 
@@ -38,16 +64,27 @@
             git_panel.dock = "left";
             outline_panel.dock = "left";
 
-            agent = {
-              dock = "right";
-              sidebar_side = "right";
-            };
+            agent.dock = "right";
 
-            agent_servers."codex-acp".type = "registry";
+            agent_servers = {
+              "codex-acp".type = "registry";
+              "pi-acp".type = "registry";
+            };
 
             terminal.shell.program = "fish";
 
-            languages."Nix".formatter.external.command = "${pkgs.nixfmt}/bin/nixfmt";
+            languages = lib.foldl' lib.recursiveUpdate { } [
+              (lib.genAttrs oxlintLanguages (_: {
+                code_actions_on_format."source.fixAll.oxc" = true;
+              }))
+              (lib.genAttrs oxfmtLanguages (_: {
+                formatter.language_server.name = "oxfmt";
+                prettier.allowed = false;
+              }))
+              {
+                "Nix".formatter.external.command = "${pkgs.nixfmt}/bin/nixfmt";
+              }
+            ];
           };
         };
       };
