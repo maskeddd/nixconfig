@@ -28,6 +28,7 @@
             localNetworkGameTransfers.openFirewall = true;
             extraPackages = with pkgs; [ SDL2 ];
           };
+          gamescope.enable = true;
           anime-game-launcher.enable = true;
         };
       };
