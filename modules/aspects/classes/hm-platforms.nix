@@ -2,10 +2,7 @@
 {
   den.schema.user.includes = [
     (
-      {
-        class,
-        aspect-chain,
-      }:
+      { aspect-chain }:
       den.batteries.forward {
         each = [
           "Linux"

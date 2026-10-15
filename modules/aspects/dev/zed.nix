@@ -10,7 +10,6 @@
           "JSX"
           "TypeScript"
           "TSX"
-          "Vue.js"
           "Svelte"
         ];
         oxlintLanguages = scriptLanguages ++ [ "Astro" ];
@@ -42,7 +41,6 @@
             "tombi"
             "scss"
             "oxc"
-            "vue"
             "lua"
             "svelte"
           ];

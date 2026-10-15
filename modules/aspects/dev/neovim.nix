@@ -3,7 +3,18 @@
   flake-file.inputs.nixvim.url = "github:nix-community/nixvim";
 
   den.aspects.neovim.homeManager =
-    { pkgs, ... }:
+    {
+      config,
+      lib,
+      osConfig,
+      pkgs,
+      ...
+    }:
+    let
+      flake = ''(builtins.getFlake "${config.programs.nh.flake}")'';
+      system = if pkgs.stdenv.hostPlatform.isDarwin then "darwin" else "nixos";
+      host = "${flake}.${system}Configurations.${osConfig.networking.hostName}";
+    in
     {
       imports = [ inputs.nixvim.homeModules.nixvim ];
 
@@ -23,42 +34,51 @@
           splitbelow = true;
           splitright = true;
           signcolumn = "yes";
-          completeopt = "menuone,noselect";
+        };
+
+        extraPackagesAfter = [ pkgs.nodejs-slim ];
+
+        diagnostic.settings = {
+          virtual_text.current_line = false;
+          virtual_lines.current_line = true;
         };
 
         lsp = {
           inlayHints.enable = true;
           servers = {
+            golangci_lint_ls.enable = true;
+            gopls = {
+              enable = true;
+              package = null;
+            };
+            jsonls.enable = true;
+            lua_ls.enable = true;
             nixd = {
               enable = true;
-              config.settings.nixd.formatting.command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
-            };
-            vue_ls.enable = true;
-            tailwindcss.enable = true;
-            tombi.enable = true;
-            vtsls = {
-              enable = true;
-              config = {
-                filetypes = [
-                  "javascript"
-                  "javascriptreact"
-                  "typescript"
-                  "typescriptreact"
-                  "vue"
-                ];
-                settings.vtsls.tsserver.globalPlugins = [
-                  {
-                    name = "@vue/typescript-plugin";
-                    location = "${pkgs.vue-language-server}/lib/language-tools/packages/language-server";
-                    languages = [ "vue" ];
-                    configNamespace = "typescript";
-                  }
-                ];
+              config.settings.nixd = {
+                formatting.command = [ (lib.getExe pkgs.nixfmt) ];
+                options = {
+                  ${system}.expr = "${host}.options";
+                  home-manager.expr = "${host}.options.home-manager.users.valueMeta.attrs.${config.home.username}.configuration.options";
+                };
               };
             };
-            oxlint.enable = true;
             oxfmt.enable = true;
+            oxlint.enable = true;
             rust_analyzer.enable = true;
+            superhtml.enable = true;
+            svelte.enable = true;
+            tailwindcss.enable = true;
+            tinymist = {
+              enable = true;
+              config.settings = {
+                formatterMode = "typstyle";
+                exportPdf = "onType";
+                outputPath = "$root/target/$dir/$name";
+              };
+            };
+            tombi.enable = true;
+            vtsls.enable = true;
           };
         };
 
@@ -75,6 +95,7 @@
               "nixd"
               "tombi"
               "rust_analyzer"
+              "tinymist"
               "oxfmt"
             ];
             settings.nix.sync = true;

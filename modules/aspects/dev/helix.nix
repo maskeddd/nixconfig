@@ -1,28 +1,53 @@
 {
   den.aspects.helix.homeManager =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
     let
-      autoFormat = name: {
-        inherit name;
-        auto-format = true;
+      autoFormat =
+        name: settings:
+        {
+          inherit name;
+          auto-format = true;
+        }
+        // settings;
+      oxfmtFormatter = {
+        command = lib.getExe (
+          pkgs.writeShellApplication {
+            name = "oxfmt-project";
+            runtimeInputs = [
+              pkgs.nodejs-slim
+              pkgs.oxfmt
+            ];
+            text = ''
+              file="$PWD/$(basename "$1")"
+              dir=$PWD
+              while [ "$dir" != / ]; do
+                if [ -x "$dir/node_modules/.bin/oxfmt" ]; then
+                  exec "$dir/node_modules/.bin/oxfmt" --stdin-filepath "$file"
+                fi
+                dir=$(dirname "$dir")
+              done
+              exec oxfmt --stdin-filepath "$file"
+            '';
+          }
+        );
+        args = [ "%{buffer_name}" ];
       };
-      withLanguageServers = name: language-servers: autoFormat name // { inherit language-servers; };
-      webFormatter = {
-        command = "oxfmt";
-        args = [
-          "--stdin-filepath"
-          "%{buffer_name}"
-        ];
-      };
-      webLanguage =
-        name: language-servers: withLanguageServers name language-servers // { formatter = webFormatter; };
-      typescript =
-        name:
-        webLanguage name [
+      script = {
+        formatter = oxfmtFormatter;
+        language-servers = [
           "vtsls"
           "oxlint"
           "tailwindcss-ls"
         ];
+      };
+      style = {
+        formatter = oxfmtFormatter;
+        language-servers = [ "tailwindcss-ls" ];
+      };
+      componentServers = [
+        "oxlint"
+        "tailwindcss-ls"
+      ];
     in
     {
       programs.helix = {
@@ -31,17 +56,16 @@
           golangci-lint-langserver
           lua-language-server
           nixd
-          oxfmt
           oxlint
           rust-analyzer
+          superhtml
+          svelte-language-server
           tailwindcss-language-server
           tinymist
           tombi
           typstyle
           vscode-langservers-extracted
           vtsls
-          vue-language-server
-          wgsl-analyzer
         ];
         settings = {
           editor = {
@@ -66,10 +90,6 @@
               command = "oxlint";
               args = [ "--lsp" ];
             };
-            tailwindcss-ls = {
-              command = "tailwindcss-language-server";
-              args = [ "--stdio" ];
-            };
             tinymist = {
               command = "tinymist";
               config = {
@@ -78,54 +98,45 @@
                 outputPath = "$root/target/$dir/$name";
               };
             };
-            tombi = {
-              command = "tombi";
-              args = [ "lsp" ];
-            };
             vtsls = {
               command = "vtsls";
               args = [ "--stdio" ];
             };
           };
-          language = [
-            (
-              (autoFormat "nix")
-              // {
-                formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
-              }
-            )
-            (autoFormat "rust")
-            (withLanguageServers "toml" [ "tombi" ])
-            (
-              (autoFormat "typst")
-              // {
-                soft-wrap.enable = true;
-              }
-            )
-            (typescript "typescript")
-            (typescript "tsx")
-            (typescript "javascript")
-            (typescript "jsx")
-            (webLanguage "html" [
-              "vscode-html-language-server"
-              "tailwindcss-ls"
-            ])
-            (webLanguage "css" [
-              "vscode-css-language-server"
-              "tailwindcss-ls"
-            ])
-            (webLanguage "scss" [
-              "vscode-css-language-server"
-              "tailwindcss-ls"
-            ])
-            (webLanguage "json" [ "vscode-json-language-server" ])
-            (webLanguage "jsonc" [ "vscode-json-language-server" ])
-            (webLanguage "vue" [
-              "vuels"
-              "oxlint"
-              "tailwindcss-ls"
-            ])
-          ];
+          language = lib.mapAttrsToList autoFormat {
+            nix.formatter.command = lib.getExe pkgs.nixfmt;
+            rust = { };
+            toml.language-servers = [ "tombi" ];
+            typst.soft-wrap.enable = true;
+
+            typescript = script;
+            tsx = script;
+            javascript = script;
+            jsx = script;
+
+            svelte = {
+              formatter = oxfmtFormatter;
+              language-servers = [ "svelteserver" ] ++ componentServers;
+            };
+            astro.language-servers = componentServers;
+
+            html = {
+              formatter = oxfmtFormatter;
+              language-servers = [
+                "superhtml"
+                "tailwindcss-ls"
+              ];
+            };
+            css = style;
+            scss = style;
+
+            json.formatter = oxfmtFormatter;
+            jsonc.formatter = oxfmtFormatter;
+            json5.formatter = oxfmtFormatter;
+            yaml.formatter = oxfmtFormatter;
+            markdown.formatter = oxfmtFormatter;
+            graphql.formatter = oxfmtFormatter;
+          };
         };
       };
     };
