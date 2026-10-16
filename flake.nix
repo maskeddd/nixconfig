@@ -44,13 +44,6 @@
       flake = false;
     };
     import-tree.url = "github:denful/import-tree";
-    mocktail = {
-      url = "github:komaruworld/mocktail";
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nixcord = {

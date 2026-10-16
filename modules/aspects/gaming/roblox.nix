@@ -1,11 +1,5 @@
-{ den, inputs, ... }:
+{ den, ... }:
 {
-  flake-file.inputs.mocktail = {
-    url = "github:komaruworld/mocktail";
-    inputs.nixpkgs.follows = "nixpkgs";
-    inputs.flake-parts.follows = "flake-parts";
-  };
-
   den.aspects.roblox = {
     includes = [ den.aspects.flatpak ];
 
@@ -37,10 +31,7 @@
         '';
       in
       {
-        home.packages = [
-          pkgs.vinegar
-          inputs.mocktail.packages.${pkgs.stdenv.hostPlatform.system}.default
-        ];
+        home.packages = [ pkgs.vinegar ];
         services.flatpak.packages = [ "org.vinegarhq.Sober" ];
         programs.mcp.servers.Roblox_Studio.command = "${robloxStudioMcp}";
       };

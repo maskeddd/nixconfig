@@ -613,29 +613,6 @@
         "type": "github"
       }
     },
-    "mocktail": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1791550175,
-        "narHash": "sha256-YXYTCfkiceyMMBM/ghQtm+6uNx/wus1HqMXtfEoTm+Y=",
-        "owner": "komaruworld",
-        "repo": "mocktail",
-        "rev": "551d2a182960e09b4a759b1420c4f1295e4a76f7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "komaruworld",
-        "repo": "mocktail",
-        "type": "github"
-      }
-    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -942,7 +919,6 @@
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
         "import-tree": "import-tree",
-        "mocktail": "mocktail",
         "nix-flatpak": "nix-flatpak",
         "nix-homebrew": "nix-homebrew",
         "nixcord": "nixcord",

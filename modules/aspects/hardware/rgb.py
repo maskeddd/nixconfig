@@ -1,10 +1,9 @@
 import json
 import os
-from pathlib import Path
 import subprocess
 import sys
+from pathlib import Path
 from tempfile import NamedTemporaryFile
-
 
 KEYBOARD = {
     "name": "Glorious GMMK V2 65 ANSI",
@@ -36,7 +35,8 @@ def prepare_config(directory):
 
     manual = settings.get("QMKVialRGBDevices") or {}
     manual["devices"] = [
-        device for device in (manual.get("devices") or [])
+        device
+        for device in (manual.get("devices") or [])
         if usb_ids(device) != usb_ids(KEYBOARD)
     ] + [KEYBOARD]
     settings["QMKVialRGBDevices"] = manual
