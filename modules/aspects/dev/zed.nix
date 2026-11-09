@@ -5,13 +5,13 @@
     homeManager =
       { pkgs, lib, ... }:
       let
-        scriptLanguages = [
+        tsLanguages = [
           "JavaScript"
           "JSX"
           "TypeScript"
           "TSX"
-          "Svelte"
         ];
+        scriptLanguages = tsLanguages ++ [ "Svelte" ];
         oxlintLanguages = scriptLanguages ++ [ "Astro" ];
         oxfmtLanguages = scriptLanguages ++ [
           "JSON"
@@ -43,6 +43,10 @@
             "oxc"
             "lua"
             "svelte"
+            "tsgo"
+            "templ"
+            "html"
+            "emmet"
           ];
 
           userSettings = {
@@ -51,6 +55,33 @@
             format_on_save = "on";
 
             inlay_hints.enabled = true;
+
+            lsp.typescript-ls.settings = lib.genAttrs [ "typescript" "javascript" ] (_: {
+              inlayHints =
+                lib.genAttrs
+                  [
+                    "parameterTypes"
+                    "variableTypes"
+                    "propertyDeclarationTypes"
+                    "functionLikeReturnTypes"
+                  ]
+                  (_: {
+                    enabled = false;
+                  });
+            });
+
+            lsp.tailwindcss-language-server.settings = {
+              includeLanguages.templ = "html";
+              experimental.classRegex = [
+                ''class="([^"]*)"''
+                ''className="([^"]*)"''
+              ];
+            };
+
+            diagnostics.inline = {
+              enabled = true;
+              max_severity = "warning";
+            };
 
             collaboration_panel.button = false;
             toolbar = {
@@ -75,6 +106,14 @@
             terminal.shell.program = "fish";
 
             languages = lib.foldl' lib.recursiveUpdate { } [
+              (lib.genAttrs tsLanguages (_: {
+                language_servers = [
+                  "typescript-ls"
+                  "!vtsls"
+                  "!typescript-language-server"
+                  "..."
+                ];
+              }))
               (lib.genAttrs oxlintLanguages (_: {
                 code_actions_on_format."source.fixAll.oxc" = true;
               }))
@@ -84,6 +123,16 @@
               }))
               {
                 "Nix".formatter.external.command = "${pkgs.nixfmt}/bin/nixfmt";
+                "Python".language_servers = [
+                  "ty"
+                  "ruff"
+                ];
+                "Templ".language_servers = [
+                  "templ"
+                  "tailwindcss-language-server"
+                  "vscode-html-language-server"
+                  "emmet-language-server"
+                ];
               }
             ];
           };

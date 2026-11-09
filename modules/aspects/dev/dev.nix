@@ -2,7 +2,6 @@
   den.aspects.dev = {
     homeManager =
       {
-        config,
         pkgs,
         lib,
         ...
@@ -13,49 +12,26 @@
           nixd
           nixfmt
           nil
-          claude-code
+          uv
         ];
-
-        home.file."${config.programs.pi-coding-agent.configDir}/claude-bridge.json".text = builtins.toJSON {
-          askClaude.enabled = false;
-          provider = {
-            plan = "pro";
-            longContextExtraUsage = false;
-            strictMcpConfig = true;
-            pathToClaudeCodeExecutable = "${pkgs.claude-code}/bin/claude";
-          };
-        };
-
-        home.file."${config.programs.pi-coding-agent.configDir}/mcp.json" =
-          lib.mkIf (config.programs.mcp.enable && config.programs.mcp.servers != { })
-            {
-              source = config.xdg.configFile."mcp/mcp.json".source;
-            };
 
         programs = {
           mcp = {
             enable = true;
+            servers = {
+              cloudflare-api.url = "https://mcp.cloudflare.com/mcp";
+            };
           };
 
-          pi-coding-agent = {
+          claude-code = {
             enable = true;
-            extraPackages = [ pkgs.nodejs ];
-            settings = {
-              packages = [
-                "npm:pi-claude-bridge@0.9.2"
-                "npm:pi-web-access"
-                "npm:@juicesharp/rpiv-ask-user-question"
-                "npm:@juicesharp/rpiv-todo"
-                "npm:pi-lens"
-                "npm:pi-subagents"
-              ];
+            enableMcpIntegration = true;
+          };
 
-              enabledModels = [
-                "openai/gpt-6.1-sol"
-                "openai/gpt-6-astra"
-                "claude-bridge/claude-opus-5-5"
-              ];
-            };
+          opencode = {
+            enable = true;
+            enableMcpIntegration = true;
+            tui = lib.mkForce { };
           };
 
           lazygit.enable = true;
@@ -63,10 +39,14 @@
         };
       };
 
+    darwin.homebrew.casks = [ "robloxstudio" ];
+
     hmLinux =
       { pkgs, lib, ... }:
       {
         home.packages = with pkgs; [
+          vinegar
+
           (buildFHSEnv {
             name = "rider-fhs";
             executableName = "rider";

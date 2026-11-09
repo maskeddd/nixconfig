@@ -27,7 +27,7 @@
             }
             {
               timeout = 1800;
-              on-timeout = "systemctl suspend";
+              on-timeout = ''hyprctl dispatch 'hl.dsp.dpms({ action = "enable" })' && sleep 3 && systemctl suspend'';
             }
           ];
         };

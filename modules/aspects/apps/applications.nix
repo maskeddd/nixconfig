@@ -4,7 +4,6 @@
       { pkgs, ... }:
       {
         home.packages = with pkgs; [
-          brave-origin
           nicotine-plus
           qbittorrent
         ];

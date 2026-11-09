@@ -1,5 +1,8 @@
+{ den, ... }:
 {
   den.aspects.shell = {
+    includes = [ den.aspects.starship ];
+
     homeManager =
       { pkgs, ... }:
       {
@@ -15,26 +18,6 @@
             set fish_greeting
           '';
 
-          starship = {
-            enable = true;
-            settings = {
-              username = {
-                style_user = "blue bold";
-                style_root = "red bold";
-                format = "[$user]($style) ";
-                disabled = false;
-                show_always = true;
-              };
-              hostname = {
-                ssh_only = false;
-                ssh_symbol = "🌐 ";
-                format = "on [$hostname](bold red) ";
-                trim_at = ".local";
-                disabled = false;
-              };
-            };
-          };
-
           zoxide.enable = true;
 
           direnv = {
@@ -44,6 +27,7 @@
 
           bat.enable = true;
           fzf.enable = true;
+          vivid.enable = true;
           jq.enable = true;
           fastfetch.enable = true;
           btop.enable = true;

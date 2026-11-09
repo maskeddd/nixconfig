@@ -8,6 +8,10 @@ local function after_tray_ready(command)
     return "gdbus wait --session org.kde.StatusNotifierWatcher && exec " .. command
 end
 
+local function set_xwayland_primary()
+    hl.exec_cmd("for _ in $(seq 10); do xrandr --output DP-3 --primary && break; sleep 1; done")
+end
+
 hl.monitor({
     output = "DP-2",
     mode = "2560x1440@120",
@@ -63,6 +67,10 @@ hl.config({
             enabled = false,
         },
     },
+
+    render = {
+        cm_auto_hdr = 0,
+    }
 })
 
 hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
@@ -162,6 +170,12 @@ hl.window_rule({
     },
     no_focus = true,
 })
+hl.window_rule({ match = { class = [[^fl64\.exe$]] }, suppress_event = "fullscreen maximize" })
+hl.window_rule({
+    match = { class = [[^fl64\.exe$]], title = [[^(.* - )?FL Studio \d{4}$]] },
+    tile = true,
+    no_max_size = true,
+})
 hl.window_rule({ match = { class = "^(helium)$" }, workspace = "1" })
 hl.window_rule({ match = { class = "^(vesktop)$" }, workspace = "4" })
 hl.window_rule({ match = { class = "^(spotify)$" }, workspace = "4" })
@@ -174,7 +188,21 @@ hl.workspace_rule({ workspace = "2", monitor = "DP-3" })
 hl.workspace_rule({ workspace = "3", monitor = "DP-3" })
 hl.workspace_rule({ workspace = "4", monitor = "DP-2" })
 
+hl.on("monitor.added", set_xwayland_primary)
+
+hl.on("window.open", function(window)
+    local size = window.size
+    if window.class:match("%.exe$") and window.title == "" and size.x == 800 and size.y == 800 then
+        hl.dispatch(hl.dsp.window.move({
+            window = "address:" .. window.address,
+            workspace = "special:fl-studio",
+            follow = false,
+        }))
+    end
+end)
+
 hl.on("hyprland.start", function()
+    set_xwayland_primary()
     hl.exec_cmd("sunsetr")
     hl.exec_cmd("steam -silent")
     hl.exec_cmd(after_tray_ready("1password --silent"))

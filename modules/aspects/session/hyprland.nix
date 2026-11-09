@@ -20,8 +20,17 @@
     };
 
     homeManager =
-      { pkgs, ... }:
       {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
+      {
+        systemd.user.sessionVariables = lib.mapAttrs (_: v: lib.mkDefault (toString v)) (
+          lib.filterAttrs (_: v: v != null) config.home.sessionVariables
+        );
+
         services.polkit-gnome.enable = true;
         xdg.mimeApps.enable = true;
 
@@ -33,6 +42,7 @@
           playerctl
           brightnessctl
           sunsetr
+          xrandr
         ];
 
         programs.satty = {

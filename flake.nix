@@ -27,6 +27,7 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+    grimoire.url = "github:Slush97/grimoire/stable";
     helium = {
       url = "github:amaanq/helium-flake";
       inputs.nixpkgs.follows = "nixpkgs";

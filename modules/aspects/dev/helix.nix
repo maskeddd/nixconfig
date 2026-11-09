@@ -2,64 +2,37 @@
   den.aspects.helix.homeManager =
     { lib, pkgs, ... }:
     let
-      autoFormat =
-        name: settings:
-        {
-          inherit name;
-          auto-format = true;
-        }
-        // settings;
-      oxfmtFormatter = {
-        command = lib.getExe (
-          pkgs.writeShellApplication {
-            name = "oxfmt-project";
-            runtimeInputs = [
-              pkgs.nodejs-slim
-              pkgs.oxfmt
-            ];
-            text = ''
-              file="$PWD/$(basename "$1")"
-              dir=$PWD
-              while [ "$dir" != / ]; do
-                if [ -x "$dir/node_modules/.bin/oxfmt" ]; then
-                  exec "$dir/node_modules/.bin/oxfmt" --stdin-filepath "$file"
-                fi
-                dir=$(dirname "$dir")
-              done
-              exec oxfmt --stdin-filepath "$file"
-            '';
-          }
-        );
-        args = [ "%{buffer_name}" ];
-      };
-      script = {
-        formatter = oxfmtFormatter;
+      withOxfmt = servers: {
         language-servers = [
-          "vtsls"
-          "oxlint"
-          "tailwindcss-ls"
-        ];
+          {
+            name = "oxfmt";
+            only-features = [ "format" ];
+          }
+        ]
+        ++ servers;
       };
-      style = {
-        formatter = oxfmtFormatter;
-        language-servers = [ "tailwindcss-ls" ];
-      };
-      componentServers = [
+      scriptServers = [
+        "vtsls"
         "oxlint"
         "tailwindcss-ls"
       ];
+      templFmt = pkgs.writeShellApplication {
+        name = "templ-fmt-rustywind";
+        runtimeInputs = [ pkgs.rustywind ];
+        text = "templ fmt | rustywind --stdin --quiet";
+      };
     in
     {
       programs.helix = {
         enable = true;
         extraPackages = with pkgs; [
-          golangci-lint-langserver
+          emmet-language-server
           lua-language-server
           nixd
+          oxfmt
           oxlint
           rust-analyzer
           superhtml
-          svelte-language-server
           tailwindcss-language-server
           tinymist
           tombi
@@ -86,10 +59,19 @@
         };
         languages = {
           language-server = {
+            emmet-language-server = {
+              command = "emmet-language-server";
+              args = [ "--stdio" ];
+            };
+            oxfmt = {
+              command = "oxfmt";
+              args = [ "--lsp" ];
+            };
             oxlint = {
               command = "oxlint";
               args = [ "--lsp" ];
             };
+            tailwindcss-ls.config.tailwindCSS.includeLanguages.templ = "html";
             tinymist = {
               command = "tinymist";
               config = {
@@ -103,40 +85,63 @@
               args = [ "--stdio" ];
             };
           };
-          language = lib.mapAttrsToList autoFormat {
-            nix.formatter.command = lib.getExe pkgs.nixfmt;
-            rust = { };
-            toml.language-servers = [ "tombi" ];
-            typst.soft-wrap.enable = true;
-
-            typescript = script;
-            tsx = script;
-            javascript = script;
-            jsx = script;
-
-            svelte = {
-              formatter = oxfmtFormatter;
-              language-servers = [ "svelteserver" ] ++ componentServers;
-            };
-            astro.language-servers = componentServers;
-
-            html = {
-              formatter = oxfmtFormatter;
-              language-servers = [
-                "superhtml"
-                "tailwindcss-ls"
-              ];
-            };
-            css = style;
-            scss = style;
-
-            json.formatter = oxfmtFormatter;
-            jsonc.formatter = oxfmtFormatter;
-            json5.formatter = oxfmtFormatter;
-            yaml.formatter = oxfmtFormatter;
-            markdown.formatter = oxfmtFormatter;
-            graphql.formatter = oxfmtFormatter;
-          };
+          language =
+            lib.mapAttrsToList
+              (
+                name: settings:
+                {
+                  inherit name;
+                  auto-format = true;
+                }
+                // settings
+              )
+              (
+                {
+                  nix.formatter.command = lib.getExe pkgs.nixfmt;
+                  rust = { };
+                  toml.language-servers = [ "tombi" ];
+                  typst.soft-wrap.enable = true;
+                  templ.formatter.command = lib.getExe templFmt;
+                  templ.language-servers = [
+                    "templ"
+                    {
+                      name = "vscode-html-language-server";
+                      except-features = [ "format" ];
+                    }
+                    "emmet-language-server"
+                    "tailwindcss-ls"
+                  ];
+                  astro.language-servers = [
+                    "oxlint"
+                    "tailwindcss-ls"
+                  ];
+                }
+                // lib.mapAttrs (_: withOxfmt) {
+                  typescript = scriptServers;
+                  tsx = scriptServers;
+                  javascript = scriptServers;
+                  jsx = scriptServers;
+                  html = [
+                    "superhtml"
+                    "emmet-language-server"
+                    "tailwindcss-ls"
+                  ];
+                  css = [ "tailwindcss-ls" ];
+                  scss = [ "tailwindcss-ls" ];
+                  json = [ "vscode-json-language-server" ];
+                  jsonc = [ "vscode-json-language-server" ];
+                  json5 = [ ];
+                  yaml = [
+                    "yaml-language-server"
+                    "ansible-language-server"
+                  ];
+                  markdown = [
+                    "marksman"
+                    "markdown-oxide"
+                  ];
+                  graphql = [ "graphql-language-service" ];
+                }
+              );
         };
       };
     };

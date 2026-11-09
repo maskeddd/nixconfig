@@ -13,6 +13,7 @@
       rgb
       fans
       mullvad
+      virtualisation
     ];
     nixos =
       { pkgs, ... }:

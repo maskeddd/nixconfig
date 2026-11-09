@@ -13,7 +13,6 @@
         spotify
         discord
         applications
-        blender
         helium
         affinity
         onepassword
@@ -32,7 +31,7 @@
 
     provides.macbook.includes = with den.aspects; [
       rift
-      roblox
+      gaming
     ];
   };
 }

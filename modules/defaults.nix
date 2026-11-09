@@ -31,7 +31,6 @@
     };
 
     darwin.nix = {
-      # auto-optimise-store is unreliable on macOS; optimise on a schedule instead
       optimise.automatic = true;
       settings.trusted-users = [ "@admin" ];
     };
